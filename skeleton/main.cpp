@@ -54,7 +54,17 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
-	}
+
+	//Act 2 P0 Draw a sphere in 0,0,0
+	PxShape* sphereShape = CreateShape(PxSphereGeometry(4),gMaterial);
+	PxTransform* sphereTransform = new PxTransform(PxVec3(0,0,0));
+	Vector4 sphereColor = {1.0f,0.0f,1.0f,1.0f};
+
+	RenderItem* sphere = new RenderItem(sphereShape,sphereTransform,sphereColor);
+	RegisterRenderItem(sphere);
+	DeregisterRenderItem(sphere);
+
+}
 
 
 // Function to configure what happens in each step of physics
