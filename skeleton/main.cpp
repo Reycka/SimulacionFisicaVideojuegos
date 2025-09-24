@@ -7,6 +7,7 @@
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
+#include "Vector3D.h"
 
 #include <iostream>
 
@@ -56,14 +57,45 @@ void initPhysics(bool interactive)
 	gScene = gPhysics->createScene(sceneDesc);
 
 	//Act 2 P0 Draw a sphere in 0,0,0
-	PxShape* sphereShape = CreateShape(PxSphereGeometry(4),gMaterial);
+	PxShape* sphereShape = CreateShape(PxSphereGeometry(1), gMaterial);
 	PxTransform* sphereTransform = new PxTransform(PxVec3(0,0,0));
-	Vector4 sphereColor = {1.0f,0.0f,1.0f,1.0f};
+	Vector4 sphereColor = {1.0f,1.0f,1.0f,1.0f};
 
 	RenderItem* sphere = new RenderItem(sphereShape,sphereTransform,sphereColor);
 	RegisterRenderItem(sphere);
 	DeregisterRenderItem(sphere);
 
+	//Act 3 P0 Draw x, y and Z axes
+
+	
+	//X
+	Vector3D vecX = Vector3D(10, 0, 0);
+	PxShape* x = CreateShape(PxSphereGeometry(1), gMaterial);
+	PxTransform* xTransform = new PxTransform(vecX.changeClass());
+	Vector4 xColor = { 1.0f,0.0f,0.0f,1.0f };
+
+	RenderItem* xAxix = new RenderItem(x, xTransform, xColor);
+	RegisterRenderItem(xAxix);
+
+
+	//Y
+	Vector3D vecY = Vector3D(0, 10, 0);
+	PxShape* y = CreateShape(PxSphereGeometry(1), gMaterial);
+	PxTransform* yTransform = new PxTransform(vecY.changeClass());
+	Vector4 yColor = { 0.0f,1.0f,0.0f,1.0f };
+
+	RenderItem* yAxix = new RenderItem(y, yTransform, yColor);
+	RegisterRenderItem(yAxix);
+
+
+	//Z
+	Vector3D vecZ = Vector3D(0, 0, 10);
+	PxShape* z = CreateShape(PxSphereGeometry(1), gMaterial);
+	PxTransform* zTransform = new PxTransform(vecZ.changeClass());
+	Vector4 zColor = { 0.0f,0.0f,1.0f,1.0f };
+
+	RenderItem* zAxix = new RenderItem(z, zTransform, zColor);
+	RegisterRenderItem(zAxix);
 }
 
 

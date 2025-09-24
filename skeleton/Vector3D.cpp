@@ -2,6 +2,7 @@
 
 Vector3D::Vector3D(float _x, float _y, float _z) : x(_x),y(_y),z(_z)
 {
+
 }
 
 Vector3D::~Vector3D()
@@ -26,7 +27,11 @@ Vector3D Vector3D::Escalar(const Vector3D& vec1, const Vector3D& vec2)
 
 Vector3D Vector3D::Vectorial(const Vector3D& vec1, const Vector3D& vec2)
 {
-    return Vector3D();
+    return Vector3D(
+        vec1.y * vec2.z - vec1.z * vec2.y,
+        vec1.z * vec2.x - vec1.x * vec2.z,
+        vec1.x * vec2.y - vec1.y * vec2.x
+    );
 }
 
 void Vector3D::MultEscalar(Vector3D& vec1, float mult)
@@ -36,22 +41,29 @@ void Vector3D::MultEscalar(Vector3D& vec1, float mult)
     vec1.z *= mult;
 }
 
+physx::PxVec3 Vector3D::changeClass()
+{
+    return physx::PxVec3({x,y,z});
+}
+
 Vector3D Vector3D::operator+(Vector3D other)
 {
-    return Vector3D();
+    return Vector3D({x + other.x, y + other.y, z + other.z});
 }
 
 Vector3D Vector3D::operator-(Vector3D other)
 {
-    return Vector3D();
+    return Vector3D({ x - other.x, y - other.y, z - other.z });
 }
 
 Vector3D Vector3D::operator*(Vector3D other)
 {
-    return Vector3D();
+    return Vector3D({ x * other.x, y * other.y, z * other.z });
 }
 
 Vector3D Vector3D::operator=(Vector3D other)
 {
-    return Vector3D();
+    return Vector3D({ x = other.x, y = other.y, z = other.z });
 }
+
+
