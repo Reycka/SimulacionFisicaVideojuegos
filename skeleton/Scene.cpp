@@ -1,7 +1,8 @@
 #include "Scene.h"
 using namespace physx;
-Scene::Scene()
+Scene::Scene(physx::PxMaterial* gMaterial)
 {
+	CreateAxes(gMaterial);
 }
 
 Scene::~Scene()

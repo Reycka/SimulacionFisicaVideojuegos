@@ -9,6 +9,7 @@
 
 //Scenes
 #include "SceneP0.h"
+#include "SceneP1.h"
 
 Scene* actScene;
 std::string display_text = "This is a test";
@@ -56,7 +57,7 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 
-	actScene = new SceneP0(gMaterial);
+	actScene = new SceneP1(gMaterial);
 }
 
 
@@ -66,7 +67,7 @@ void initPhysics(bool interactive)
 void stepPhysics(bool interactive, double t)
 {
 	PX_UNUSED(interactive);
-
+	actScene->update(t);
 	gScene->simulate(t);
 	gScene->fetchResults(true);
 }

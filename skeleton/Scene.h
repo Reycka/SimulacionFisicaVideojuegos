@@ -7,7 +7,7 @@ private:
 protected:
 
 public:
-	Scene();
+	Scene(physx::PxMaterial* gMaterial);
 	virtual ~Scene();
 	void AddEntity(Entity* ent);
 	void CreateAxes(physx::PxMaterial* gMaterial);

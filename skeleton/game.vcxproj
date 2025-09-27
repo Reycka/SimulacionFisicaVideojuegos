@@ -262,6 +262,7 @@
     <ClCompile Include="Render\Render.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneP0.cpp" />
+    <ClCompile Include="SceneP1.cpp" />
     <ClCompile Include="Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -274,6 +275,7 @@
     <ClInclude Include="Render\Render.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneP0.h" />
+    <ClInclude Include="SceneP1.h" />
     <ClInclude Include="Vector3D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
