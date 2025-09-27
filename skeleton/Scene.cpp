@@ -17,6 +17,20 @@ void Scene::AddEntity(Entity* ent)
 	entities.push_back(ent);
 }
 
+void Scene::RegScene()
+{
+	for (auto ent : entities) {
+		ent->RegItem();
+	}
+}
+
+void Scene::DeRegScene()
+{
+	for (auto ent : entities) {
+		ent->DeRegItem();
+	}
+}
+
 void Scene::CreateAxes(physx::PxMaterial* gMaterial)
 {
 

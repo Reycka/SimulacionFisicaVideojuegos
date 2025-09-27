@@ -21,6 +21,16 @@ Entity::Entity(Vector3D pos, PxShape* _shape, const Vector4& color)
 	RegisterRenderItem(renderItem);
 }
 
+void Entity::RegItem()
+{
+	RegisterRenderItem(renderItem);
+}
+
+void Entity::DeRegItem()
+{
+	DeregisterRenderItem(renderItem);
+}
+
 Entity::~Entity()
 {
 	DeregisterRenderItem(renderItem);

@@ -12,6 +12,7 @@
 #include "SceneP1.h"
 
 Scene* actScene;
+std::vector<Scene*> scenes;
 std::string display_text = "This is a test";
 
 
@@ -56,8 +57,12 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
+	
+	scenes.push_back(new SceneP0(gMaterial));
+	scenes.push_back(new SceneP1(gMaterial));
 
-	actScene = new SceneP1(gMaterial);
+	actScene = scenes[0];
+	scenes[1]->DeRegScene();
 }
 
 
@@ -91,6 +96,15 @@ void cleanupPhysics(bool interactive)
 	delete actScene;
 }
 
+void ChangeScene(Scene* sceneToChange) {
+
+	if (actScene != sceneToChange) {
+		actScene->DeRegScene();
+		actScene = sceneToChange;
+		actScene->RegScene();
+	}
+}
+
 // Function called when a key is pressed
 void keyPress(unsigned char key, const PxTransform& camera)
 {
@@ -104,6 +118,16 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{
 		break;
 	}
+	case '0':
+	{
+		ChangeScene(scenes[0]);
+		break;
+	}
+	case '1':
+	{
+		ChangeScene(scenes[1]);
+		break;
+	}
 	default:
 		break;
 	}
@@ -114,7 +138,6 @@ void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 	PX_UNUSED(actor1);
 	PX_UNUSED(actor2);
 }
-
 
 int main(int, const char*const*)
 {

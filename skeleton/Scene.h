@@ -10,6 +10,8 @@ public:
 	Scene(physx::PxMaterial* gMaterial);
 	virtual ~Scene();
 	void AddEntity(Entity* ent);
+	void RegScene();
+	void DeRegScene();
 	void CreateAxes(physx::PxMaterial* gMaterial);
 	void update(double t);
 };
