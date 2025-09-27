@@ -23,13 +23,9 @@ Entity::Entity(Vector3D pos, PxShape* _shape, const Vector4& color)
 
 Entity::~Entity()
 {
-	renderItem->release();
+	DeregisterRenderItem(renderItem);
 	delete transform;
-}
 
-void Entity::update(double t)
-{
-	integrate(t);
 }
 
 
