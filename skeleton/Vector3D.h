@@ -14,7 +14,7 @@ public:
 	Vector3D Normalize(Vector3D vec);
 	Vector3D Escalar(const Vector3D& vec1, const Vector3D& vec2);
 	Vector3D Vectorial(const Vector3D& vec1, const Vector3D& vec2);
-	void MultEscalar(Vector3D& vec1, float mult);
+	Vector3D MultEscalar(float mult);
 	physx::PxVec3 changeClass();
 
 	Vector3D operator+(Vector3D other);

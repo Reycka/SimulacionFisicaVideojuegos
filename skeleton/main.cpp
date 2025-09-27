@@ -62,6 +62,8 @@ void initPhysics(bool interactive)
 	scenes.push_back(new SceneP1(gMaterial));
 
 	actScene = scenes[0];
+
+	scenes[0]->DeRegScene();
 	scenes[1]->DeRegScene();
 }
 
@@ -120,6 +122,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	}
 	case '0':
 	{
+
 		ChangeScene(scenes[0]);
 		break;
 	}

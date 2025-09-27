@@ -28,6 +28,6 @@ Particle::~Particle()
 
 void Particle::integrate(double t)
 {
+	v = (v + (a.MultEscalar(t)));
 	getT()->p = getT()->p + (v.changeClass() * t);
-	v = v + (a * t);
 }

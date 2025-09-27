@@ -34,11 +34,9 @@ Vector3D Vector3D::Vectorial(const Vector3D& vec1, const Vector3D& vec2)
     );
 }
 
-void Vector3D::MultEscalar(Vector3D& vec1, float mult)
+Vector3D Vector3D::MultEscalar(float mult)
 {
-    vec1.x *= mult;
-    vec1.y *= mult;
-    vec1.z *= mult;
+    return Vector3D(x * mult, y * mult, z * mult);
 }
 
 physx::PxVec3 Vector3D::changeClass()
