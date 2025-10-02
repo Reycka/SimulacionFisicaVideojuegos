@@ -1,8 +1,11 @@
 #include "Scene.h"
 using namespace physx;
-Scene::Scene(physx::PxMaterial* gMaterial)
+Scene::Scene(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, physx::PxScene* _gScene)
 {
-	CreateAxes(gMaterial);
+	gMaterial = _gMaterial;
+	phy = _phy;
+	gScene = _gScene;
+	CreateAxes();
 }
 
 Scene::~Scene()
@@ -31,7 +34,7 @@ void Scene::DeRegScene()
 	}
 }
 
-void Scene::CreateAxes(physx::PxMaterial* gMaterial)
+void Scene::CreateAxes()
 {
 
 	//X
@@ -59,4 +62,19 @@ void Scene::update(double t)
 	for (auto ent : entities) {
 		ent->integrate(t);
 	}
+}
+
+physx::PxPhysics* Scene::getPhysx() const
+{
+	return phy;
+}
+
+physx::PxScene* Scene::getPhysxScene() const
+{
+	return gScene;
+}
+
+physx::PxMaterial* Scene::getMaterial() const
+{
+	return gMaterial;
 }
