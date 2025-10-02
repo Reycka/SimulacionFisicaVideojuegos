@@ -58,13 +58,13 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 	
-	scenes.push_back(new SceneP0(gMaterial));
 	scenes.push_back(new SceneP1(gMaterial));
+	//scenes.push_back(new SceneP0(gMaterial));
 
 	actScene = scenes[0];
 
 	scenes[0]->DeRegScene();
-	scenes[1]->DeRegScene();
+//	scenes[1]->DeRegScene();
 }
 
 
@@ -123,12 +123,12 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case '0':
 	{
 
-		ChangeScene(scenes[0]);
+		//ChangeScene(scenes[0]);
 		break;
 	}
 	case '1':
 	{
-		ChangeScene(scenes[1]);
+		//ChangeScene(scenes[1]);
 		break;
 	}
 	default:

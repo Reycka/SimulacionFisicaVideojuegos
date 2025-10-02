@@ -28,6 +28,9 @@ Particle::~Particle()
 
 void Particle::integrate(double t)
 {
+	//Euler
 	v = (v + (a.MultEscalar(t)));
+	v = v.MultEscalar(damp);
 	getT()->p = getT()->p + (v.changeClass() * t);
+
 }
