@@ -1,5 +1,4 @@
 #include "Entity.h"
-
 using namespace physx;
 
 Entity::Entity()
@@ -10,7 +9,6 @@ Entity::Entity()
 	transform = new PxTransform(pos.changeClass());
 	Vector4 color = { 1.0,1.0,1.0,1.0 };
 	renderItem = new RenderItem(shape, transform, color);
-	RegisterRenderItem(renderItem);
 }
 
 Entity::Entity(Vector3D pos, PxShape* _shape, const Vector4& color)
@@ -18,7 +16,6 @@ Entity::Entity(Vector3D pos, PxShape* _shape, const Vector4& color)
 	shape = _shape;
 	transform = new PxTransform(pos.changeClass());
 	renderItem = new RenderItem(shape, transform, color);
-	RegisterRenderItem(renderItem);
 }
 
 void Entity::RegItem()
@@ -34,7 +31,9 @@ void Entity::DeRegItem()
 Entity::~Entity()
 {
 	DeregisterRenderItem(renderItem);
+	shape->release();
 	delete transform;
+	delete renderItem;
 
 }
 

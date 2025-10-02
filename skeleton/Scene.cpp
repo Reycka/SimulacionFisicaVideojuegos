@@ -22,14 +22,14 @@ void Scene::AddEntity(Entity* ent)
 
 void Scene::RegScene()
 {
-	for (auto ent : entities) {
+	for (auto& ent : entities) {
 		ent->RegItem();
 	}
 }
 
 void Scene::DeRegScene()
 {
-	for (auto ent : entities) {
+	for (auto& ent : entities) {
 		ent->DeRegItem();
 	}
 }
@@ -59,7 +59,7 @@ void Scene::CreateAxes()
 
 void Scene::update(double t)
 {
-	for (auto ent : entities) {
+	for (auto& ent : entities) {
 		ent->integrate(t);
 	}
 }

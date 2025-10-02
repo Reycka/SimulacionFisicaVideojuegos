@@ -231,6 +231,7 @@
       </PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalOptions>/INCREMENTAL:NO /LIBPATH:../../../Lib/vc14win64 PhysX3Common_x64.lib PhysX3_x64.lib PhysX3Cooking_x64.lib PhysX3CharacterKinematic_x64.lib PhysX3Extensions.lib PxTask_x64.lib PxFoundation_x64.lib PsFastXml_x64.lib PxPvdSDK_x64.lib /LIBPATH:../../lib/vc14win64 Utils.lib</AdditionalOptions>
@@ -267,6 +268,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="callbacks.hpp" />
+    <ClInclude Include="checkML.h" />
     <ClInclude Include="core.hpp" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Particle.h" />

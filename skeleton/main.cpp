@@ -6,6 +6,7 @@
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
+#include "checkML.h"
 
 //Scenes
 #include "SceneP0.h"
@@ -61,9 +62,12 @@ void initPhysics(bool interactive)
 	scenes.push_back(new SceneP0(gMaterial,gPhysics,gScene));
 	scenes.push_back(new SceneP1(gMaterial,gPhysics,gScene));
 
-	actScene = scenes[0];
 	scenes[0]->DeRegScene();
 	scenes[1]->DeRegScene();
+
+	actScene = scenes[0];
+	actScene->RegScene();
+
 }
 
 
@@ -84,6 +88,9 @@ void cleanupPhysics(bool interactive)
 {
 	PX_UNUSED(interactive);
 
+	delete actScene;
+	scenes.clear(); // por limpieza
+
 	// Rigid Body ++++++++++++++++++++++++++++++++++++++++++
 	gScene->release();
 	gDispatcher->release();
@@ -94,7 +101,8 @@ void cleanupPhysics(bool interactive)
 	transport->release();
 	
 	gFoundation->release();
-	delete actScene;
+
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 }
 
 void ChangeScene(Scene* sceneToChange) {
@@ -145,6 +153,7 @@ int main(int, const char*const*)
 #ifndef OFFLINE_EXECUTION 
 	extern void renderLoop();
 	renderLoop();
+
 #else
 	static const PxU32 frameCount = 100;
 	initPhysics(false);
