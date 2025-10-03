@@ -5,7 +5,7 @@ SceneP0::SceneP0(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, physx::P
 {
 	PxShape* sphereShape = CreateShape(PxSphereGeometry(1), getMaterial());
 	Vector4 sphereColor = { 1.0f,1.0f,1.0f,1.0f };
-	AddEntity(new Entity(Vector3D(0, 0, 0), sphereShape, sphereColor));
+	AddEntity(new Entity(Vector3(0, 0, 0), sphereShape, sphereColor));
 }
 
 SceneP0::~SceneP0()

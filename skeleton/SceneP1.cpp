@@ -7,9 +7,9 @@ SceneP1::SceneP1(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, physx::P
 	Vector4 sphereColor = { 1.0f,0.0f,1.0f,1.0f };
 
 	//Sin Aceleración
-	AddEntity(new Particle(Vector3D(0, 0, 0), sphereShape, sphereColor, Vector3D(0.0, 10.0, 0.0), Vector3D(0.0, 0.0, 0.0), 10, 10));
+	AddEntity(new Particle(Vector3(0, 0, 0), sphereShape, sphereColor, Vector3(0.0, 10.0, 0.0), Vector3(0.0, 0.0, 0.0), 10, 10));
 	//Con Aceleración
-	AddEntity(new Particle(Vector3D(0, 0, 0), sphereShape, sphereColor,Vector3D(0.0,1.0,0.0),Vector3D(0.0,6.0,0.0),10,10));
+	AddEntity(new Particle(Vector3(0, 0, 0), sphereShape, sphereColor,Vector3(0.0,1.0,0.0),Vector3(0.0,6.0,0.0),10,10));
 
 }
 

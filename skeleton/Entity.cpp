@@ -9,8 +9,8 @@ Entity::Entity()
 	transform = new PxTransform(pos.changeClass());
 	Vector4 color = { 1.0,1.0,1.0,1.0 };
 	renderItem = new RenderItem(shape, transform, color);
-	v = Vector3D({ 0.0,0.0,0.0 });
-	a = Vector3D({ 0.0,0.0,0.0 });
+	v = Vector3({ 0.0,0.0,0.0 });
+	a = Vector3({ 0.0,0.0,0.0 });
 	masa = 0;
 	tVida = 0;
 	damp = 0;
@@ -18,13 +18,13 @@ Entity::Entity()
 	lastPos = Vector3({ 0.0,0.0,0.0 });
 }
 
-Entity::Entity(Vector3D pos, PxShape* _shape, const Vector4& color)
+Entity::Entity(Vector3 pos, PxShape* _shape, const Vector4& color)
 {
 	shape = _shape;
-	transform = new PxTransform(pos.changeClass());
+	transform = new PxTransform(pos);
 	renderItem = new RenderItem(shape, transform, color);
-	v = Vector3D({0.0,0.0,0.0});
-	a = Vector3D({ 0.0,0.0,0.0 });
+	v = Vector3({0.0,0.0,0.0});
+	a = Vector3({ 0.0,0.0,0.0 });
 	masa = 0;
 	tVida = 0;
 	damp = 0;
@@ -32,10 +32,10 @@ Entity::Entity(Vector3D pos, PxShape* _shape, const Vector4& color)
 	lastPos = Vector3({ 0.0,0.0,0.0 });
 }
 
-Entity::Entity(Vector3D pos, physx::PxShape* _shape, const Vector4& color, Vector3D _v, Vector3D _a, double _masa, double _tVida, double _damp)
+Entity::Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector3 _v, Vector3 _a, double _masa, double _tVida, double _damp)
 {
 	shape = _shape;
-	transform = new PxTransform(pos.changeClass());
+	transform = new PxTransform(pos);
 	renderItem = new RenderItem(shape, transform, color);
 	v = _v;
 	a = _a;

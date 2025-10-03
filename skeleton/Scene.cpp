@@ -38,19 +38,19 @@ void Scene::CreateAxes()
 {
 
 	//X
-	Vector3D vecX = Vector3D(10, 0, 0);
+	Vector3 vecX = Vector3(10, 0, 0);
 	PxShape* x = CreateShape(PxSphereGeometry(1), gMaterial);
 	Vector4 xColor = { 1.0f,0.0f,0.0f,1.0f };
 	AddEntity(new Entity(vecX, x, xColor));
 
 	//Y
-	Vector3D vecY = Vector3D(0, 10, 0);
+	Vector3 vecY = Vector3(0, 10, 0);
 	PxShape* y = CreateShape(PxSphereGeometry(1), gMaterial);
 	Vector4 yColor = { 0.0f,1.0f,0.0f,1.0f };
 	AddEntity(new Entity(vecY, y, yColor));
 
 	//Z
-	Vector3D vecZ = Vector3D(0, 0, 10);
+	Vector3 vecZ = Vector3(0, 0, 10);
 	PxShape* z = CreateShape(PxSphereGeometry(1), gMaterial);
 	Vector4 zColor = { 0.0f,0.0f,1.0f,1.0f };
 	AddEntity(new Entity(vecZ, z, zColor));
