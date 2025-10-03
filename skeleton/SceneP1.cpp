@@ -15,9 +15,9 @@ SceneP1::SceneP1(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, physx::P
 
 	//Balas
 	sphereColor = { 1.0f,1.0f,0.0f,1.0f };
-	AddEntity(new Proyectil(Vector3(0, 0, 0), sphereShape, sphereColor, Vector3(0.0, 10.0, 0.0), Vector3(0.0, 10.0, 0.0), 10, 10,30,Vector3(30.0,15.0,0.0),Vector3(0.0,-12.0,0.0)));
+	//AddEntity(new Proyectil(Vector3(0, 0, 0), sphereShape, sphereColor, Vector3(0.0, 10.0, 0.0), Vector3(0.0, 10.0, 0.0), 10, 10,30,Vector3(30.0,15.0,0.0),Vector3(0.0,-12.0,0.0)));
 
-	//AddEntity(new Proyectil(_cam->getEye(), sphereShape, sphereColor, Vector3(0.0, 0.0, 0.0), Vector3(10.0, 10.0, 0.0), 10, 10, 30, Vector3(30.0, 15.0, 0.0)));
+	AddEntity(new Proyectil(_cam->getEye(), sphereShape, sphereColor, _cam->getDir() * 100, Vector3(1.0, 10.0, 1.0), 10, 10, 30, Vector3(30.0, 15.0, 0.0), Vector3(0.0, -12.0, 0.0)));
 
 }
 
