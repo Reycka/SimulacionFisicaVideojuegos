@@ -7,6 +7,9 @@ class Particle : public Entity
 
 private:
 
+	Vector3 lastPos;
+	bool firstComprobation;
+
 	Vector3D v;
 	Vector3D a;
 	double masa;

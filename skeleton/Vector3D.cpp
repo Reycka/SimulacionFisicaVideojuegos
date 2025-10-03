@@ -64,4 +64,9 @@ Vector3D Vector3D::operator=(Vector3D other)
     return Vector3D({ x = other.x, y = other.y, z = other.z });
 }
 
+bool Vector3D::operator==(Vector3D other)
+{
+    return x == other.x && y == other.y && z == other.z;
+}
+
 

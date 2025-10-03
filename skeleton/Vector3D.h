@@ -21,6 +21,7 @@ public:
 	Vector3D operator-(Vector3D other);
 	Vector3D operator*(Vector3D other);
 	Vector3D operator=(Vector3D other);
+	bool operator==(Vector3D other);
 	inline Vector3D operator=(physx::PxVec3 other) { return Vector3D({ x = other.x, y = other.y, z = other.z }); }
 
 };

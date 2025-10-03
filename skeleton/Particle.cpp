@@ -8,6 +8,8 @@ Particle::Particle() : Entity()
 	 damp = 0.999;
 	 tVida = 3;
 	 masa = 5;
+	 firstComprobation = true;
+	 lastPos = { 0.0,0.0,0.0 };
 
 }
 
@@ -18,6 +20,8 @@ Particle::Particle(Vector3D pos, PxShape* shape, const Vector4& color, Vector3D 
 	masa = _masa;
 	tVida = _tVida;
 	damp = _damp;
+	firstComprobation = true;
+	lastPos = { 0.0,0.0,0.0 };
 
 }
 
@@ -28,9 +32,21 @@ Particle::~Particle()
 
 void Particle::integrate(double t)
 {
-	//Euler
-	v = (v + (a.MultEscalar(t)));
-	v = v.MultEscalar(damp);
-	getT()->p = getT()->p + (v.changeClass() * t);
+	if (firstComprobation || a == Vector3D({0.0,0.0,0.0})) {
+		//Euler
+		v = (v + (a.MultEscalar(t)));
+		v = v.MultEscalar(damp);
+		getT()->p = getT()->p + (v.changeClass() * t);
+		lastPos = getT()->p;
+		firstComprobation = false;
+	}
 
+	else {
+		//Verlet
+		Vector3 newPosition = getT()->p * 2.0 - lastPos + (a.MultEscalar(t * t).changeClass());
+		newPosition = getT()->p + (newPosition - getT()->p) * damp;
+		lastPos = getT()->p;
+		getT()->p = newPosition;
+		v = (getT()->p - lastPos) / (2.0 * t);
+	}
 }
