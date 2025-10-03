@@ -8,10 +8,11 @@ private:
 	physx::PxPhysics* phy;
 	physx::PxScene* gScene;
 	physx::PxMaterial* gMaterial;
+	Camera* cam;
 protected:
 
 public:
-	Scene(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy,physx::PxScene* _gScene);
+	Scene(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy,physx::PxScene* _gScene, Camera* _cam);
 	virtual ~Scene();
 	void AddEntity(Entity* ent);
 	void RegScene();

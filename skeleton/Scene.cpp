@@ -1,10 +1,11 @@
 #include "Scene.h"
 using namespace physx;
-Scene::Scene(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, physx::PxScene* _gScene)
+Scene::Scene(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, physx::PxScene* _gScene,Camera* _cam)
 {
 	gMaterial = _gMaterial;
 	phy = _phy;
 	gScene = _gScene;
+	cam = _cam;
 	CreateAxes();
 }
 

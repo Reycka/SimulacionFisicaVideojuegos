@@ -59,8 +59,8 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 	
-	scenes.push_back(new SceneP0(gMaterial,gPhysics,gScene));
-	scenes.push_back(new SceneP1(gMaterial,gPhysics,gScene));
+	scenes.push_back(new SceneP0(gMaterial,gPhysics,gScene,GetCamera()));
+	scenes.push_back(new SceneP1(gMaterial,gPhysics,gScene,GetCamera()));
 
 	scenes[0]->DeRegScene();
 	scenes[1]->DeRegScene();

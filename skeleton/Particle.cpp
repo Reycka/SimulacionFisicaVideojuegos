@@ -3,11 +3,11 @@ using namespace physx;
 Particle::Particle() : Entity()
 {
 
-	 v = Vector3{ 0,10,0 };
+	 vSim = Vector3{ 0,10,0 };
 	 a = Vector3{ 0,-9.8,0 };
 	 damp = 0.999;
 	 tVida = 3;
-	 masa = 5;
+	 masaSim = 5;
 	 firstComprobation = true;
 	 lastPos = { 0.0,0.0,0.0 };
 
@@ -27,9 +27,9 @@ void Particle::integrate(double t)
 {
 	if (firstComprobation || a == Vector3({0.0,0.0,0.0})) {
 		//Euler
-		v = (v + (a * t));
-		v = v * pow(damp,t);
-		getT()->p = getT()->p + (v * t);
+		vSim = (vSim + (a * t));
+		vSim = vSim * pow(damp,t);
+		getT()->p = getT()->p + (vSim * t);
 		lastPos = getT()->p;
 		firstComprobation = false;
 	}
@@ -40,6 +40,6 @@ void Particle::integrate(double t)
 		newPosition = getT()->p + (newPosition - getT()->p) * pow(damp,t);
 		lastPos = getT()->p;
 		getT()->p = newPosition;
-		v = (getT()->p - lastPos) / (2.0 * t);
+		vSim = (getT()->p - lastPos) / (2.0 * t);
 	}
 }

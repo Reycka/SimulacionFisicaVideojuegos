@@ -9,13 +9,14 @@ Entity::Entity()
 	transform = new PxTransform(pos.changeClass());
 	Vector4 color = { 1.0,1.0,1.0,1.0 };
 	renderItem = new RenderItem(shape, transform, color);
-	v = Vector3({ 0.0,0.0,0.0 });
+	vSim = Vector3({ 0.0,0.0,0.0 });
 	a = Vector3({ 0.0,0.0,0.0 });
-	masa = 0;
+	masaSim = 0;
 	tVida = 0;
 	damp = 0;
 	firstComprobation = true;
 	lastPos = Vector3({ 0.0,0.0,0.0 });
+	g = Vector3({ 0.0,0.0,0.0 });
 }
 
 Entity::Entity(Vector3 pos, PxShape* _shape, const Vector4& color)
@@ -23,27 +24,29 @@ Entity::Entity(Vector3 pos, PxShape* _shape, const Vector4& color)
 	shape = _shape;
 	transform = new PxTransform(pos);
 	renderItem = new RenderItem(shape, transform, color);
-	v = Vector3({0.0,0.0,0.0});
+	vSim = Vector3({0.0,0.0,0.0});
 	a = Vector3({ 0.0,0.0,0.0 });
-	masa = 0;
+	masaSim = 0;
 	tVida = 0;
 	damp = 0;
 	firstComprobation = true;
 	lastPos = Vector3({ 0.0,0.0,0.0 });
+	g = Vector3({ 0.0,0.0,0.0 });
 }
 
-Entity::Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector3 _v, Vector3 _a, double _masa, double _tVida, double _damp)
+Entity::Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector3 _v, Vector3 _a, double _masa, double _tVida, double _damp, double _masaReal, Vector3 _vReal, Vector3 _g)
 {
 	shape = _shape;
 	transform = new PxTransform(pos);
 	renderItem = new RenderItem(shape, transform, color);
-	v = _v;
+	vSim = _v;
 	a = _a;
-	masa = _masa;
+	masaSim = _masa;
 	tVida = _tVida;
 	damp = _damp;
 	firstComprobation = true;
 	lastPos = Vector3({ 0.0,0.0,0.0 });
+	g = _g;
 }
 
 void Entity::RegItem()
