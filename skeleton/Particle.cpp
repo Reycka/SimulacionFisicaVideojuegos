@@ -13,15 +13,8 @@ Particle::Particle() : Entity()
 
 }
 
-Particle::Particle(Vector3D pos, PxShape* shape, const Vector4& color, Vector3D _v, Vector3D _a, double _masa, double _tVida, double _damp) : Entity(pos,shape,color)
+Particle::Particle(Vector3D pos, PxShape* shape, const Vector4& color, Vector3D _v, Vector3D _a, double _masa, double _tVida, double _damp) : Entity(pos,shape,color,_v,_a,_masa,_tVida,_damp)
 {
-	v = _v;
-	a = _a;
-	masa = _masa;
-	tVida = _tVida;
-	damp = _damp;
-	firstComprobation = true;
-	lastPos = { 0.0,0.0,0.0 };
 
 }
 
