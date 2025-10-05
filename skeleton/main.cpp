@@ -118,10 +118,8 @@ void keyPress(unsigned char key, const PxTransform& camera)
 {
 	PX_UNUSED(camera);
 
-	switch(toupper(key))
+	switch(key)
 	{
-	//case 'B': break;
-	//case ' ':	break;
 	case ' ':
 	{
 		break;
@@ -134,6 +132,21 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case '1':
 	{
 		ChangeScene(scenes[1]);
+		break;
+	}
+	case 'c':
+	{
+		actScene->keyPress(key);
+		break;
+	}
+	case 'v':
+	{
+		actScene->keyPress(key);
+		break;
+	}
+	case 'b':
+	{
+		actScene->keyPress(key);
 		break;
 	}
 	default:

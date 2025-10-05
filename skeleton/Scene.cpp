@@ -65,6 +65,10 @@ void Scene::update(double t)
 	}
 }
 
+void Scene::keyPress(unsigned char key)
+{
+}
+
 physx::PxPhysics* Scene::getPhysx() const
 {
 	return phy;
@@ -78,4 +82,9 @@ physx::PxScene* Scene::getPhysxScene() const
 physx::PxMaterial* Scene::getMaterial() const
 {
 	return gMaterial;
+}
+
+Camera* Scene::getCamera() const
+{
+	return cam;
 }

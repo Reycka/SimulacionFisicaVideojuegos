@@ -19,7 +19,9 @@ public:
 	void DeRegScene();
 	void CreateAxes();
 	void update(double t);
+	virtual void keyPress(unsigned char key);
 	physx::PxPhysics* getPhysx() const;
 	physx::PxScene* getPhysxScene() const;
 	physx::PxMaterial* getMaterial() const;
+	Camera* getCamera() const;
 };
