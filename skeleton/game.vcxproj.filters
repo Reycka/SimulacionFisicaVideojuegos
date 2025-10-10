@@ -17,6 +17,8 @@
     <ClCompile Include="SceneP0.cpp" />
     <ClCompile Include="SceneP1.cpp" />
     <ClCompile Include="Proyectil.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="GaussianGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -36,6 +38,9 @@
     <ClInclude Include="SceneP1.h" />
     <ClInclude Include="checkML.h" />
     <ClInclude Include="Proyectil.h" />
+    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="ParticleGen.h" />
+    <ClInclude Include="GaussianGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

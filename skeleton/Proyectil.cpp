@@ -24,6 +24,8 @@ Proyectil::~Proyectil()
 
 void Proyectil::integrate(double t)
 {
+	Entity::integrate(t);
+
 //	if (firstComprobation || a == Vector3({ 0.0,0.0,0.0 })) {
 		//Euler
 		vSim = (vSim + (a * t));

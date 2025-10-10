@@ -23,6 +23,7 @@ protected:
 	double masaReal;
 	double tVida;
 	double damp;
+	double lastTime = 0;
 
 public:
 	Entity();
@@ -32,6 +33,8 @@ public:
 	void DeRegItem();
 	virtual ~Entity();
 	physx::PxTransform* getT() const;
-	virtual void integrate(double t) {};
+	physx::PxShape* getShape() const;
+	virtual void integrate(double t);
+
 };
 

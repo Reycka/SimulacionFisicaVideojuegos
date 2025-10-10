@@ -73,3 +73,9 @@ PxTransform* Entity::getT() const
 {
 	return transform;
 }
+
+physx::PxShape* Entity::getShape() const
+{
+	return shape;
+}
+

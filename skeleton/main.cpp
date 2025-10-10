@@ -2,6 +2,8 @@
 #include <PxPhysicsAPI.h>
 #include <iostream>
 #include <vector>
+#include <chrono>
+#include <thread>
 
 #include "core.hpp"
 #include "RenderUtils.hpp"
@@ -80,6 +82,7 @@ void stepPhysics(bool interactive, double t)
 	actScene->update(t);
 	gScene->simulate(t);
 	gScene->fetchResults(true);
+	std::this_thread::sleep_for(std::chrono::microseconds(10));
 }
 
 // Function to clean data

@@ -15,7 +15,7 @@ Particle::Particle() : Entity()
 
 Particle::Particle(Vector3 pos, PxShape* shape, const Vector4& color, Vector3 _v, Vector3 _a, double _masa, double _tVida, double _damp) : Entity(pos,shape,color,_v,_a,_masa,_tVida,_damp)
 {
-
+	
 }
 
 Particle::~Particle()
@@ -23,8 +23,11 @@ Particle::~Particle()
 
 }
 
-void Particle::integrate(double t)
+void Particle::integrate(double t) 
 {
+	tVida -= (t - lastTime);
+	lastTime = t;
+
 	if (firstComprobation || a == Vector3({0.0,0.0,0.0})) {
 		//Euler
 		vSim = (vSim + (a * t));
