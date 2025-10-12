@@ -20,14 +20,15 @@ x = xmediaDeLaDistribucion + d(-mt) * desviacion de P
 
 protected:
 	Particle* model;
-	std::list<Particle*>part;
+	std::list<std::pair<Particle*,bool>>part;
 	Vector3 limitPos;
 	std::mt19937 _mt;
 	std::uniform_real_distribution<double> urd;
 public:
 	virtual ~ParticleGen() {};
-	virtual void addParticles(std::list<Particle*>& p) = 0;
+	virtual void addParticles() = 0;
 	virtual void removeParticles() = 0;
+	virtual void integrate(double t) = 0;
 	virtual void setModel(Particle* _model) = 0;
 };
 

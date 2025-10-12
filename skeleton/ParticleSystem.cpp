@@ -12,7 +12,6 @@ ParticleSystem::~ParticleSystem()
 	for (auto gen : generators) {
 		delete gen;
 	}
-	particles.clear();
 	generators.clear();
 }
 
@@ -24,15 +23,14 @@ void ParticleSystem::addGenerator(ParticleGen* gen)
 
 void ParticleSystem::integrate(double t)
 {
-	for (auto part : particles) {
-		part->integrate(t); 
-	}
 
-	for (auto gen : generators) {
+	for (auto& gen : generators) {
 
+		gen->addParticles(); //Añade las partículas nuevas
+		gen->integrate(t);
 		gen->removeParticles(); //Elimina las particulas viejas 
-		gen->addParticles(particles); //Añade las partículas nuevas
 
 	}
 }
+
 

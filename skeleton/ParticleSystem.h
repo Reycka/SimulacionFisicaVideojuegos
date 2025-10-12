@@ -8,7 +8,6 @@ class ParticleSystem : public Entity
 private:
 
 	Particle* modelo;
-	std::list<Particle*>particles;
 	std::list<ParticleGen*>generators;
 
 public:

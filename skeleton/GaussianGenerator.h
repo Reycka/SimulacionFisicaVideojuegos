@@ -10,8 +10,9 @@ private:
 public:
 	GaussianGenerator();
 	virtual ~GaussianGenerator();
-	virtual void addParticles(std::list<Particle*>& p) override;
+	virtual void addParticles() override;
 	virtual void removeParticles() override;
+	virtual void integrate(double t) override;
 	virtual void setModel(Particle* model) override;
 };
 
