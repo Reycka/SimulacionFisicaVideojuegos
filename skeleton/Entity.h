@@ -14,7 +14,6 @@ protected:
 
 	Vector3 lastPos;
 	bool firstComprobation;
-
 	Vector3 vSim;
 	Vector3 vReal;
 	Vector3 a;
@@ -34,7 +33,13 @@ public:
 	virtual ~Entity();
 	physx::PxTransform* getT() const;
 	physx::PxShape* getShape() const;
-	virtual void integrate(double t);
+	Vector3 getV()const;
+	Vector3 getA()const;
+	Vector3 getG() const;
+	double getMasa() const;
+	double getTvida() const;
+	double getDamp() const;
+	virtual void integrate(double t) {};
 
 };
 

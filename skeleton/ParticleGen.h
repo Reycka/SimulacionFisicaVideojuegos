@@ -17,16 +17,15 @@ desviacion de velocidad
 desviacion de tiempo
 x = xmediaDeLaDistribucion + d(-mt) * desviacion de P
 */
-private:
+
+protected:
 	Particle* model;
-	std::list<Particle*>p;
-	Vector4 color;
+	std::list<Particle*>part;
 	Vector3 limitPos;
 	std::mt19937 _mt;
 	std::uniform_real_distribution<double> urd;
-
 public:
-	virtual void addParticles() = 0;
+	virtual void addParticles(std::list<Particle*> p) = 0;
 	virtual void removeParticles() = 0;
 	inline void setModel(Particle* _model) { model = _model; };
 };

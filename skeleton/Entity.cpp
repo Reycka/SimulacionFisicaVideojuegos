@@ -69,6 +69,8 @@ Entity::~Entity()
 }
 
 
+
+//GETTERS
 PxTransform* Entity::getT() const
 {
 	return transform;
@@ -77,5 +79,35 @@ PxTransform* Entity::getT() const
 physx::PxShape* Entity::getShape() const
 {
 	return shape;
+}
+
+Vector3 Entity::getV() const
+{
+	return vSim;
+}
+
+Vector3 Entity::getA() const
+{
+	return a;
+}
+
+Vector3 Entity::getG() const
+{
+	return g;
+}
+
+double Entity::getMasa() const
+{
+	return masaSim;
+}
+
+double Entity::getTvida() const
+{
+	return tVida;
+}
+
+double Entity::getDamp() const
+{
+	return damp;
 }
 
