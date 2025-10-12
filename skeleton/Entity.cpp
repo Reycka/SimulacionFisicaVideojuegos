@@ -68,6 +68,11 @@ Entity::~Entity()
 
 }
 
+RenderItem* Entity::getRenderItem() const
+{
+	return renderItem;
+}
+
 
 
 //GETTERS

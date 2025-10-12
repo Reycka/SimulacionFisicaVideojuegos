@@ -1,19 +1,19 @@
 #include "ParticleSystem.h"
+#include "Particle.h"
 
-
-ParticleSystem::ParticleSystem(Vector3 pos, physx::PxShape* shape, Vector4 color,Vector3 v, Vector3 a, double _tVida, double damp = 0.999) : Entity(pos,shape,{0.0,0.0,0.0,0.0})
+ParticleSystem::ParticleSystem(Vector3 pos, physx::PxShape* shape, Vector4 color,Vector3 v, Vector3 a, double _tVida, double damp) : Entity(pos,shape,{0.0,0.0,0.0,0.0})
 {
 	modelo = new Particle(pos,shape,color,v,a,_tVida,damp);
+	modelo->DeRegItem();
 }
 
 ParticleSystem::~ParticleSystem()
 {
-	for (auto part : particles) {
-		part->DeRegItem(); //Si se llama a la destructora de Entity incluyendo esto entonces no hace falta
-	}
 	for (auto gen : generators) {
 		delete gen;
 	}
+	particles.clear();
+	generators.clear();
 }
 
 void ParticleSystem::addGenerator(ParticleGen* gen)

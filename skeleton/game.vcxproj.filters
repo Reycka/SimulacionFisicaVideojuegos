@@ -7,44 +7,112 @@
     <ClCompile Include="Render\Render.cpp">
       <Filter>Render</Filter>
     </ClCompile>
-    <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="callbacks.cpp" />
-    <ClCompile Include="Vector3D.cpp" />
-    <ClCompile Include="Particle.cpp" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SceneP0.cpp" />
-    <ClCompile Include="SceneP1.cpp" />
-    <ClCompile Include="Proyectil.cpp" />
-    <ClCompile Include="ParticleSystem.cpp" />
-    <ClCompile Include="GaussianGenerator.cpp" />
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneP0.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneP1.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyectil.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderUtils.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Entities\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Entities\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="GaussianGenerator.cpp">
+      <Filter>Entities\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="callbacks.cpp">
+      <Filter>General</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3D.cpp">
+      <Filter>General</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneP2_GEN1.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="core.hpp" />
     <ClInclude Include="Render\Camera.h">
       <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="Render\Render.h">
       <Filter>Render</Filter>
     </ClInclude>
-    <ClInclude Include="RenderUtils.hpp" />
-    <ClInclude Include="callbacks.hpp" />
-    <ClInclude Include="Vector3D.h" />
-    <ClInclude Include="Particle.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="SceneP0.h" />
-    <ClInclude Include="SceneP1.h" />
-    <ClInclude Include="checkML.h" />
-    <ClInclude Include="Proyectil.h" />
-    <ClInclude Include="ParticleSystem.h" />
-    <ClInclude Include="ParticleGen.h" />
-    <ClInclude Include="GaussianGenerator.h" />
+    <ClInclude Include="Scene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneP0.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneP1.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyectil.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderUtils.hpp">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Entities\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Entities\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="GaussianGenerator.h">
+      <Filter>Entities\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleGen.h">
+      <Filter>Entities\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="callbacks.hpp">
+      <Filter>General</Filter>
+    </ClInclude>
+    <ClInclude Include="checkML.h">
+      <Filter>General</Filter>
+    </ClInclude>
+    <ClInclude Include="core.hpp">
+      <Filter>General</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3D.h">
+      <Filter>General</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneP2_GEN1.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
       <UniqueIdentifier>{d04b4f9f-5a69-465e-8070-25c6d0bcd3c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{9627b38e-e0ad-4be9-b003-9f8b1b3eb776}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{c046ea5f-a5c8-4132-9f8d-6ff047310c65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Particles">
+      <UniqueIdentifier>{f129fd3b-18b7-49a5-aaac-7d19bb247733}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="General">
+      <UniqueIdentifier>{1620f2aa-c471-4bbd-a3b0-0170961d0c2e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

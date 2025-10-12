@@ -9,8 +9,9 @@ private:
 	std::normal_distribution<double> nd;
 public:
 	GaussianGenerator();
-	~GaussianGenerator();
-	virtual void addParticles(std::list<Particle*> p) override;
+	virtual ~GaussianGenerator();
+	virtual void addParticles(std::list<Particle*>& p) override;
 	virtual void removeParticles() override;
+	virtual void setModel(Particle* model) override;
 };
 

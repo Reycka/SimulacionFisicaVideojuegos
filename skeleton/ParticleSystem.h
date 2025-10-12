@@ -1,7 +1,7 @@
 #pragma once
 #include <list>
-#include "Entity.h"
 #include "ParticleGen.h"
+class Particle;
 class ParticleSystem : public Entity
 {
 

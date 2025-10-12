@@ -25,8 +25,9 @@ protected:
 	std::mt19937 _mt;
 	std::uniform_real_distribution<double> urd;
 public:
-	virtual void addParticles(std::list<Particle*> p) = 0;
+	virtual ~ParticleGen() {};
+	virtual void addParticles(std::list<Particle*>& p) = 0;
 	virtual void removeParticles() = 0;
-	inline void setModel(Particle* _model) { model = _model; };
+	virtual void setModel(Particle* _model) = 0;
 };
 

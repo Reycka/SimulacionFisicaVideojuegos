@@ -31,6 +31,7 @@ public:
 	void RegItem();
 	void DeRegItem();
 	virtual ~Entity();
+	RenderItem* getRenderItem() const;
 	physx::PxTransform* getT() const;
 	physx::PxShape* getShape() const;
 	Vector3 getV()const;
