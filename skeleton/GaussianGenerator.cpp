@@ -2,19 +2,22 @@
 
 GaussianGenerator::GaussianGenerator()
 {
+
 }
 
 GaussianGenerator::~GaussianGenerator()
 {
 	for (auto particle : part) {
-		particle->DeRegItem();
-		delete particle;
+		if (particle != nullptr) {
+			particle->DeRegItem();
+		}
 	}
 }
 
 void GaussianGenerator::addParticles(std::list<Particle*>& p)
 {
-	part.push_back(model);
+	//pos, shape, color, v, a, _tVida, damp
+	part.push_back(new Particle({ model->getT()->p.x,model->getT()->p.y,model->getT()->p.z }, model->getShape(), model->getRenderItem()->color, model->getV(), model->getA(), model->getTvida(), model->getDamp()));
 	p.push_back(part.back());
 }
 
@@ -23,9 +26,11 @@ void GaussianGenerator::removeParticles()
 	for (auto pa : part) {
 		if (pa->getTvida() <= 0) {
 			pa->DeRegItem();
+			pa = nullptr;
 		}
 		else if (pa->getT()->p.x < limitPos.x || pa->getT()->p.y < limitPos.y || pa->getT()->p.z < limitPos.z) {
 			pa->DeRegItem();
+			pa = nullptr;
 		}
 	}
 }
