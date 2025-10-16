@@ -8,8 +8,8 @@ SceneP2_GEN1::SceneP2_GEN1(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy
 	PxShape* sphereShape = CreateShape(PxSphereGeometry(1), getMaterial());
 	Vector4 sphereColor = { 1.0f,1.0f,0.0f,1.0f };
 
-	ParticleSystem* partSys = new ParticleSystem({0.0,0.0,0.0},sphereShape,sphereColor,{0.0,10.0,0.0},{0.0,2.0,0.0},15);
-	GaussianGenerator* gaus = new GaussianGenerator();
+	ParticleSystem* partSys = new ParticleSystem();
+	GaussianGenerator* gaus = new GaussianGenerator({ 0.0,0.0,0.0 }, sphereShape, sphereColor, { 0.0,10.0,0.0 }, { 0.0,2.0,0.0 }, 1);
 	partSys->addGenerator(gaus);
 	AddEntity(partSys);
 }

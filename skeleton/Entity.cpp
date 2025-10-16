@@ -7,7 +7,7 @@ Entity::Entity()
 	PxShape* _shape = CreateShape(PxSphereGeometry(1), NULL);
 	shape = _shape;
 	transform = new PxTransform(pos.changeClass());
-	Vector4 color = { 1.0,1.0,1.0,1.0 };
+	Vector4 color = { 0.0,0.0,0.0,0.0 };
 	renderItem = new RenderItem(shape, transform, color);
 	vSim = Vector3({ 0.0,0.0,0.0 });
 	a = Vector3({ 0.0,0.0,0.0 });
@@ -17,6 +17,7 @@ Entity::Entity()
 	firstComprobation = true;
 	lastPos = Vector3({ 0.0,0.0,0.0 });
 	g = Vector3({ 0.0,0.0,0.0 });
+
 }
 
 Entity::Entity(Vector3 pos, PxShape* _shape, const Vector4& color)
@@ -61,7 +62,7 @@ void Entity::DeRegItem()
 
 Entity::~Entity()
 {
-	DeregisterRenderItem(renderItem);
+	DeRegItem();
 	shape->release();
 	delete transform;
 	delete renderItem;

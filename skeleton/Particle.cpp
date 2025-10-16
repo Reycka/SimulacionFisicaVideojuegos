@@ -1,4 +1,5 @@
 #include "Particle.h"
+#include <math.h>
 using namespace physx;
 Particle::Particle() : Entity()
 {

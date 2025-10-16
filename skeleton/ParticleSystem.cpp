@@ -1,14 +1,14 @@
 #include "ParticleSystem.h"
 #include "Particle.h"
 
-ParticleSystem::ParticleSystem(Vector3 pos, physx::PxShape* shape, Vector4 color,Vector3 v, Vector3 a, double _tVida, double damp) : Entity(pos,shape,{0.0,0.0,0.0,0.0})
+ParticleSystem::ParticleSystem() : Entity()
 {
-	modelo = new Particle(pos,shape,color,v,a,_tVida,damp);
-	modelo->DeRegItem();
+	Entity::DeRegItem(); //Elimino la representacion de la entidad de la escena
 }
 
 ParticleSystem::~ParticleSystem()
 {
+	Entity::RegItem(); //Activo la representacion para posteirormente eliminarla bien
 	for (auto gen : generators) {
 		delete gen;
 	}
@@ -18,18 +18,30 @@ ParticleSystem::~ParticleSystem()
 void ParticleSystem::addGenerator(ParticleGen* gen)
 {
 	generators.push_back(gen);
-	generators.back()->setModel(modelo);
 }
 
 void ParticleSystem::integrate(double t)
 {
 
 	for (auto& gen : generators) {
-
-		gen->addParticles(); //Añade las partículas nuevas
+		gen->removeParticles(); //Elimina las particulas viejas
 		gen->integrate(t);
-		gen->removeParticles(); //Elimina las particulas viejas 
+		gen->addParticles(); //Añade las partículas nuevas
 
+	}
+}
+
+void ParticleSystem::RegItem()
+{
+	for (auto& gen : generators) {
+		gen->RegParticles();
+	}
+}
+
+void ParticleSystem::DeRegItem()
+{
+	for (auto& gen : generators) {
+		gen->DeRegParticles();
 	}
 }
 

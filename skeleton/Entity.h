@@ -9,6 +9,7 @@ private:
 	RenderItem* renderItem;
 	physx::PxTransform* transform;
 	physx::PxShape* shape;
+	bool MeRenderizo = true;
 
 protected:
 
@@ -28,8 +29,8 @@ public:
 	Entity();
 	Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color);
 	Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector3 _v, Vector3 _a, double _masa, double _tVida, double _damp = 0.999, double _masaReal = 1, Vector3 _vReal = { 0.0,1.0,0.0 }, Vector3 _g = {0.0,-9.8,0.0});
-	void RegItem();
-	void DeRegItem();
+	virtual void RegItem();
+	virtual void DeRegItem();
 	virtual ~Entity();
 	RenderItem* getRenderItem() const;
 	physx::PxTransform* getT() const;
