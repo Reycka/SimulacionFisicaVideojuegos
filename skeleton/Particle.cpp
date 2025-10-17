@@ -15,9 +15,9 @@ Particle::Particle() : Entity()
 
 }
 
-Particle::Particle(Vector3 pos, PxShape* shape, const Vector4& color, Vector3 _v, Vector3 _a, double _tVida, double _damp) : Entity(pos,shape,color,_v,_a,0,_tVida,_damp)
+Particle::Particle(Vector3 pos, PxShape* shape, const Vector4& color, Vector3 _v, Vector3 _a, double _tVida, Vector3 g, double _damp) : Entity(pos,shape,color,_v,_a,0,_tVida,g,_damp)
 {
-	
+	a += g;
 }
 
 Particle::~Particle()
@@ -45,5 +45,6 @@ void Particle::integrate(double t)
 		lastPos = getT()->p;
 		getT()->p = newPosition;
 		vSim = (getT()->p - lastPos) / (2.0 * t);
+		a += g;
 	}
 }

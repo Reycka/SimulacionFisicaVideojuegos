@@ -35,7 +35,7 @@ Entity::Entity(Vector3 pos, PxShape* _shape, const Vector4& color)
 	g = Vector3({ 0.0,0.0,0.0 });
 }
 
-Entity::Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector3 _v, Vector3 _a, double _masa, double _tVida, double _damp, double _masaReal, Vector3 _vReal, Vector3 _g)
+Entity::Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector3 _v, Vector3 _a, double _masa, double _tVida, Vector3 _g,double _damp, double _masaReal, Vector3 _vRea)
 {
 	shape = _shape;
 	transform = new PxTransform(pos);

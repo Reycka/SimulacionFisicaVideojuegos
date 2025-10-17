@@ -32,9 +32,6 @@
     <ClCompile Include="Particle.cpp">
       <Filter>Entities\Particles</Filter>
     </ClCompile>
-    <ClCompile Include="GaussianGenerator.cpp">
-      <Filter>Entities\Particles</Filter>
-    </ClCompile>
     <ClCompile Include="callbacks.cpp">
       <Filter>General</Filter>
     </ClCompile>
@@ -43,6 +40,9 @@
     </ClCompile>
     <ClCompile Include="SceneP2_GEN1.cpp">
       <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="GaussianGenerator.cpp">
+      <Filter>Entities\Particles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

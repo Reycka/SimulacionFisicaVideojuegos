@@ -1,6 +1,6 @@
 #include "GaussianGenerator.h"
 #include <iostream>
-GaussianGenerator::GaussianGenerator(Vector3 _limitPos,Vector3 pos, physx::PxShape* shape, Vector4 color, Vector3 v, Vector3 a, double _tVida,int l, double _timeToSpwan, double damp)
+GaussianGenerator::GaussianGenerator(Vector3 _limitPos,Vector3 pos, physx::PxShape* shape, Vector4 color, Vector3 v, Vector3 a,double _tVida, Vector3 g,int l, double _timeToSpwan, double damp)
 {
 	//Atributos del generador
 	limitPos = _limitPos;
@@ -9,7 +9,7 @@ GaussianGenerator::GaussianGenerator(Vector3 _limitPos,Vector3 pos, physx::PxSha
 	limit = l;
 
 	//Partícula modelo
-	model = new Particle(pos,shape,color,v,a,_tVida,damp);
+	model = new Particle(pos,shape,color,v,a,_tVida,g,damp);
 	model->DeRegItem();
 
 	//Aleatorio
@@ -41,14 +41,15 @@ Particle* GaussianGenerator::GeneraAleatoria()
 
 	//Creación de las variables random
 	//Para el color
-	std::normal_distribution<float> c(0.5f, 1.0f);
+	std::uniform_real_distribution<float> c(0.4f, 1.0f);
 	double colorVariation = c(_mt);
 
 	//Para la velocidad
-	std::normal_distribution<double> d(-1, 1);
+	std::normal_distribution<double> d(-5, 5);
 	double velVariationX = d(_mt);
 	double velVariationY = d(_mt);
 	double velVariationZ = d(_mt);
+
 
 	//Asgnación del color
 	Vector4 color = rend->color;
@@ -65,7 +66,7 @@ Particle* GaussianGenerator::GeneraAleatoria()
 
 	//Asignación de la velocidad
 	Vector3 v = model->getV();
-	v.x = v.x + (v.x *velVariationX);
+	v.x = v.x + (v.x * velVariationX);
 	v.y = v.y + (v.y * velVariationY);
 	v.z = v.z + (v.z * velVariationZ);
 
@@ -80,7 +81,7 @@ Particle* GaussianGenerator::GeneraAleatoria()
 	double damping = model->getDamp();
 
 	//Creación y devolución de la partícula
-	Particle* p = new Particle(pos,sh,color,v,a,vida,damping);
+	Particle* p = new Particle(pos,sh,color,v,a, vida, model->getG(), damping);
 	return p;
 }
 

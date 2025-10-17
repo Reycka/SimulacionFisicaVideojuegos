@@ -27,7 +27,7 @@ protected:
 public:
 	Entity();
 	Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color);
-	Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector3 _v, Vector3 _a, double _masa, double _tVida, double _damp = 0.999, double _masaReal = 1, Vector3 _vReal = { 0.0,1.0,0.0 }, Vector3 _g = {0.0,-9.8,0.0});
+	Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector3 _v, Vector3 _a, double _masa, double _tVida, Vector3 _g = { 0.0,-9.8,0.0 }, double _damp = 0.999, double _masaReal = 1, Vector3 _vReal = { 0.0,1.0,0.0 });
 	virtual void RegItem();
 	virtual void DeRegItem();
 	virtual ~Entity();
