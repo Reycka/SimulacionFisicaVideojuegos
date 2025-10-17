@@ -23,7 +23,6 @@ protected:
 	double masaReal;
 	double tVida;
 	double damp;
-	double lastTime = 0;
 
 public:
 	Entity();

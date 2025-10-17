@@ -20,9 +20,10 @@ x = xmediaDeLaDistribucion + d(-mt) * desviacion de P
 
 protected:
 	Particle* model;
-	std::vector<Particle*>part;
-	int limit = 10;
-	int partGen = 0;
+	std::vector<std::pair<Particle*,bool>>part;
+	int limit = 5;
+	double timeToSpawn;
+	double timePass;
 	Vector3 limitPos;
 	std::mt19937 _mt;
 	std::uniform_real_distribution<double> urd;

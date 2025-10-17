@@ -1,5 +1,6 @@
 #include "Particle.h"
 #include <math.h>
+#include <iostream>
 using namespace physx;
 Particle::Particle() : Entity()
 {
@@ -26,8 +27,7 @@ Particle::~Particle()
 
 void Particle::integrate(double t) 
 {
-	tVida -= (t - lastTime);
-	lastTime = t;
+	tVida -= t;
 
 	if (firstComprobation || a == Vector3({0.0,0.0,0.0})) {
 		//Euler
