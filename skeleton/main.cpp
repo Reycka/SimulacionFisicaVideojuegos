@@ -14,6 +14,8 @@
 #include "SceneP0.h"
 #include "SceneP1.h"
 #include "SceneP2_GEN1.h"
+#include "SceneP2_GEN2.h"
+#include "SceneP2_GEN3.h"
 
 Scene* actScene;
 std::vector<Scene*> scenes;
@@ -65,10 +67,15 @@ void initPhysics(bool interactive)
 	scenes.push_back(new SceneP0(gMaterial,gPhysics,gScene,GetCamera()));
 	scenes.push_back(new SceneP1(gMaterial,gPhysics,gScene,GetCamera()));
 	scenes.push_back(new SceneP2_GEN1(gMaterial, gPhysics, gScene, GetCamera()));
+	scenes.push_back(new SceneP2_GEN2(gMaterial, gPhysics, gScene, GetCamera()));
+	scenes.push_back(new SceneP2_GEN3(gMaterial, gPhysics, gScene, GetCamera()));
+
 
 	scenes[0]->DeRegScene();
 	scenes[1]->DeRegScene();
 	scenes[2]->DeRegScene();
+	scenes[3]->DeRegScene();
+	scenes[4]->DeRegScene();
 
 	actScene = scenes[0];
 	actScene->RegScene();
@@ -143,6 +150,16 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case '2':
 	{
 		ChangeScene(scenes[2]);
+		break;
+	}
+	case '3':
+	{
+		ChangeScene(scenes[3]);
+		break;
+	}
+	case '4':
+	{
+		ChangeScene(scenes[4]);
 		break;
 	}
 	case 'c':
