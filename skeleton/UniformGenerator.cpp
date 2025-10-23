@@ -1,9 +1,9 @@
 #include "UniformGenerator.h"
 #include <iostream>
-UniformGenerator::UniformGenerator(Vector3 _limitPos, Vector3 pos, physx::PxShape* shape, Vector4 color, Vector3 v, Vector3 a, double _tVida, Vector3 g, int l, double _timeToSpwan, double damp)
+UniformGenerator::UniformGenerator(float rad, Vector3 pos, physx::PxShape* shape, Vector4 color, Vector3 v, Vector3 a, double _tVida, Vector3 g, int l, double _timeToSpwan, double damp)
 {
 	//Atributos del generador
-	limitPos = _limitPos;
+	radius = rad;
 	timeToSpawn = _timeToSpwan;
 	timePass = timeToSpawn;
 	limit = l;
@@ -29,9 +29,9 @@ UniformGenerator::~UniformGenerator()
 Particle* UniformGenerator::GeneraAleatoria()
 {
 	//Seteo aleatorio de la posición inicial
-	int aleX = std::rand() % 5 + 1;
-	int aleY = std::rand() % 2 + 1;
-	int aleZ = std::rand() % 5 + 1;
+	int aleX = std::rand() % (int)radius / 2 + 1;
+	int aleY = std::rand() % (int)radius / 2 + 1;
+	int aleZ = std::rand() % (int)radius / 2 + 1;
 	Vector3 pos = Vector3(model->getT()->p.x + aleX, model->getT()->p.y + aleY, model->getT()->p.z + aleZ);
 
 	//Seteo de la forma y el renderItem
@@ -40,7 +40,7 @@ Particle* UniformGenerator::GeneraAleatoria()
 
 	//Creación de las variables random
 	//Para el color
-	std::uniform_real_distribution<float> c(0.4f, 1.0f);
+	std::uniform_real_distribution<float> c(0.4f, 0.8f);
 	double colorVariation = c(_mt);
 
 	//Para la velocidad

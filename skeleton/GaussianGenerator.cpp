@@ -1,10 +1,13 @@
 #include "GaussianGenerator.h"
 #include <iostream>
 #include <cmath>
-GaussianGenerator::GaussianGenerator(Vector3 _limitPos,Vector3 pos, physx::PxShape* shape, Vector4 color, Vector3 v, Vector3 a,double _tVida, Vector3 g,int l, double _timeToSpwan, double damp)
+GaussianGenerator::GaussianGenerator(float rad,Vector3 pos, physx::PxShape* shape, Vector4 color, Vector3 v, Vector3 a,double _tVida, Vector3 g,int l, double _timeToSpwan, double damp)
 {
 	//Atributos del generador
-	limitPos = _limitPos;
+	radius = rad;
+	limitPos.x = rad ;
+	limitPos.y = rad ;
+	limitPos.z = rad ;
 	timeToSpawn = _timeToSpwan;
 	timePass = timeToSpawn;
 	limit = l;
@@ -31,9 +34,9 @@ GaussianGenerator::~GaussianGenerator()
 Particle* GaussianGenerator::GeneraAleatoria()
 {
 	//Seteo aleatorio de la posición inicial
-	int aleX = std::rand() % 5 + 1;
-	int aleY = std::rand() % 2 + 1;
-	int aleZ = std::rand() % 5 + 1;
+	int aleX = std::rand() % (int)radius / 2 + 1;
+	int aleY = std::rand() % (int)radius / 2 + 1;
+	int aleZ = std::rand() % (int)radius / 2 + 1;
 	Vector3 pos = Vector3(model->getT()->p.x + aleX, model->getT()->p.y + aleY, model->getT()->p.z + aleZ);
 
 	//Seteo de la forma y el renderItem
@@ -42,9 +45,11 @@ Particle* GaussianGenerator::GeneraAleatoria()
 
 	//Creación de las variables random
 	//Para el color
-	std::uniform_real_distribution<float> c(0.4f, 1.0f);
+	std::uniform_real_distribution<float> c(0.4f, 0.8f);
 	double colorVariation = c(_mt);
 
+	//Para la vida
+	std::uniform_real_distribution<float> life(-10.0f, 10.0f);
 	//Para la velocidad
 	std::normal_distribution<double> d(-50, 50);
 	double velVariationX = d(_mt);
@@ -83,7 +88,7 @@ Particle* GaussianGenerator::GeneraAleatoria()
 	a.z += a.z * aVariationZ;
 
 	//Asignación de la vida
-	double lifeVariation = d(_mt);
+	double lifeVariation = life(_mt);
 	double vida = model->getTvida() + lifeVariation;
 
 	//Asignacion de damping

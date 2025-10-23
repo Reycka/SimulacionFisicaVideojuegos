@@ -20,6 +20,7 @@ x = xmediaDeLaDistribucion + d(-mt) * desviacion de P
 
 protected:
 	Particle* model;
+	double radius;
 	std::vector<std::pair<Particle*,bool>>part;
 	int limit = 5;
 	double timeToSpawn;

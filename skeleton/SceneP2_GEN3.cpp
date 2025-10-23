@@ -11,12 +11,12 @@ SceneP2_GEN3::SceneP2_GEN3(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy
 	Vector4 gaussColor = { 1.0f,1.0f,0.0f,1.0f };
 	Vector4 sphereColor = { 1.0f,0.0f,1.0f,1.0f };
 
-	ParticleSystem* partSys = new ParticleSystem();
+/*	ParticleSystem* partSys = new ParticleSystem();
 	GaussianGenerator* gaus = new GaussianGenerator({ 20.0,70.0,15.0 }, { 0.0,0.0,0.0 }, sphereShape, gaussColor, { 3.0,10.0,3.0 }, { 0.0,20.0,0.0 }, 6, { 0.0,-1.0,0.0 }, 35, 0.1);
 	partSys->addGenerator(gaus);
 	UniformGenerator* unif = new UniformGenerator({ 20.0,70.0,15.0 }, { 10.0,0.0,0.0 }, sphereShape, sphereColor, { 3.0,10.0,3.0 }, { 20.0,20.0,20.0 }, 6, { 0.0,-4.0,0.0 }, 20, 0.3);
 	partSys->addGenerator(unif);
-	AddEntity(partSys);
+	AddEntity(partSys);*/
 
 }
 

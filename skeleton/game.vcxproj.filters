@@ -50,6 +50,9 @@
     <ClCompile Include="SceneP2_GEN2.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="SceneP2_GEN3.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render\Camera.h">
@@ -107,6 +110,9 @@
       <Filter>Entities\Particles</Filter>
     </ClInclude>
     <ClInclude Include="SceneP2_GEN2.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneP2_GEN3.h">
       <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
