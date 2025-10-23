@@ -4,6 +4,9 @@ UniformGenerator::UniformGenerator(float rad, Vector3 pos, physx::PxShape* shape
 {
 	//Atributos del generador
 	radius = rad;
+	limitPos.x = rad;
+	limitPos.y = rad;
+	limitPos.z = rad;
 	timeToSpawn = _timeToSpwan;
 	timePass = timeToSpawn;
 	limit = l;
@@ -42,6 +45,10 @@ Particle* UniformGenerator::GeneraAleatoria()
 	//Para el color
 	std::uniform_real_distribution<float> c(0.4f, 0.8f);
 	double colorVariation = c(_mt);
+
+
+	//Para la vida
+	std::uniform_real_distribution<float> life(-10.0f, 10.0f);
 
 	//Para la velocidad
 	std::uniform_real_distribution<double> d(-2.0f, 2.0f);
@@ -82,7 +89,7 @@ Particle* UniformGenerator::GeneraAleatoria()
 	a.z += a.z * aVariationZ;
 
 	//Asignación de la vida
-	double lifeVariation = d(_mt);
+	double lifeVariation = life(_mt);
 	double vida = model->getTvida() + lifeVariation;
 
 	//Asignacion de damping
