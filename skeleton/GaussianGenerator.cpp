@@ -5,9 +5,9 @@ GaussianGenerator::GaussianGenerator(float rad,Vector3 pos, physx::PxShape* shap
 {
 	//Atributos del generador
 	radius = rad;
-	limitPos.x = rad ;
-	limitPos.y = rad ;
-	limitPos.z = rad ;
+	limitPos.x = rad * 2 ;
+	limitPos.y = rad  * 2;
+	limitPos.z = rad  * 2;
 	timeToSpawn = _timeToSpwan;
 	timePass = timeToSpawn;
 	limit = l;
@@ -45,13 +45,13 @@ Particle* GaussianGenerator::GeneraAleatoria()
 
 	//Creación de las variables random
 	//Para el color
-	std::uniform_real_distribution<float> c(0.4f, 0.8f);
+	std::uniform_real_distribution<float> c(0.1f, 0.5f);
 	double colorVariation = c(_mt);
 
 	//Para la vida
 	std::uniform_real_distribution<float> life(-10.0f, 10.0f);
 	//Para la velocidad
-	std::normal_distribution<double> d(-50, 50);
+	std::normal_distribution<double> d(0, 50);
 	double velVariationX = d(_mt);
 	double velVariationY = d(_mt);
 	double velVariationZ = d(_mt);
@@ -64,13 +64,13 @@ Particle* GaussianGenerator::GeneraAleatoria()
 
 	//Asgnación del color
 	Vector4 color = rend->color;
-	if (color.x > 0.0) {
+	if (color.x > 0.0 && colorVariations[0]) {
 		color.x = colorVariation;
 	}
-	if (color.y > 0.0) {
+	if (color.y > 0.0 && colorVariations[1]) {
 		color.y = colorVariation;
 	}
-	if (color.z > 0.0) {
+	if (color.z > 0.0 && colorVariations[2]) {
 		color.z = colorVariation;
 	}
 
@@ -154,4 +154,11 @@ void GaussianGenerator::integrate(double t)
 		}	
 	}
 	timePass += t;
+}
+
+void GaussianGenerator::setVariation(int RGBAttribute, bool show)
+{
+	for (int i = 0; i < colorVariations.size(); ++i) {
+		if (i == RGBAttribute) colorVariations[i] = show;
+	}
 }

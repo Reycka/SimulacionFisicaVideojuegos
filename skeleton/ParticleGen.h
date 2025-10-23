@@ -19,6 +19,7 @@ x = xmediaDeLaDistribucion + d(-mt) * desviacion de P
 */
 
 protected:
+	std::vector<bool> colorVariations{true,true,true}; //Que colores queremos cambiar
 	Particle* model;
 	double radius;
 	std::vector<std::pair<Particle*,bool>>part;
@@ -36,5 +37,6 @@ public:
 	virtual Particle* GeneraAleatoria() = 0;
 	virtual void removeParticles() = 0;
 	virtual void integrate(double t) = 0;
+	virtual void setVariation(int RGBAttribute, bool show) = 0;
 };
 

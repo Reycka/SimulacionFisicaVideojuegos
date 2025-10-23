@@ -12,5 +12,6 @@ public:
 	virtual void addParticles() override;
 	virtual void removeParticles() override;
 	virtual void integrate(double t) override;
+	virtual void setVariation(int RGBAttribute, bool show) override;
 };
 

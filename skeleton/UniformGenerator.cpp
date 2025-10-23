@@ -57,7 +57,7 @@ Particle* UniformGenerator::GeneraAleatoria()
 	double velVariationZ = d(_mt);
 
 	//Para la aceleracion
-	std::uniform_real_distribution<double> ac(-5.0f, 5.0f);
+	std::uniform_real_distribution<double> ac(-1.0f, 1.0f);
 	double aVariationX = ac(_mt);
 	double aVariationY = ac(_mt);
 	double aVariationZ = ac(_mt);
@@ -155,3 +155,11 @@ void UniformGenerator::integrate(double t)
 	}
 	timePass += t;
 }
+
+void UniformGenerator::setVariation(int RGBAttribute, bool show)
+{
+	for (int i = 0; i < colorVariations.size(); ++i) {
+		if (i == RGBAttribute) colorVariations[i] = show;
+	}
+}
+

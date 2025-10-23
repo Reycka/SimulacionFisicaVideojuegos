@@ -4,7 +4,7 @@
 #include "GaussianGenerator.h"
 #include "UniformGenerator.h"
 using namespace physx;
-//Esta escena contiene el generador de tormenta de nieve
+//Esta escena contiene el generador de niebla
 SceneP2_GEN1::SceneP2_GEN1(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, physx::PxScene* _gScene, Camera* _cam) : Scene(_gMaterial, _phy, _gScene, _cam)
 {
 	PxShape* sphereShape = CreateShape(PxSphereGeometry(1), getMaterial());
