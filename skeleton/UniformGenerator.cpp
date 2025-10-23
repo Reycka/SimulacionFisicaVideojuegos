@@ -1,7 +1,6 @@
-#include "GaussianGenerator.h"
+#include "UniformGenerator.h"
 #include <iostream>
-#include <cmath>
-GaussianGenerator::GaussianGenerator(Vector3 _limitPos,Vector3 pos, physx::PxShape* shape, Vector4 color, Vector3 v, Vector3 a,double _tVida, Vector3 g,int l, double _timeToSpwan, double damp)
+UniformGenerator::UniformGenerator(Vector3 _limitPos, Vector3 pos, physx::PxShape* shape, Vector4 color, Vector3 v, Vector3 a, double _tVida, Vector3 g, int l, double _timeToSpwan, double damp)
 {
 	//Atributos del generador
 	limitPos = _limitPos;
@@ -10,16 +9,15 @@ GaussianGenerator::GaussianGenerator(Vector3 _limitPos,Vector3 pos, physx::PxSha
 	limit = l;
 
 	//Partícula modelo
-	model = new Particle(pos,shape,color,v,a,_tVida,g,damp);
+	model = new Particle(pos, shape, color, v, a, _tVida, g, damp);
 	model->DeRegItem();
 
 	//Aleatorio
 	std::random_device rand;
 	_mt = std::mt19937(rand());
-
 }
 
-GaussianGenerator::~GaussianGenerator()
+UniformGenerator::~UniformGenerator()
 {
 	for (auto particle : part) {
 		if (particle.second) {
@@ -28,7 +26,7 @@ GaussianGenerator::~GaussianGenerator()
 	}
 }
 
-Particle* GaussianGenerator::GeneraAleatoria()
+Particle* UniformGenerator::GeneraAleatoria()
 {
 	//Seteo aleatorio de la posición inicial
 	int aleX = std::rand() % 5 + 1;
@@ -46,13 +44,13 @@ Particle* GaussianGenerator::GeneraAleatoria()
 	double colorVariation = c(_mt);
 
 	//Para la velocidad
-	std::normal_distribution<double> d(-50, 50);
+	std::uniform_real_distribution<double> d(-2.0f, 2.0f);
 	double velVariationX = d(_mt);
 	double velVariationY = d(_mt);
 	double velVariationZ = d(_mt);
 
 	//Para la aceleracion
-	std::normal_distribution<double> ac(-1, 1);
+	std::uniform_real_distribution<double> ac(-5.0f, 5.0f);
 	double aVariationX = ac(_mt);
 	double aVariationY = ac(_mt);
 	double aVariationZ = ac(_mt);
@@ -76,6 +74,7 @@ Particle* GaussianGenerator::GeneraAleatoria()
 	v.y = v.y + (v.y * velVariationY);
 	v.z = v.z + (v.z * velVariationZ);
 
+
 	//Asignación de aceleración
 	Vector3 a = model->getA();
 	a.x += a.x * aVariationX;
@@ -90,11 +89,11 @@ Particle* GaussianGenerator::GeneraAleatoria()
 	double damping = model->getDamp();
 
 	//Creación y devolución de la partícula
-	Particle* p = new Particle(pos,sh,color,v,a, vida, model->getG(), damping);
+	Particle* p = new Particle(pos, sh, color, v, a, vida, model->getG(), damping);
 	return p;
 }
 
-void GaussianGenerator::RegParticles()
+void UniformGenerator::RegParticles()
 {
 	for (auto& pa : part) {
 		if (pa.second) {
@@ -103,7 +102,7 @@ void GaussianGenerator::RegParticles()
 	}
 }
 
-void GaussianGenerator::DeRegParticles()
+void UniformGenerator::DeRegParticles()
 {
 	for (auto& pa : part) {
 		if (pa.second) {
@@ -112,7 +111,7 @@ void GaussianGenerator::DeRegParticles()
 	}
 }
 
-void GaussianGenerator::addParticles()
+void UniformGenerator::addParticles()
 {
 	//pos, shape, color, v, a, _tVida, damp
 	if (timePass >= timeToSpawn) {
@@ -123,16 +122,15 @@ void GaussianGenerator::addParticles()
 		}
 		timePass = 0;
 	}
-
 }
 
-void GaussianGenerator::removeParticles()
+void UniformGenerator::removeParticles()
 {
 	for (auto& pa : part) {
-		if (pa.first->getTvida() <= 0 && pa.second == true) {;
+		if (pa.first->getTvida() <= 0 && pa.second == true) {
+			;
 			pa.first->DeRegItem();
 			pa.second = false;
-			
 		}
 		else if (pa.second == true && std::abs(pa.first->getT()->p.x) > limitPos.x || pa.second == true && std::abs(pa.first->getT()->p.y) > limitPos.y || pa.second == true && std::abs(pa.first->getT()->p.z) > limitPos.z) {
 			pa.first->DeRegItem();
@@ -141,12 +139,12 @@ void GaussianGenerator::removeParticles()
 	}
 }
 
-void GaussianGenerator::integrate(double t)
+void UniformGenerator::integrate(double t)
 {
 	for (auto& particle : part) {
 		if (particle.second) {
 			particle.first->integrate(t);
-		}	
+		}
 	}
 	timePass += t;
 }

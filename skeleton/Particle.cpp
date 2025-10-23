@@ -45,6 +45,6 @@ void Particle::integrate(double t)
 		lastPos = getT()->p;
 		getT()->p = newPosition;
 		vSim = (getT()->p - lastPos) / (2.0 * t);
-		a += g;
+		
 	}
 }

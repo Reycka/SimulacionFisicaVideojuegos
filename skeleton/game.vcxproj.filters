@@ -44,6 +44,9 @@
     <ClCompile Include="GaussianGenerator.cpp">
       <Filter>Entities\Particles</Filter>
     </ClCompile>
+    <ClCompile Include="UniformGenerator.cpp">
+      <Filter>Entities\Particles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render\Camera.h">
@@ -96,6 +99,9 @@
     </ClInclude>
     <ClInclude Include="SceneP2_GEN1.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="UniformGenerator.h">
+      <Filter>Entities\Particles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
