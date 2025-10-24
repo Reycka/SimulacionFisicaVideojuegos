@@ -31,6 +31,25 @@ GaussianGenerator::~GaussianGenerator()
 	}
 }
 
+void GaussianGenerator::addForceGen(ForceGenerator g)
+{
+	FGen.push_back(g);
+}
+
+void GaussianGenerator::activeForceGen(ForceGenerator g)
+{
+	for (auto g : FGen) {
+		g.setIsActive(true);
+	}
+}
+
+void GaussianGenerator::DesactiveForceGen(ForceGenerator g)
+{
+	for (auto g : FGen) {
+		g.setIsActive(false);
+	}
+}
+
 Particle* GaussianGenerator::GeneraAleatoria()
 {
 	//Seteo aleatorio de la posición inicial

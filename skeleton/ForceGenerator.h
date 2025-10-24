@@ -4,8 +4,9 @@
 class ForceGenerator
 {
 private:
-	
+	bool isActive;
 public:
-	virtual Vector3 addForce() = 0;
+	virtual Vector3 addForce() {};
+	inline void setIsActive(bool a) { isActive = a; }
 };
 

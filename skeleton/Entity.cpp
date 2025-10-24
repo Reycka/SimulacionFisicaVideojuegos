@@ -66,20 +66,29 @@ Entity::~Entity()
 
 }
 
-void Entity::addForceGenerator(ForceGenerator* gen)
+void Entity::addForceGenerator(ForceGenerator gen)
 {
-	generators.push_back(gen);
+	ForceGen.push_back(gen);
 }
 
-void Entity::removeForceGenerator(ForceGenerator* gen)
+void Entity::DesActiveForceGenerator(ForceGenerator gen)
 {
-	
+	for (auto g : ForceGen) {
+		 g.setIsActive(false);
+	}
+}
+
+void Entity::reActiveForceGenerator(ForceGenerator gen)
+{
+	for (auto g : ForceGen) {
+		g.setIsActive(true);
+	}
 }
 
 void Entity::addForces()
 {
-	for (auto g : generators) {
-		force += g->addForce();
+	for (auto g : ForceGen) {
+		force += g.addForce();
 	}
 }
 

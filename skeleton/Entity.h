@@ -9,7 +9,7 @@ private:
 	RenderItem* renderItem;
 	physx::PxTransform* transform;
 	physx::PxShape* shape;
-	std::vector<ForceGenerator*> generators;
+
 protected:
 
 	Vector3 lastPos;
@@ -22,6 +22,7 @@ protected:
 	double masaReal;
 	double tVida;
 	double damp;
+	std::list<ForceGenerator> ForceGen;
 
 
 public:
@@ -31,8 +32,9 @@ public:
 	virtual void RegItem();
 	virtual void DeRegItem();
 	virtual ~Entity();
-	void addForceGenerator(ForceGenerator* gen);
-	void removeForceGenerator(ForceGenerator* gen);
+	virtual void addForceGenerator(ForceGenerator gen);
+	virtual void DesActiveForceGenerator(ForceGenerator gen);
+	virtual void reActiveForceGenerator(ForceGenerator gen);
 	void addForces();
 	RenderItem* getRenderItem() const;
 	physx::PxTransform* getT() const;

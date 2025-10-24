@@ -15,10 +15,28 @@ ParticleSystem::~ParticleSystem()
 	generators.clear();
 }
 
-void ParticleSystem::addGenerator(ParticleGen* gen)
+void ParticleSystem::addForceGenerator(ForceGenerator gen)
 {
-	generators.push_back(gen);
+	for (auto g : generators) {
+		g->addForceGen(gen);
+	}
 }
+
+void ParticleSystem::DesActiveForceGenerator(ForceGenerator gen)
+{
+	for (auto g : generators) {
+		g->DesactiveForceGen(gen);
+	}
+}
+
+void ParticleSystem::reActiveForceGenerator(ForceGenerator gen)
+{
+	for (auto g : generators) {
+		g->activeForceGen(gen);
+	}
+}
+
+
 
 void ParticleSystem::integrate(double t)
 {
