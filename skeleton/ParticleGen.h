@@ -4,19 +4,7 @@
 #include <random>
 class ParticleGen
 {
-//DISTRIBUCION UNIFORME: double a = std::uniform_real_ditribution<double> -u{0,1}
-// Posteriormente se hace POS * RADIO * a
 
-//DISTRIBUCIÓN NORMAL: double a = std::normal_real_distribution<double> -d{0,1}
-// Posteriormente se hace POS * RADIO * a
-
-/*
-CASO DE GENERADOR GAUSSIANO
-desviacion de Posicion
-desviacion de velocidad
-desviacion de tiempo
-x = xmediaDeLaDistribucion + d(-mt) * desviacion de P
-*/
 
 protected:
 	std::vector<bool> colorVariations{true,true,true}; //Que colores queremos cambiar

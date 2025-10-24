@@ -12,7 +12,7 @@ SceneP2_GEN1::SceneP2_GEN1(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy
 	Vector4 sphereColor = { 1.0f,0.0f,1.0f,1.0f };
 
 	ParticleSystem* partSys = new ParticleSystem();
-	GaussianGenerator* gaus = new GaussianGenerator(90, { 0.0,0.0,0.0 }, sphereShape, color, { 3.0,10.0,3.0 }, { 5.0,4.0,5.0 }, 20, {0.0,-1.0,0.0}, 85, 0.5);
+	GaussianGenerator* gaus = new GaussianGenerator(90, { 0.0,0.0,0.0 }, sphereShape, color, { 3.0,10.0,3.0 },20, {0.0,-1.0,0.0}, 85, 0.5);
 	partSys->addGenerator(gaus);
 	AddEntity(partSys);
 

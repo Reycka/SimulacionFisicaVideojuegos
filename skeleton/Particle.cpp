@@ -1,12 +1,12 @@
 #include "Particle.h"
 #include <math.h>
 #include <iostream>
+
 using namespace physx;
 Particle::Particle() : Entity()
 {
 
 	 vSim = Vector3{ 0,10,0 };
-	 a = Vector3{ 0,-9.8,0 };
 	 damp = 0.999;
 	 tVida = 3;
 	 masaSim = 5;
@@ -15,9 +15,9 @@ Particle::Particle() : Entity()
 
 }
 
-Particle::Particle(Vector3 pos, PxShape* shape, const Vector4& color, Vector3 _v, Vector3 _a, double _tVida, Vector3 g, double _damp) : Entity(pos,shape,color,_v,_a,0,_tVida,g,_damp)
+Particle::Particle(Vector3 pos, PxShape* shape, const Vector4& color, Vector3 _v, double _tVida, Vector3 g, double _damp) : Entity(pos,shape,color,_v,0,_tVida,g,_damp)
 {
-	a += g;
+	
 }
 
 Particle::~Particle()
@@ -28,10 +28,14 @@ Particle::~Particle()
 void Particle::integrate(double t) 
 {
 	tVida -= t;
+	//ClearOldForces
+	force = Vector3({ 0.0,0.0,0.0 });
+	//AddNewForces
+	addForces();
 
-	if (firstComprobation || a == Vector3({0.0,0.0,0.0})) {
+	if (firstComprobation || (force/masaSim) == Vector3({0.0,0.0,0.0})) {
 		//Euler
-		vSim = (vSim + (a * t));
+		vSim = (vSim + ((force / masaSim) * t));
 		vSim = vSim * pow(damp,t);
 		getT()->p = getT()->p + (vSim * t);
 		lastPos = getT()->p;
@@ -40,11 +44,12 @@ void Particle::integrate(double t)
 
 	else {
 		//Verlet
-		Vector3 newPosition = getT()->p * 2.0 - lastPos + (a * t * t);
+		Vector3 newPosition = getT()->p * 2.0 - lastPos + ((force / masaSim) * t * t);
 		newPosition = getT()->p + (newPosition - getT()->p) * pow(damp,t);
 		lastPos = getT()->p;
 		getT()->p = newPosition;
 		vSim = (getT()->p - lastPos) / (2.0 * t);
 		
 	}
+	
 }

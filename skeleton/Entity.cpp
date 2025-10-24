@@ -10,7 +10,6 @@ Entity::Entity()
 	Vector4 color = { 0.0,0.0,0.0,0.0 };
 	renderItem = new RenderItem(shape, transform, color);
 	vSim = Vector3({ 0.0,0.0,0.0 });
-	a = Vector3({ 0.0,0.0,0.0 });
 	masaSim = 0;
 	tVida = 0;
 	damp = 0;
@@ -26,7 +25,6 @@ Entity::Entity(Vector3 pos, PxShape* _shape, const Vector4& color)
 	transform = new PxTransform(pos);
 	renderItem = new RenderItem(shape, transform, color);
 	vSim = Vector3({0.0,0.0,0.0});
-	a = Vector3({ 0.0,0.0,0.0 });
 	masaSim = 0;
 	tVida = 0;
 	damp = 0;
@@ -35,13 +33,12 @@ Entity::Entity(Vector3 pos, PxShape* _shape, const Vector4& color)
 	g = Vector3({ 0.0,0.0,0.0 });
 }
 
-Entity::Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector3 _v, Vector3 _a, double _masa, double _tVida, Vector3 _g,double _damp, double _masaReal, Vector3 _vRea)
+Entity::Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector3 _v, double _masa, double _tVida, Vector3 _g,double _damp, double _masaReal, Vector3 _vRea)
 {
 	shape = _shape;
 	transform = new PxTransform(pos);
 	renderItem = new RenderItem(shape, transform, color);
 	vSim = _v;
-	a = _a;
 	masaSim = _masa;
 	tVida = _tVida;
 	damp = _damp;
@@ -69,6 +66,23 @@ Entity::~Entity()
 
 }
 
+void Entity::addForceGenerator(ForceGenerator* gen)
+{
+	generators.push_back(gen);
+}
+
+void Entity::removeForceGenerator(ForceGenerator* gen)
+{
+	
+}
+
+void Entity::addForces()
+{
+	for (auto g : generators) {
+		force += g->addForce();
+	}
+}
+
 RenderItem* Entity::getRenderItem() const
 {
 	return renderItem;
@@ -92,11 +106,10 @@ Vector3 Entity::getV() const
 	return vSim;
 }
 
-Vector3 Entity::getA() const
+Vector3 Entity::getForce() const
 {
-	return a;
+	return force;
 }
-
 Vector3 Entity::getG() const
 {
 	return g;

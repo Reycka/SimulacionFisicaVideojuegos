@@ -1,6 +1,6 @@
 #include "UniformGenerator.h"
 #include <iostream>
-UniformGenerator::UniformGenerator(float rad, Vector3 pos, physx::PxShape* shape, Vector4 color, Vector3 v, Vector3 a, double _tVida, Vector3 g, int l, double _timeToSpwan, double damp)
+UniformGenerator::UniformGenerator(float rad, Vector3 pos, physx::PxShape* shape, Vector4 color, Vector3 v, double _tVida, Vector3 g, int l, double _timeToSpwan, double damp)
 {
 	//Atributos del generador
 	radius = rad;
@@ -12,7 +12,7 @@ UniformGenerator::UniformGenerator(float rad, Vector3 pos, physx::PxShape* shape
 	limit = l;
 
 	//Partícula modelo
-	model = new Particle(pos, shape, color, v, a, _tVida, g, damp);
+	model = new Particle(pos, shape, color, v, _tVida, g, damp);
 	model->DeRegItem();
 
 	//Aleatorio
@@ -56,12 +56,6 @@ Particle* UniformGenerator::GeneraAleatoria()
 	double velVariationY = d(_mt);
 	double velVariationZ = d(_mt);
 
-	//Para la aceleracion
-	std::uniform_real_distribution<double> ac(-1.0f, 1.0f);
-	double aVariationX = ac(_mt);
-	double aVariationY = ac(_mt);
-	double aVariationZ = ac(_mt);
-
 	//Asgnación del color
 	Vector4 color = rend->color;
 	if (color.x > 0.0) {
@@ -82,11 +76,6 @@ Particle* UniformGenerator::GeneraAleatoria()
 	v.z = v.z + (v.z * velVariationZ);
 
 
-	//Asignación de aceleración
-	Vector3 a = model->getA();
-	a.x += a.x * aVariationX;
-	a.y += a.y * aVariationY;
-	a.z += a.z * aVariationZ;
 
 	//Asignación de la vida
 	double lifeVariation = life(_mt);
@@ -96,7 +85,7 @@ Particle* UniformGenerator::GeneraAleatoria()
 	double damping = model->getDamp();
 
 	//Creación y devolución de la partícula
-	Particle* p = new Particle(pos, sh, color, v, a, vida, model->getG(), damping);
+	Particle* p = new Particle(pos, sh, color, v, vida, model->getG(), damping);
 	return p;
 }
 

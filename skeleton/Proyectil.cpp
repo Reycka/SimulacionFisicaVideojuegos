@@ -13,9 +13,9 @@ Proyectil::Proyectil()
 {
 }
 
-Proyectil::Proyectil(Vector3 pos, physx::PxShape* shape, const Vector4& color, Vector3 _v, Vector3 _a, double _masa, double _tVida, double _masaReal, Vector3 _vReal,Vector3 _g ,double _damp) : Entity(pos,shape,color,_v,_a,_masa,_tVida,_g,_damp,_masaReal,_vReal)
+Proyectil::Proyectil(Vector3 pos, physx::PxShape* shape, const Vector4& color, Vector3 _v, double _masa, double _tVida, double _masaReal, Vector3 _vReal,Vector3 _g ,double _damp) : Entity(pos,shape,color,_v,_masa,_tVida,_g,_damp,_masaReal,_vReal)
 {
-	a += g;
+
 }
 
 Proyectil::~Proyectil()
@@ -28,7 +28,7 @@ void Proyectil::integrate(double t)
 
 //	if (firstComprobation || a == Vector3({ 0.0,0.0,0.0 })) {
 		//Euler
-		vSim = (vSim + (a * t));
+		vSim = (vSim + ((force/masaSim) * t));
 		vSim = vSim * pow(damp, t);
 		getT()->p = getT()->p + (vSim * t);
 		lastPos = getT()->p;

@@ -53,6 +53,9 @@
     <ClCompile Include="SceneP2_GEN3.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="ForceGenerator.cpp">
+      <Filter>ForceGenerators</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render\Camera.h">
@@ -115,6 +118,9 @@
     <ClInclude Include="SceneP2_GEN3.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="ForceGenerator.h">
+      <Filter>ForceGenerators</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
@@ -131,6 +137,9 @@
     </Filter>
     <Filter Include="General">
       <UniqueIdentifier>{1620f2aa-c471-4bbd-a3b0-0170961d0c2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ForceGenerators">
+      <UniqueIdentifier>{afb1548d-af30-4b15-8d3e-88d104a822ca}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
