@@ -8,5 +8,6 @@ private:
 public:
 	virtual Vector3 addForce() {};
 	inline void setIsActive(bool a) { isActive = a; }
+	inline bool operator==(ForceGenerator* other) { return this == other; };
 };
 
