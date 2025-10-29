@@ -29,6 +29,25 @@ UniformGenerator::~UniformGenerator()
 	}
 }
 
+void UniformGenerator::addForceGen(ForceGenerator g)
+{
+	FGen.push_back(g);
+}
+
+void UniformGenerator::activeForceGen(ForceGenerator gen)
+{
+	for (auto g : FGen) {
+		if (g == &gen)g.setIsActive(true);
+	}
+}
+
+void UniformGenerator::DesactiveForceGen(ForceGenerator gen)
+{
+	for (auto g : FGen) {
+		if (g == &gen)g.setIsActive(false);
+	}
+}
+
 Particle* UniformGenerator::GeneraAleatoria()
 {
 	//Seteo aleatorio de la posición inicial
@@ -86,6 +105,9 @@ Particle* UniformGenerator::GeneraAleatoria()
 
 	//Creación y devolución de la partícula
 	Particle* p = new Particle(pos, sh, color, v, vida, model->getG(), damping);
+	for (auto g : FGen) {
+		p->addForceGenerator(g);
+	}
 	return p;
 }
 
