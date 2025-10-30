@@ -25,7 +25,7 @@ Entity::Entity(Vector3 pos, PxShape* _shape, const Vector4& color)
 	transform = new PxTransform(pos);
 	renderItem = new RenderItem(shape, transform, color);
 	vSim = Vector3({0.0,0.0,0.0});
-	masaSim = 0;
+	masaSim = 3;
 	tVida = 0;
 	damp = 0;
 	firstComprobation = true;
@@ -59,13 +59,13 @@ void Entity::DeRegItem()
 
 Entity::~Entity()
 {
-	DeRegItem();
 	shape->release();
 	for (auto forG : ForceGen) {
 		delete forG;
 	}
 	delete transform;
 	delete renderItem;
+	DeRegItem();
 
 }
 

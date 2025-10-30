@@ -9,13 +9,13 @@
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene.cpp">
-      <Filter>Scenes</Filter>
+      <Filter>General\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="SceneP0.cpp">
-      <Filter>Scenes</Filter>
+      <Filter>General\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="SceneP1.cpp">
-      <Filter>Scenes</Filter>
+      <Filter>General\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Entities</Filter>
@@ -39,7 +39,7 @@
       <Filter>General</Filter>
     </ClCompile>
     <ClCompile Include="SceneP2_GEN1.cpp">
-      <Filter>Scenes</Filter>
+      <Filter>General\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="GaussianGenerator.cpp">
       <Filter>Entities\Particles</Filter>
@@ -48,10 +48,10 @@
       <Filter>Entities\Particles</Filter>
     </ClCompile>
     <ClCompile Include="SceneP2_GEN2.cpp">
-      <Filter>Scenes</Filter>
+      <Filter>General\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="SceneP2_GEN3.cpp">
-      <Filter>Scenes</Filter>
+      <Filter>General\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="GravityGenerator.cpp">
       <Filter>ForceGenerators</Filter>
@@ -65,13 +65,13 @@
       <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Scenes</Filter>
+      <Filter>General\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="SceneP0.h">
-      <Filter>Scenes</Filter>
+      <Filter>General\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="SceneP1.h">
-      <Filter>Scenes</Filter>
+      <Filter>General\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Entities</Filter>
@@ -107,16 +107,16 @@
       <Filter>General</Filter>
     </ClInclude>
     <ClInclude Include="SceneP2_GEN1.h">
-      <Filter>Scenes</Filter>
+      <Filter>General\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="UniformGenerator.h">
       <Filter>Entities\Particles</Filter>
     </ClInclude>
     <ClInclude Include="SceneP2_GEN2.h">
-      <Filter>Scenes</Filter>
+      <Filter>General\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="SceneP2_GEN3.h">
-      <Filter>Scenes</Filter>
+      <Filter>General\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="ForceGenerator.h">
       <Filter>ForceGenerators</Filter>
@@ -129,9 +129,6 @@
     <Filter Include="Render">
       <UniqueIdentifier>{d04b4f9f-5a69-465e-8070-25c6d0bcd3c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes">
-      <UniqueIdentifier>{9627b38e-e0ad-4be9-b003-9f8b1b3eb776}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Entities">
       <UniqueIdentifier>{c046ea5f-a5c8-4132-9f8d-6ff047310c65}</UniqueIdentifier>
     </Filter>
@@ -143,6 +140,9 @@
     </Filter>
     <Filter Include="ForceGenerators">
       <UniqueIdentifier>{afb1548d-af30-4b15-8d3e-88d104a822ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="General\Scenes">
+      <UniqueIdentifier>{9627b38e-e0ad-4be9-b003-9f8b1b3eb776}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

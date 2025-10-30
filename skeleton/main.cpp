@@ -100,8 +100,10 @@ void stepPhysics(bool interactive, double t)
 void cleanupPhysics(bool interactive)
 {
 	PX_UNUSED(interactive);
-
-	delete actScene;
+	for (auto scene : scenes) {
+		scene->RegScene();
+		delete scene;
+	}
 	scenes.clear(); // por limpieza
 
 	// Rigid Body ++++++++++++++++++++++++++++++++++++++++++
@@ -114,6 +116,7 @@ void cleanupPhysics(bool interactive)
 	transport->release();
 	
 	gFoundation->release();
+
 
 }
 
