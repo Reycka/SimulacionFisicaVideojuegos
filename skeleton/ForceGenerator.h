@@ -1,12 +1,12 @@
 #pragma once
 #include <list>
-#include "Vector3D.h"
+#include "RenderUtils.hpp"
 class ForceGenerator
 {
-private:
-	bool isActive;
+protected:
+	bool isActive = true;
 public:
-	virtual Vector3 addForce() {};
+	virtual Vector3 addForce() = 0;
 	inline void setIsActive(bool a) { isActive = a; }
 	inline bool operator==(ForceGenerator* other) { return this == other; };
 };

@@ -1,6 +1,4 @@
 #pragma once
-#include "Vector3D.h"
-#include "RenderUtils.hpp"
 #include <vector>
 #include "ForceGenerator.h"
 class Entity
@@ -22,7 +20,7 @@ protected:
 	double masaReal;
 	double tVida;
 	double damp;
-	std::list<ForceGenerator> ForceGen;
+	std::list<ForceGenerator*> ForceGen;
 
 
 public:
@@ -32,9 +30,9 @@ public:
 	virtual void RegItem();
 	virtual void DeRegItem();
 	virtual ~Entity();
-	virtual void addForceGenerator(ForceGenerator gen);
-	virtual void DesActiveForceGenerator(ForceGenerator gen);
-	virtual void reActiveForceGenerator(ForceGenerator gen);
+	virtual void addForceGenerator(ForceGenerator* gen);
+	virtual void DesActiveForceGenerator(ForceGenerator* gen);
+	virtual void reActiveForceGenerator(ForceGenerator* gen);
 	void addForces();
 	RenderItem* getRenderItem() const;
 	physx::PxTransform* getT() const;

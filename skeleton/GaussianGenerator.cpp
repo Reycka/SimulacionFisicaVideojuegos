@@ -31,22 +31,22 @@ GaussianGenerator::~GaussianGenerator()
 	}
 }
 
-void GaussianGenerator::addForceGen(ForceGenerator g)
+void GaussianGenerator::addForceGen(ForceGenerator* g)
 {
 	FGen.push_back(g);
 }
 
-void GaussianGenerator::activeForceGen(ForceGenerator gen)
+void GaussianGenerator::activeForceGen(ForceGenerator* gen)
 {
 	for (auto g : FGen) {
-		if(g == &gen)g.setIsActive(true);
+		if(g == gen)g->setIsActive(true);
 	}
 }
 
-void GaussianGenerator::DesactiveForceGen(ForceGenerator gen)
+void GaussianGenerator::DesactiveForceGen(ForceGenerator* gen)
 {
 	for (auto g : FGen) {
-		if (g == &gen)g.setIsActive(false);
+		if (g == gen)g->setIsActive(false);
 	}
 }
 

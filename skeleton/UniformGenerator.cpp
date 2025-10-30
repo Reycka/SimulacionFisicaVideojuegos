@@ -29,22 +29,22 @@ UniformGenerator::~UniformGenerator()
 	}
 }
 
-void UniformGenerator::addForceGen(ForceGenerator g)
+void UniformGenerator::addForceGen(ForceGenerator* g)
 {
 	FGen.push_back(g);
 }
 
-void UniformGenerator::activeForceGen(ForceGenerator gen)
+void UniformGenerator::activeForceGen(ForceGenerator* gen)
 {
 	for (auto g : FGen) {
-		if (g == &gen)g.setIsActive(true);
+		if (g == gen)g->setIsActive(true);
 	}
 }
 
-void UniformGenerator::DesactiveForceGen(ForceGenerator gen)
+void UniformGenerator::DesactiveForceGen(ForceGenerator* gen)
 {
 	for (auto g : FGen) {
-		if (g == &gen)g.setIsActive(false);
+		if (g == gen)g->setIsActive(false);
 	}
 }
 

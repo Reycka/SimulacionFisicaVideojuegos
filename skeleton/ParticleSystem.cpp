@@ -15,21 +15,26 @@ ParticleSystem::~ParticleSystem()
 	generators.clear();
 }
 
-void ParticleSystem::addForceGenerator(ForceGenerator gen)
+void ParticleSystem::addGenerator(ParticleGen* gen)
+{
+	generators.push_back(gen);
+}
+
+void ParticleSystem::addForceGenerator(ForceGenerator* gen)
 {
 	for (auto g : generators) {
 		g->addForceGen(gen);
 	}
 }
 
-void ParticleSystem::DesActiveForceGenerator(ForceGenerator gen)
+void ParticleSystem::DesActiveForceGenerator(ForceGenerator* gen)
 {
 	for (auto g : generators) {
 		g->DesactiveForceGen(gen);
 	}
 }
 
-void ParticleSystem::reActiveForceGenerator(ForceGenerator gen)
+void ParticleSystem::reActiveForceGenerator(ForceGenerator* gen)
 {
 	for (auto g : generators) {
 		g->activeForceGen(gen);

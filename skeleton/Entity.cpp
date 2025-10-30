@@ -3,10 +3,10 @@ using namespace physx;
 
 Entity::Entity()
 {
-	Vector3D pos = { 0,0,0 };
+	Vector3 pos = { 0,0,0 };
 	PxShape* _shape = CreateShape(PxSphereGeometry(1), NULL);
 	shape = _shape;
-	transform = new PxTransform(pos.changeClass());
+	transform = new PxTransform(pos);
 	Vector4 color = { 0.0,0.0,0.0,0.0 };
 	renderItem = new RenderItem(shape, transform, color);
 	vSim = Vector3({ 0.0,0.0,0.0 });
@@ -61,34 +61,41 @@ Entity::~Entity()
 {
 	DeRegItem();
 	shape->release();
+	for (auto forG : ForceGen) {
+		delete forG;
+	}
 	delete transform;
 	delete renderItem;
 
 }
 
-void Entity::addForceGenerator(ForceGenerator gen)
+void Entity::addForceGenerator(ForceGenerator* gen)
 {
 	ForceGen.push_back(gen);
 }
 
-void Entity::DesActiveForceGenerator(ForceGenerator gen)
+void Entity::DesActiveForceGenerator(ForceGenerator* gen)
 {
 	for (auto g : ForceGen) {
-		 g.setIsActive(false);
+		 g->setIsActive(false);
 	}
 }
 
-void Entity::reActiveForceGenerator(ForceGenerator gen)
+void Entity::reActiveForceGenerator(ForceGenerator* gen)
 {
 	for (auto g : ForceGen) {
-		g.setIsActive(true);
+		g->setIsActive(true);
 	}
 }
 
 void Entity::addForces()
 {
 	for (auto g : ForceGen) {
-		force += g.addForce();
+		 Vector3 forceReturned;
+		 forceReturned = g->addForce();
+		 force.x += forceReturned.x;
+		 force.y += forceReturned.y;
+		 force.z += forceReturned.z;
 	}
 }
 

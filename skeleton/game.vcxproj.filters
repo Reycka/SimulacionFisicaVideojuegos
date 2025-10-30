@@ -53,6 +53,9 @@
     <ClCompile Include="SceneP2_GEN3.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="GravityGenerator.cpp">
+      <Filter>ForceGenerators</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render\Camera.h">
@@ -116,6 +119,9 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="ForceGenerator.h">
+      <Filter>ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="GravityGenerator.h">
       <Filter>ForceGenerators</Filter>
     </ClInclude>
   </ItemGroup>
