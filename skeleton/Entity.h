@@ -4,6 +4,7 @@
 class Entity
 {
 private:
+	int maxIndex;  
 	RenderItem* renderItem;
 	physx::PxTransform* transform;
 	physx::PxShape* shape;

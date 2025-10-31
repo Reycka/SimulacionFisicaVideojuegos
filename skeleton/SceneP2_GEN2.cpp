@@ -2,6 +2,7 @@
 
 #include "ParticleSystem.h"
 #include "GravityGenerator.h"
+#include "WindGenerator.h"
 #include "UniformGenerator.h"
 using namespace physx;
 //Esta escena contiene el generador de lluvia
@@ -13,8 +14,10 @@ SceneP2_GEN2::SceneP2_GEN2(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy
 	ParticleSystem* partSys = new ParticleSystem();
 	UniformGenerator* unif = new UniformGenerator(80, { -20.0,60.0,-20.0 }, sphereShape, rainColor, { 0.0,-60.0,0.0 }, 25, { 0.0,-1.0,0.0 }, 40, 0.2);
 	GravityGenerator* grav = new GravityGenerator({ 0.0,-10.0,0.0 });
+	WindGenerator* wind = new WindGenerator({ -20.0,0.0,0.0 }, 10.0f, {20.0,0.0,15.0}, 10);
 	partSys->addGenerator(unif);
 	partSys->addForceGenerator(grav);
+	partSys->addForceGenerator(wind);
 	AddEntity(partSys);
 
 }

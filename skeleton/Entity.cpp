@@ -92,7 +92,7 @@ void Entity::addForces()
 {
 	for (auto g : ForceGen) {
 		 Vector3 forceReturned;
-		 forceReturned = g->addForce();
+		 forceReturned = g->addForce(transform->p,vSim);
 		 force.x += forceReturned.x;
 		 force.y += forceReturned.y;
 		 force.z += forceReturned.z;
