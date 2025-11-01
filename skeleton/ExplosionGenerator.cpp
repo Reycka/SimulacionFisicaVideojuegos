@@ -1,6 +1,6 @@
 #include "ExplosionGenerator.h"
 #include <cmath>
-ExplosionGenerator::ExplosionGenerator(Vector3 _pos, float _R, float _cteR, float _K, Vector3 _velExp)
+ExplosionGenerator::ExplosionGenerator(Vector3 _pos, float _R, float _cteR, float _K, Vector3 _velExp, const float MAXEXPTIME) : MAXEXPLOSIONTIME(MAXEXPTIME)
 {
     pos = _pos;
     R = _R;
