@@ -9,6 +9,8 @@ ExplosionGenerator::ExplosionGenerator(Vector3 _pos, float _R, float _cteR, floa
     r = 0;
     velExp = _velExp;
     isActive = false;
+    lastTimeRegister = -1;
+    timeSinceExplode = 0;
 }
 
 ExplosionGenerator::~ExplosionGenerator()
@@ -18,7 +20,17 @@ ExplosionGenerator::~ExplosionGenerator()
 Vector3 ExplosionGenerator::addForce(Vector3 entPos, Vector3 entVel, float t)
 {
     explosionForce = Vector3({ 0.0,0.0,0.0 });
+    if (lastTimeRegister != t) {
+        lastTimeRegister = t;
+        timeSinceExplode += t;
+        if (timeSinceExplode >= MAXEXPLOSIONTIME) {
+            isActive = false;
+            lastTimeRegister = -1;
+            timeSinceExplode = 0;
+        }
+    }
     if (isActive) {
+     
         r = pow((entPos.x - pos.x), 2) + pow((entPos.y - pos.y), 2) + pow((entPos.z - pos.z), 2);
         float dotr = r;
         r = std::sqrt(r);

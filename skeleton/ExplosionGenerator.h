@@ -11,6 +11,8 @@ private:
 	float cteR;
 	float R;
 	float K;
+	float lastTimeRegister;
+	float timeSinceExplode;
 public:
 	ExplosionGenerator(Vector3 _pos, float _R,float _cteR, float _K,Vector3 _velExp);
 	~ExplosionGenerator();
