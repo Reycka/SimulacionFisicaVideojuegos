@@ -59,7 +59,9 @@
     <ClCompile Include="WindGenerator.cpp">
       <Filter>ForceGenerators</Filter>
     </ClCompile>
-    <ClCompile Include="Whirlwind.cpp" />
+    <ClCompile Include="WhirlwindGenerator.cpp">
+      <Filter>ForceGenerators</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render\Camera.h">
@@ -131,7 +133,9 @@
     <ClInclude Include="WindGenerator.h">
       <Filter>ForceGenerators</Filter>
     </ClInclude>
-    <ClInclude Include="Whirlwind.h" />
+    <ClInclude Include="WhirlwindGenerator.h">
+      <Filter>ForceGenerators</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

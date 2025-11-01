@@ -2,17 +2,8 @@
 #include "ForceGenerator.h"
 class WindGenerator : public ForceGenerator
 {
-enum dir {
-    TOP,
-	DOWN,
-	RIGHT,
-	LEFT,
-	TOPLEFT,
-	TOPRIGHT,
-	DOWNLEFT,
-	DOWNRIGHT
-};
-private:
+
+protected:
 	Vector3 pos;
 	float rad;
 	Vector3 windVelocity;
