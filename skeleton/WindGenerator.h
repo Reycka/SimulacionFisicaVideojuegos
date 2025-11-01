@@ -13,7 +13,7 @@ protected:
 public:
 	WindGenerator(Vector3 _pos,float rad,Vector3 windVelocity,float k1,float k2 = 0);
 	~WindGenerator();
-	virtual Vector3 addForce(Vector3 entPos, Vector3 entVelocity) override;
+	virtual Vector3 addForce(Vector3 entPos, Vector3 entVelocity,float t = 0) override;
 	virtual bool isOnArea(Vector3 entPos) override;
 };
 

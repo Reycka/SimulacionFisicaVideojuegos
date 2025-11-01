@@ -15,8 +15,6 @@ public:
 	~ParticleSystem();
 	void addGenerator(ParticleGen* gen);
 	virtual void addForceGenerator(ForceGenerator* gen) override;
-	virtual void DesActiveForceGenerator(ForceGenerator* gen) override;
-	virtual void reActiveForceGenerator(ForceGenerator* gen) override;
 	virtual void integrate(double t) override;
 	virtual void RegItem() override;
 	virtual void DeRegItem() override;

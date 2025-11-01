@@ -62,6 +62,12 @@
     <ClCompile Include="WhirlwindGenerator.cpp">
       <Filter>ForceGenerators</Filter>
     </ClCompile>
+    <ClCompile Include="ExplosionGenerator.cpp">
+      <Filter>ForceGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneP3_Explosion.cpp">
+      <Filter>General\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render\Camera.h">
@@ -135,6 +141,12 @@
     </ClInclude>
     <ClInclude Include="WhirlwindGenerator.h">
       <Filter>ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplosionGenerator.h">
+      <Filter>ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneP3_Explosion.h">
+      <Filter>General\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

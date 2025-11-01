@@ -27,22 +27,6 @@ void ParticleSystem::addForceGenerator(ForceGenerator* gen)
 	}
 }
 
-void ParticleSystem::DesActiveForceGenerator(ForceGenerator* gen)
-{
-	for (auto g : generators) {
-		g->DesactiveForceGen(gen);
-	}
-}
-
-void ParticleSystem::reActiveForceGenerator(ForceGenerator* gen)
-{
-	for (auto g : generators) {
-		g->activeForceGen(gen);
-	}
-}
-
-
-
 void ParticleSystem::integrate(double t)
 {
 

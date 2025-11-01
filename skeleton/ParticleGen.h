@@ -21,8 +21,6 @@ protected:
 public:
 	virtual ~ParticleGen() {};
 	virtual void addForceGen(ForceGenerator* g) = 0;
-	virtual void activeForceGen(ForceGenerator* g) = 0;
-	virtual void DesactiveForceGen(ForceGenerator* g) = 0;
 	virtual void addParticles() = 0;
 	virtual void RegParticles() = 0;
 	virtual void DeRegParticles() = 0;

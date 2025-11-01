@@ -27,7 +27,7 @@ void Particle::integrate(double t)
 	//ClearOldForces
 	force = Vector3({ 0.0,0.0,0.0 });
 	//AddNewForces
-	addForces();
+	addForces(t);
 
 	if (firstComprobation || (force/masaSim) == Vector3({0.0,0.0,0.0})) {
 		//Euler

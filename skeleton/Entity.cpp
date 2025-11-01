@@ -85,11 +85,11 @@ void Entity::reActiveForceGenerator(ForceGenerator* gen)
 	}
 }
 
-void Entity::addForces()
+void Entity::addForces(double t)
 {
 	for (auto g : ForceGen) {
 		 Vector3 forceReturned;
-		 forceReturned = g->addForce(transform->p,vSim);
+		 forceReturned = g->addForce(transform->p,vSim,t);
 		 force.x += forceReturned.x;
 		 force.y += forceReturned.y;
 		 force.z += forceReturned.z;

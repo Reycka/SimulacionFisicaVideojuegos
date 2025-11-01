@@ -34,7 +34,7 @@ public:
 	virtual void addForceGenerator(ForceGenerator* gen);
 	virtual void DesActiveForceGenerator(ForceGenerator* gen);
 	virtual void reActiveForceGenerator(ForceGenerator* gen);
-	void addForces();
+	void addForces(double t);
 	RenderItem* getRenderItem() const;
 	physx::PxTransform* getT() const;
 	physx::PxShape* getShape() const;
