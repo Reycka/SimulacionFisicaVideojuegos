@@ -17,6 +17,7 @@ SceneP2_GEN1::SceneP2_GEN1(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy
 	partSys->addGenerator(gaus);
 	partSys->addForceGenerator(gravityGen);
 	AddEntity(partSys);
+	AddForceGenerator(gravityGen);
 
 }
 

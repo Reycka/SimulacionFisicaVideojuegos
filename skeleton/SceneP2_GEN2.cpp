@@ -21,7 +21,8 @@ SceneP2_GEN2::SceneP2_GEN2(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy
 	partSys->addForceGenerator(grav);
 	partSys->addForceGenerator(whirlWind);
 	AddEntity(partSys);
-
+	AddForceGenerator(grav);
+	AddForceGenerator(whirlWind);
 }
 
 SceneP2_GEN2::~SceneP2_GEN2()

@@ -14,11 +14,19 @@ Scene::~Scene()
 	for (auto ent : entities) {
 		delete ent;
 	}
+	for (auto fGen : generators) {
+		delete fGen;
+	}
 }
 
 void Scene::AddEntity(Entity* ent)
 {
 	entities.push_back(ent);
+}
+
+void Scene::AddForceGenerator(ForceGenerator* forceGen)
+{
+	generators.push_back(forceGen);
 }
 
 void Scene::RegScene()

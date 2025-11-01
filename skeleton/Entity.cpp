@@ -60,9 +60,6 @@ void Entity::DeRegItem()
 Entity::~Entity()
 {
 	shape->release();
-	for (auto forG : ForceGen) {
-		delete forG;
-	}
 	delete transform;
 	delete renderItem;
 	DeRegItem();
