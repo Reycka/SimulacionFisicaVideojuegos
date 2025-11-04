@@ -24,24 +24,14 @@ Proyectil::~Proyectil()
 
 void Proyectil::integrate(double t)
 {
-	Entity::integrate(t);
+	tVida -= t;
+	//ClearOldForces
+	force = Vector3({ 0.0,0.0,0.0 });
+	//AddNewForces
+	addForces(t);
 
-//	if (firstComprobation || a == Vector3({ 0.0,0.0,0.0 })) {
-		//Euler
-		vSim = (vSim + ((force/masaSim) * t));
-		vSim = vSim * pow(damp, t);
-		getT()->p = getT()->p + (vSim * t);
-		lastPos = getT()->p;
-		firstComprobation = false;
-	//}
-		/*
-	else {
-		//Verlet
-		
-		Vector3 newPosition = getT()->p * 2.0 - lastPos + (a * t * t);
-		newPosition = getT()->p + (newPosition - getT()->p) * pow(damp, t);
-		lastPos = getT()->p;
-		getT()->p = newPosition;
-		vSim = (getT()->p - lastPos) / (2.0 * t);
-	}*/
+	vSim = (vSim + ((force/masaSim) * t));
+	vSim = vSim * pow(damp, t);
+	getT()->p = getT()->p + (vSim * t);
+
 }

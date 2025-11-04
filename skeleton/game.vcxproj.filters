@@ -68,6 +68,13 @@
     <ClCompile Include="SceneP3_Explosion.cpp">
       <Filter>General\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="CompoundEntity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="nave.cpp" />
+    <ClCompile Include="Enenmigo.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render\Camera.h">
@@ -148,6 +155,13 @@
     <ClInclude Include="SceneP3_Explosion.h">
       <Filter>General\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="CompoundEntity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="nave.h" />
+    <ClInclude Include="Enenmigo.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
@@ -167,6 +181,9 @@
     </Filter>
     <Filter Include="General\Scenes">
       <UniqueIdentifier>{9627b38e-e0ad-4be9-b003-9f8b1b3eb776}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{ab6c6fb1-cd0a-4db3-abc1-c9ce329ed69e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
