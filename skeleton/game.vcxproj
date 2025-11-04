@@ -255,8 +255,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="callbacks.cpp" />
+    <ClCompile Include="Characther.cpp" />
     <ClCompile Include="CompoundEntity.cpp" />
-    <ClCompile Include="Enenmigo.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="ExplosionGenerator.cpp" />
     <ClCompile Include="GaussianGenerator.cpp" />
@@ -283,10 +284,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="callbacks.hpp" />
+    <ClInclude Include="Characther.h" />
     <ClInclude Include="checkML.h" />
     <ClInclude Include="CompoundEntity.h" />
     <ClInclude Include="core.hpp" />
-    <ClInclude Include="Enenmigo.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="ExplosionGenerator.h" />
     <ClInclude Include="ForceGenerator.h" />

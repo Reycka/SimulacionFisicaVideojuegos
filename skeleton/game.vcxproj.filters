@@ -72,9 +72,10 @@
       <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="nave.cpp" />
-    <ClCompile Include="Enenmigo.cpp">
+    <ClCompile Include="Enemy.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Characther.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render\Camera.h">
@@ -159,9 +160,10 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="nave.h" />
-    <ClInclude Include="Enenmigo.h">
+    <ClInclude Include="Enemy.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Characther.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
