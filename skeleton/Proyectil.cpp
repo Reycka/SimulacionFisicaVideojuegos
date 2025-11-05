@@ -13,7 +13,7 @@ Proyectil::Proyectil()
 {
 }
 
-Proyectil::Proyectil(Vector3 pos, physx::PxShape* shape, const Vector4& color, Vector3 _v, double _masa, double _tVida, double _masaReal, Vector3 _vReal,Vector3 _g ,double _damp) : Entity(pos,shape,color,_v,_masa,_tVida,_g,_damp,_masaReal,_vReal)
+Proyectil::Proyectil(Vector3 pos, physx::PxShape* shape, const Vector4& color, Vector3 _v, double _masa, double _tVida, double _masaReal, Vector3 _vReal ,double _damp) : Entity(pos,shape,color,_v,_masa,_tVida,_damp,_masaReal,_vReal)
 {
 
 }

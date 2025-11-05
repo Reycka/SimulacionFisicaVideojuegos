@@ -7,6 +7,7 @@ class ParticleGen
 
 
 protected:
+	bool isActive = true;
 	std::vector<ForceGenerator*> FGen;
 	std::vector<bool> colorVariations{true,true,true}; //Que colores queremos cambiar
 	Particle* model;
@@ -20,6 +21,8 @@ protected:
 	std::uniform_real_distribution<double> urd;
 public:
 	virtual ~ParticleGen() {};
+	virtual bool getIsActive() = 0;
+	virtual void setIsActive(bool active) = 0;
 	virtual void addForceGen(ForceGenerator* g) = 0;
 	virtual void addParticles() = 0;
 	virtual void RegParticles() = 0;

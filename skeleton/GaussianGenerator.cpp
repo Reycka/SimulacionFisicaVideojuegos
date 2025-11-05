@@ -1,7 +1,7 @@
 #include "GaussianGenerator.h"
 #include <iostream>
 #include <cmath>
-GaussianGenerator::GaussianGenerator(float rad,Vector3 pos, physx::PxShape* shape, Vector4 color, Vector3 v,double _tVida, Vector3 g,int l, double _timeToSpwan, double damp)
+GaussianGenerator::GaussianGenerator(float rad,Vector3 pos, physx::PxShape* shape, Vector4 color, Vector3 v,double _tVida,int l, double _timeToSpwan, double damp, double masa)
 {
 	//Atributos del generador
 	radius = rad;
@@ -13,7 +13,7 @@ GaussianGenerator::GaussianGenerator(float rad,Vector3 pos, physx::PxShape* shap
 	limit = l;
 
 	//Partícula modelo
-	model = new Particle(pos,shape,color,v,_tVida,g,damp);
+	model = new Particle(pos,shape,color,v,_tVida,damp,masa);
 	model->DeRegItem();
 
 	//Aleatorio
@@ -29,6 +29,16 @@ GaussianGenerator::~GaussianGenerator()
 			particle.first->DeRegItem();
 		}
 	}
+}
+
+bool GaussianGenerator::getIsActive()
+{
+	return isActive;
+}
+
+void GaussianGenerator::setIsActive(bool active)
+{
+	isActive = active;
 }
 
 void GaussianGenerator::addForceGen(ForceGenerator* g)
@@ -88,8 +98,9 @@ Particle* GaussianGenerator::GeneraAleatoria()
 	//Asignacion de damping
 	double damping = model->getDamp();
 
+	double masa = model->getMasa();
 	//Creación y devolución de la partícula
-	Particle* p = new Particle(pos,sh,color,v, vida, model->getG(), damping);
+	Particle* p = new Particle(pos,sh,color,v, vida, damping,masa);
 	for (auto g : FGen) {
 		p->addForceGenerator(g);
 	}

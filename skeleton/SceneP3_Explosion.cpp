@@ -12,8 +12,8 @@ SceneP3_Explosion::SceneP3_Explosion(physx::PxMaterial* _gMaterial, physx::PxPhy
 	Vector4 fogColor = { 0.5f,0.5f,0.5f,1.0f };
 
 	ParticleSystem* partSys = new ParticleSystem();
-	UniformGenerator* unif = new UniformGenerator(80, { -20.0,60.0,-20.0 }, sphereShape, rainColor, { 0.0,-60.0,0.0 }, 25, { 0.0,-1.0,0.0 }, 40, 0.2);
-	GaussianGenerator* gaus = new GaussianGenerator(90, { 0.0,0.0,0.0 }, sphereShape, fogColor, { 3.0,10.0,3.0 }, 20, { 0.0,-1.0,0.0 }, 85, 0.5);
+	UniformGenerator* unif = new UniformGenerator(80, { -20.0,60.0,-20.0 }, sphereShape, rainColor, { 0.0,-60.0,0.0 }, 25,40, 0.2);
+	GaussianGenerator* gaus = new GaussianGenerator(90, { 0.0,0.0,0.0 }, sphereShape, fogColor, { 3.0,10.0,3.0 }, 20, 85, 0.5);
 	GravityGenerator* grav = new GravityGenerator({ 0.0,-10.0,0.0 });
 	exp = new ExplosionGenerator({ 0.0f, 0.0f, 0.0f },0.0f,2.0f,2500.0f,{ 343.0f, 2405.0f, 1234.0f },4.0);
 	partSys->addGenerator(unif);

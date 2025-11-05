@@ -1,12 +1,11 @@
 #include "Enemy.h"
 
-Enemy::Enemy(int _health, int _points, double _shootTime, double _lifeTime)
+Enemy::Enemy(int _health, int _points, double _shootTime)
 {
 	health = _health;
 	points = _points;
 	MAXSHOOTTIME = _shootTime;
 	shootTime = _shootTime;
-	lifeTime = _lifeTime;
 }
 
 Enemy::~Enemy()
@@ -61,6 +60,7 @@ void Enemy::shoot()
 {
 	if (shootTime >= MAXSHOOTTIME) {
 		shootTime = 0.0;
+		//Instanciar la bala
 	}
 }
 

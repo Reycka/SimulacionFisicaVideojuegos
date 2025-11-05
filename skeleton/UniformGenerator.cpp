@@ -1,6 +1,6 @@
 #include "UniformGenerator.h"
 #include <iostream>
-UniformGenerator::UniformGenerator(float rad, Vector3 pos, physx::PxShape* shape, Vector4 color, Vector3 v, double _tVida, Vector3 g, int l, double _timeToSpwan, double damp)
+UniformGenerator::UniformGenerator(float rad, Vector3 pos, physx::PxShape* shape, Vector4 color, Vector3 v, double _tVida, int l, double _timeToSpwan, double damp)
 {
 	//Atributos del generador
 	radius = rad;
@@ -12,7 +12,7 @@ UniformGenerator::UniformGenerator(float rad, Vector3 pos, physx::PxShape* shape
 	limit = l;
 
 	//Partícula modelo
-	model = new Particle(pos, shape, color, v, _tVida, g, damp);
+	model = new Particle(pos, shape, color, v, _tVida, damp);
 	model->DeRegItem();
 
 	//Aleatorio
@@ -29,6 +29,15 @@ UniformGenerator::~UniformGenerator()
 	}
 }
 
+bool UniformGenerator::getIsActive()
+{
+	return isActive;
+}
+
+void UniformGenerator::setIsActive(bool active)
+{
+	isActive = active;
+}
 void UniformGenerator::addForceGen(ForceGenerator* g)
 {
 	FGen.push_back(g);
@@ -91,7 +100,7 @@ Particle* UniformGenerator::GeneraAleatoria()
 	double damping = model->getDamp();
 
 	//Creación y devolución de la partícula
-	Particle* p = new Particle(pos, sh, color, v, vida, model->getG(), damping);
+	Particle* p = new Particle(pos, sh, color, v, vida, damping);
 	for (auto g : FGen) {
 		p->addForceGenerator(g);
 	}

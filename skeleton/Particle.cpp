@@ -15,7 +15,7 @@ Particle::Particle() : Entity()
 
 }
 
-Particle::Particle(Vector3 pos, PxShape* shape, const Vector4& color, Vector3 _v, double _tVida, Vector3 g, double _damp,double masaSim) : Entity(pos,shape,color,_v,masaSim,_tVida,g,_damp)
+Particle::Particle(Vector3 pos, PxShape* shape, const Vector4& color, Vector3 _v, double _tVida, double _damp,double masaSim) : Entity(pos,shape,color,_v,masaSim,_tVida,_damp)
 {
 	
 }

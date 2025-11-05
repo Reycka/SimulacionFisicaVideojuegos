@@ -15,7 +15,6 @@ Entity::Entity()
 	damp = 0;
 	firstComprobation = true;
 	lastPos = Vector3({ 0.0,0.0,0.0 });
-	g = Vector3({ 0.0,0.0,0.0 });
 
 }
 
@@ -30,10 +29,9 @@ Entity::Entity(Vector3 pos, PxShape* _shape, const Vector4& color)
 	damp = 0;
 	firstComprobation = true;
 	lastPos = Vector3({ 0.0,0.0,0.0 });
-	g = Vector3({ 0.0,0.0,0.0 });
 }
 
-Entity::Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector3 _v, double _masa, double _tVida, Vector3 _g,double _damp, double _masaReal, Vector3 _vRea)
+Entity::Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector3 _v, double _masa, double _tVida,double _damp, double _masaReal, Vector3 _vRea)
 {
 	shape = _shape;
 	transform = new PxTransform(pos);
@@ -44,7 +42,6 @@ Entity::Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector
 	damp = _damp;
 	firstComprobation = true;
 	lastPos = Vector3({ 0.0,0.0,0.0 });
-	g = _g;
 }
 
 void Entity::RegItem()
@@ -122,10 +119,6 @@ Vector3 Entity::getV() const
 Vector3 Entity::getForce() const
 {
 	return force;
-}
-Vector3 Entity::getG() const
-{
-	return g;
 }
 
 double Entity::getMasa() const

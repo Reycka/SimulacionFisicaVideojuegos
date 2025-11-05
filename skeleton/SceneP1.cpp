@@ -24,13 +24,13 @@ void SceneP1::keyPress(unsigned char key)
 {
 	switch (key) {
 	case 'c':
-		AddEntity(new Proyectil(getCamera()->getEye(), CreateShape(PxSphereGeometry(1), getMaterial()), { 1.0f,1.0f,0.0f,1.0f } , getCamera()->getDir() * 100, 10, 10, 30, Vector3(30.0, 15.0, 0.0), Vector3(0.0, -12.0, 0.0)));
+		AddEntity(new Proyectil(getCamera()->getEye(), CreateShape(PxSphereGeometry(1), getMaterial()), { 1.0f,1.0f,0.0f,1.0f } , getCamera()->getDir() * 100, 10, 10, 30, Vector3(30.0, 15.0, 0.0)));
 		break;
 	case 'v':
-		AddEntity(new Proyectil(getCamera()->getEye(), CreateShape(PxSphereGeometry(1), getMaterial()), { 1.0f,0.0f,1.0f,1.0f }, getCamera()->getDir() * 100, 10, 10, 30, Vector3(30.0, 15.0, 0.0), Vector3(0.0, 2.0, 0.0)));
+		AddEntity(new Proyectil(getCamera()->getEye(), CreateShape(PxSphereGeometry(1), getMaterial()), { 1.0f,0.0f,1.0f,1.0f }, getCamera()->getDir() * 100, 10, 10, 30, Vector3(30.0, 15.0, 0.0)));
 		break;
 	case 'b':
-		AddEntity(new Proyectil(getCamera()->getEye(), CreateShape(PxSphereGeometry(1), getMaterial()), { 0.0f,1.0f,1.0f,1.0f }, getCamera()->getDir() * 100,10, 10, 30, Vector3(30.0, 15.0, 0.0), Vector3(0.0, -22.0, 0.0)));
+		AddEntity(new Proyectil(getCamera()->getEye(), CreateShape(PxSphereGeometry(1), getMaterial()), { 0.0f,1.0f,1.0f,1.0f }, getCamera()->getDir() * 100,10, 10, 30, Vector3(30.0, 15.0, 0.0)));
 		break;
 	}
 }

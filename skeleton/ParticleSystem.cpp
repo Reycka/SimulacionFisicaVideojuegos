@@ -20,6 +20,16 @@ void ParticleSystem::addGenerator(ParticleGen* gen)
 	generators.push_back(gen);
 }
 
+void ParticleSystem::setActiveParticleGenerator(ParticleGen* gen,bool active)
+{
+	for (auto g : generators) {
+		if (g == gen) {
+			g->setIsActive(active);
+			break;
+		}
+	}
+}
+
 void ParticleSystem::addForceGenerator(ForceGenerator* gen)
 {
 	for (auto g : generators) {
@@ -31,10 +41,11 @@ void ParticleSystem::integrate(double t)
 {
 
 	for (auto& gen : generators) {
-		gen->removeParticles(); //Elimina las particulas viejas
-		gen->integrate(t);
-		gen->addParticles(); //Añade las partículas nuevas
-
+		if (gen->getIsActive()) {
+			gen->removeParticles(); //Elimina las particulas viejas
+			gen->integrate(t);
+			gen->addParticles(); //Añade las partículas nuevas
+		}
 	}
 }
 

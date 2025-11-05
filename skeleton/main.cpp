@@ -17,6 +17,7 @@
 #include "SceneP2_GEN2.h"
 #include "SceneP2_GEN3.h"
 #include "SceneP3_Explosion.h"
+#include "gameScene.h"
 
 Scene* actScene;
 std::vector<Scene*> scenes;
@@ -71,6 +72,7 @@ void initPhysics(bool interactive)
 	scenes.push_back(new SceneP2_GEN2(gMaterial, gPhysics, gScene, GetCamera()));
 	scenes.push_back(new SceneP2_GEN3(gMaterial, gPhysics, gScene, GetCamera()));
 	scenes.push_back(new SceneP3_Explosion(gMaterial, gPhysics, gScene, GetCamera()));
+	scenes.push_back(new gameScene(gMaterial, gPhysics, gScene, GetCamera()));
 
 
 	scenes[0]->DeRegScene();
@@ -79,6 +81,7 @@ void initPhysics(bool interactive)
 	scenes[3]->DeRegScene();
 	scenes[4]->DeRegScene();
 	scenes[5]->DeRegScene();
+	scenes[6]->DeRegScene();
 
 	actScene = scenes[0];
 	actScene->RegScene();
@@ -171,6 +174,11 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case '5':
 	{
 		ChangeScene(scenes[5]);
+		break;
+	}
+	case '6':
+	{
+		ChangeScene(scenes[6]);
 		break;
 	}
 	case 'c':
