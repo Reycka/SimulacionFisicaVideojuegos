@@ -40,6 +40,8 @@ Entity::Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector
 	masaSim = _masa;
 	tVida = _tVida;
 	damp = _damp;
+	masaReal = _masaReal;
+	vReal = _vRea;
 	firstComprobation = true;
 	lastPos = Vector3({ 0.0,0.0,0.0 });
 }
@@ -116,6 +118,11 @@ Vector3 Entity::getV() const
 	return vSim;
 }
 
+Vector3 Entity::getVReal() const
+{
+	return vReal;
+}
+
 Vector3 Entity::getForce() const
 {
 	return force;
@@ -124,6 +131,11 @@ Vector3 Entity::getForce() const
 double Entity::getMasa() const
 {
 	return masaSim;
+}
+
+double Entity::getMasaReal() const
+{
+	return masaReal;
 }
 
 double Entity::getTvida() const

@@ -38,8 +38,10 @@ public:
 	physx::PxTransform* getT() const;
 	physx::PxShape* getShape() const;
 	Vector3 getV()const;
+	Vector3 getVReal()const;
 	Vector3 getForce()const;
 	double getMasa() const;
+	double getMasaReal() const;
 	double getTvida() const;
 	double getDamp() const;
 	virtual void integrate(double t) {};

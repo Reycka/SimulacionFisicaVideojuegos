@@ -83,6 +83,7 @@
     <ClCompile Include="gameScene.cpp">
       <Filter>General\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="shootManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render\Camera.h">
@@ -178,6 +179,7 @@
     <ClInclude Include="gameScene.h">
       <Filter>General\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="shootManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

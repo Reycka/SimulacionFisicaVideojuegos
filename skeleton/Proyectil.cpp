@@ -7,6 +7,7 @@ void Proyectil::AjustaMasa()
 	aux.y *= aux.y;
 	aux.z *= aux.z;
 	masaSim = masaReal * aux.magnitude();
+	masaAjustada = true;
 }
 
 Proyectil::Proyectil()
@@ -15,7 +16,7 @@ Proyectil::Proyectil()
 
 Proyectil::Proyectil(Vector3 pos, physx::PxShape* shape, const Vector4& color, Vector3 _v, double _masa, double _tVida, double _masaReal, Vector3 _vReal ,double _damp) : Entity(pos,shape,color,_v,_masa,_tVida,_damp,_masaReal,_vReal)
 {
-
+	if(!masaAjustada)AjustaMasa();
 }
 
 Proyectil::~Proyectil()
@@ -24,6 +25,7 @@ Proyectil::~Proyectil()
 
 void Proyectil::integrate(double t)
 {
+
 	tVida -= t;
 	//ClearOldForces
 	force = Vector3({ 0.0,0.0,0.0 });
