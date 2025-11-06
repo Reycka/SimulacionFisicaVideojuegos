@@ -20,8 +20,15 @@ shootManager::~shootManager()
 
 void shootManager::addProyectil()
 {
-	Proyectil* p = new Proyectil(modelo->getT()->p,modelo->getShape(), modelo->getRenderItem()->color, modelo->getV(), modelo->getMasa(),modelo->getTvida(),modelo->getMasaReal(),modelo->getVReal());
+	Proyectil* p = new Proyectil(modelo->getT()->p, modelo->getShape(), modelo->getRenderItem()->color, modelo->getV(), modelo->getMasa(), modelo->getTvida(), modelo->getMasaReal(), modelo->getVReal());
 	proyectiles.push_back({ p, true });
+	for (auto& g : ForceGen) {
+		for (auto& p : proyectiles) {
+			if (p.second) {
+				p.first->addForceGenerator(g);
+			}
+		}
+	}
 }
 
 void shootManager::removeProyectil()
@@ -36,11 +43,7 @@ void shootManager::removeProyectil()
 
 void shootManager::addForceGenerator(ForceGenerator* gen)
 {
-	for (auto& p : proyectiles) {
-		if (p.second) {
-			p.first->addForceGenerator(gen);
-		}
-	}
+	Entity::addForceGenerator(gen);
 }
 
 void shootManager::RegItem()
