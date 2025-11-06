@@ -51,6 +51,7 @@ void nave::integrate(double t)
 	getT()->p = getT()->p + (vSim * t);
 
 	//SOLO PARA LA INTERMEDIA, RESETEA LA NAVE MODELO A SU POSICION ORIGINAL
+	//PARA ESTE DISPARO TAMBIÉN HABRÁ QUE SETEARLE QUE APUNTE SOLO A CÁMARA A FUTURO AL IGUAL QUE DESACTIVAR EL SHOOT CUANDO MUERA O ESTE SIENDO DERRIBADA
 	if (abs(getT()->p.x) > 50 || abs(getT()->p.y) > 50 || abs(getT()->p.z > 50)) {
 		getT()->p = finalPos;
 		vSim = { 0.0,0.0,0.0 };
