@@ -1,7 +1,8 @@
 #include "nave.h"
 using namespace physx;
-nave::nave(Vector3 _finalPos, Vector3 pos, physx::PxShape* _shape, physx::PxMaterial* mat, const Vector4& color, Vector3 _v, double _masa, double _tVida, double _damp, int health, int points, double timeToSpawn,Proyectil* p) : Entity(pos, _shape, color, _v, _masa, _tVida, _damp), Enemy(health, points, timeToSpawn,p)
+nave::nave(Vector3 _finalPos, Vector3 pos, physx::PxShape* _shape, physx::PxMaterial* mat, const Vector4& color, Vector3 _v, double _masa, double _tVida, double _damp, int health, int points, double timeToSpawn,Proyectil* p,ExplosionGenerator* _Exp) : Entity(pos, _shape, color, _v, _masa, _tVida, _damp), Enemy(health, points, timeToSpawn,p)
 {
+	exp = _Exp;
 	pr = p;
 	finalPos = _finalPos;
 	partShipSystem = new ParticleSystem();
@@ -9,12 +10,13 @@ nave::nave(Vector3 _finalPos, Vector3 pos, physx::PxShape* _shape, physx::PxMate
 	Vector4 fireColor = { 1.0f,1.0f,0.0f,1.0f };
 	smokeGenerator = new GaussianGenerator(5, getT()->p + Vector3({ -10.0,-10.0,-10.0 }), mat, 1, smokeColor, { 1.0,1.0,1.0 }, 8, 6, 0.1, 0.999, 2.0);
 	fireGenerator = new UniformGenerator(5, getT()->p + Vector3({ -10.0,-10.0,-10.0 }), mat, 1, fireColor, { 0.0,10.0,0.0 }, 4, 3, 0.1, 0.999, 5.0);
-	fireGenerator->setLimitPos({30.0, 350.0, 30.0});
-	smokeGenerator->setLimitPos({ 30.0, 350.0, 30.0 });
+	fireGenerator->setLimitPos({300.0, 350.0, 300.0});
+	smokeGenerator->setLimitPos({ 300.0, 350.0, 300.0 });
 	fireGenerator->setVariation(0, false);
 	partShipSystem->addGenerator(smokeGenerator);
 	partShipSystem->addGenerator(fireGenerator);
 	partShipSystem->setActiveParticleGenerator(smokeGenerator,false);
+	addForceGenerator(exp);
 	
 }
 
@@ -34,6 +36,9 @@ void nave::integrate(double t)
 	if (!smokeGenerator->getIsActive() && actState == GOLPEADO) {
 		partShipSystem->setActiveParticleGenerator(smokeGenerator, true);
 	}
+	else if (!exp->getIsActive() && actState == MUERTO) {
+		exp->setIsActive(true);
+	}
 	tVida -= t;
 	force = Vector3({ 0.0,0.0,0.0 });
 	addForces(t);
@@ -41,10 +46,20 @@ void nave::integrate(double t)
 	vSim = (vSim + ((force * pow(masaSim, -1)) * t));
 	vSim = vSim * pow(damp, t);
 	getT()->p = getT()->p + (vSim * t);
-	partShipSystem->setPosition(getT()->p);
+
+	//SOLO PARA LA INTERMEDIA, RESETEA LA NAVE MODELO A SU POSICION ORIGINAL
+	if (abs(getT()->p.x) > 50 || abs(getT()->p.y) > 50 || abs(getT()->p.z > 50)) {
+		getT()->p = finalPos;
+		vSim = { 0.0,0.0,0.0 };
+		actState = SPAWN;
+		health = 2;
+	}
+	partShipSystem->setPosition(getT()->p + Vector3({ -10.0,-10.0,-10.0 }));
 	partShipSystem->integrate(t);
 	proyectilUpdate(t);
-	pr->getT()->p = pr->getT()->p + (vSim * t);	
+	pr->getT()->p = getT()->p;
+
+
 }
 
 void nave::RegItem()

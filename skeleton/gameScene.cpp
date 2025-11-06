@@ -10,14 +10,22 @@ gameScene::gameScene(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, phys
 	PxShape* sphereShape = CreateShape(PxSphereGeometry(3), getMaterial());
 	Vector4 sphereColor = { 1.0f,0.0f,1.0f,1.0f };
 	Proyectil* p = new Proyectil({ 15.0,15.0,15.0 }, CreateShape(PxSphereGeometry(1), getMaterial()), { 1.0f,1.0f,0.0f,1.0f }, getCamera()->getEye() , 10, 60, 60, Vector3(30.0, 15.0, 0.0));
-	model = new nave({ 15.0,15.0,15.0 }, { 15.0,15.0,15.0 }, sphereShape,getMaterial(), sphereColor, {0.0,3.0,0.0}, 20.0, 30.0, 0.999, 2, 100, 2.0, p);
-	whirlWind = new WhirlwindGenerator({ 15.0,15.0,15.0 }, 30.0f, 10);
+	ExplosionGenerator* exp = new ExplosionGenerator({ 15.0f, 15.0f, 0.0f }, 0.0f, 2.0f, 25500.0f, { 3043.0f, 2405.0f, 1234.0f }, 0.5);
+	model = new nave({ 15.0,15.0,15.0 }, { 15.0,15.0,15.0 }, sphereShape,getMaterial(), sphereColor, {0.0,3.0,0.0}, 20.0, 30.0, 0.999, 2, 100, 2.0, p,exp);
+	whirlWind = new WhirlwindGenerator({ 0.0,-20.0,0.0 }, 70.0f, 10);
 	g = new GravityGenerator({ 0.0,-10.0,0.0 });
+	wind = new WindGenerator({15.0,15.0,15.0}, 30.0f, {10.0,0.0,0.0}, 50);
+	
 	AddForceGenerator(whirlWind);
 	AddForceGenerator(g);
+	AddForceGenerator(wind);
+	AddForceGenerator(exp);
 	model->addForceGenerator(whirlWind);
 	model->addForceGenerator(g);
+	model->addForceGenerator(wind);
 	whirlWind->setIsActive(false);
+	wind->setIsActive(false);
+	exp->setIsActive(false);
 	AddEntity(model);
 }
 

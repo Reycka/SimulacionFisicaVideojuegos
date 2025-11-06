@@ -97,7 +97,7 @@ Particle* UniformGenerator::GeneraAleatoria()
 	std::uniform_real_distribution<float> life(-2.0f, 10.0f);
 
 	//Para la velocidad
-	std::uniform_real_distribution<double> d(-1.0f, 2.0f);
+	std::uniform_real_distribution<double> d(0.0f, 2.0f);
 	double velVariationX = d(_mt);
 	double velVariationY = d(_mt);
 	double velVariationZ = d(_mt);

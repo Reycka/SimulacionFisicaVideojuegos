@@ -4,6 +4,7 @@
 #include "ParticleSystem.h"
 #include "GaussianGenerator.h"
 #include "UniformGenerator.h"
+#include "ExplosionGenerator.h"
 class nave : public Entity ,public Enemy
 {
 private:
@@ -12,9 +13,10 @@ private:
 	ParticleSystem* partShipSystem;
 	GaussianGenerator* smokeGenerator;
 	UniformGenerator* fireGenerator;
+	ExplosionGenerator* exp;
 
 public:
-	nave(Vector3 _finalPos,Vector3 pos, physx::PxShape* _shape, physx::PxMaterial* mat,const Vector4& color, Vector3 _v, double _masa, double _tVida, double _damp = 0.999, int health = 2, int points = 100, double timeToSpawn = 2.0,Proyectil* p = nullptr);
+	nave(Vector3 _finalPos,Vector3 pos, physx::PxShape* _shape, physx::PxMaterial* mat,const Vector4& color, Vector3 _v, double _masa, double _tVida, double _damp = 0.999, int health = 2, int points = 100, double timeToSpawn = 2.0,Proyectil* p = nullptr, ExplosionGenerator* exp = nullptr);
 	~nave();
 	virtual void addForceGenerator(ForceGenerator* gen) override;
 	virtual void integrate(double t) override;
