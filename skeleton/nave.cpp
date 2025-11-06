@@ -1,13 +1,14 @@
 #include "nave.h"
-
-nave::nave(Vector3 _finalPos, Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector3 _v, double _masa, double _tVida, double _damp,int health,int points,double timeToSpawn) : Entity(pos,_shape,color,_v,_masa,_tVida,_damp) ,Enemy(health,points,timeToSpawn)
+using namespace physx;
+nave::nave(Vector3 _finalPos, Vector3 pos, physx::PxShape* _shape, physx::PxMaterial* mat, const Vector4& color, Vector3 _v, double _masa, double _tVida, double _damp, int health, int points, double timeToSpawn) : Entity(pos, _shape, color, _v, _masa, _tVida, _damp), Enemy(health, points, timeToSpawn)
 {
 	finalPos = _finalPos;
 	partShipSystem = new ParticleSystem();
 	Vector4 smokeColor = { 0.5,0.5,0.5,0.7 };
 	Vector4 fireColor = { 1.0f,1.0f,0.0f,1.0f };
-	smokeGenerator = new GaussianGenerator(5,getT()->p - Vector3({-2.0,0.0,-2.0}), _shape, smokeColor, {0.0,1.0,0.0}, 0.25, 3, 0.5, 0.999, 2.0);
-	fireGenerator = new GaussianGenerator(5,getT()->p - Vector3({ -2.0,0.0,-2.0 }), _shape, fireColor, {0.0,1.0,0.0}, 0.25, 3,0.5,0.999,5.0);
+	smokeGenerator = new GaussianGenerator(5, getT()->p + Vector3({ -10.0,-10.0,-10.0 }), mat, 1, smokeColor, { 0.0,1.0,0.0 }, 4, 3, 0.1, 0.999, 2.0);
+	fireGenerator = new UniformGenerator(5, getT()->p + Vector3({ -10.0,-10.0,-10.0 }), mat, 1, fireColor, { 0.0,10.0,0.0 }, 4, 3, 0.1, 0.999, 5.0);
+	fireGenerator->setLimitPos({30.0, 40.0, 30.0});
 	fireGenerator->setVariation(0, false);
 	partShipSystem->addGenerator(smokeGenerator);
 	partShipSystem->addGenerator(fireGenerator);

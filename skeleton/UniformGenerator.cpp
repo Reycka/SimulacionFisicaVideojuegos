@@ -1,6 +1,7 @@
 #include "UniformGenerator.h"
 #include <iostream>
-UniformGenerator::UniformGenerator(float rad, Vector3 pos, physx::PxShape* shape, Vector4 color, Vector3 v, double _tVida, int l, double _timeToSpwan, double damp)
+using namespace physx;
+UniformGenerator::UniformGenerator(float rad, Vector3 pos, physx::PxShape* shape, Vector4 color, Vector3 v, double _tVida, int l, double _timeToSpwan, double damp,double masa)
 {
 	//Atributos del generador
 	radius = rad;
@@ -12,7 +13,27 @@ UniformGenerator::UniformGenerator(float rad, Vector3 pos, physx::PxShape* shape
 	limit = l;
 
 	//Partícula modelo
-	model = new Particle(pos, shape, color, v, _tVida, damp);
+	model = new Particle(pos, shape, color, v, _tVida, damp,masa);
+	model->DeRegItem();
+
+	//Aleatorio
+	std::random_device rand;
+	_mt = std::mt19937(rand());
+}
+
+UniformGenerator::UniformGenerator(float rad, Vector3 pos, physx::PxMaterial* mat, int tam, Vector4 color, Vector3 v, double _tVida, int l, double _timeToSpwan, double damp,double masa)
+{
+	//Atributos del generador
+	radius = rad;
+	limitPos.x = rad;
+	limitPos.y = rad;
+	limitPos.z = rad;
+	timeToSpawn = _timeToSpwan;
+	timePass = timeToSpawn;
+	limit = l;
+	PxShape* shape = CreateShape(PxSphereGeometry(tam), mat);
+	//Partícula modelo
+	model = new Particle(pos, shape, color, v, _tVida, damp, masa);
 	model->DeRegItem();
 
 	//Aleatorio
@@ -34,6 +55,12 @@ bool UniformGenerator::getIsActive()
 	return isActive;
 }
 
+void UniformGenerator::setLimitPos(Vector3 pos)
+{
+	limitPos.x = pos.x;
+	limitPos.y = pos.y;
+	limitPos.z = pos.z;
+}
 void UniformGenerator::setIsActive(bool active)
 {
 	isActive = active;
@@ -63,26 +90,25 @@ Particle* UniformGenerator::GeneraAleatoria()
 
 
 	//Para la vida
-	std::uniform_real_distribution<float> life(-10.0f, 10.0f);
+	std::uniform_real_distribution<float> life(-2.0f, 10.0f);
 
 	//Para la velocidad
-	std::uniform_real_distribution<double> d(-2.0f, 2.0f);
+	std::uniform_real_distribution<double> d(-1.0f, 2.0f);
 	double velVariationX = d(_mt);
 	double velVariationY = d(_mt);
 	double velVariationZ = d(_mt);
 
 	//Asgnación del color
 	Vector4 color = rend->color;
-	if (color.x > 0.0) {
+	if (color.x > 0.0 && colorVariations[0]) {
 		color.x = colorVariation;
 	}
-	if (color.y > 0.0) {
+	if (color.y > 0.0 && colorVariations[1]) {
 		color.y = colorVariation;
 	}
-	if (color.z > 0.0) {
+	if (color.z > 0.0 && colorVariations[2]) {
 		color.z = colorVariation;
 	}
-
 
 	//Asignación de la velocidad
 	Vector3 v = model->getV();

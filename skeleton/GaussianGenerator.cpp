@@ -1,6 +1,7 @@
 #include "GaussianGenerator.h"
 #include <iostream>
 #include <cmath>
+using namespace physx;
 GaussianGenerator::GaussianGenerator(float rad,Vector3 pos, physx::PxShape* shape, Vector4 color, Vector3 v,double _tVida,int l, double _timeToSpwan, double damp, double masa)
 {
 	//Atributos del generador
@@ -11,7 +12,6 @@ GaussianGenerator::GaussianGenerator(float rad,Vector3 pos, physx::PxShape* shap
 	timeToSpawn = _timeToSpwan;
 	timePass = timeToSpawn;
 	limit = l;
-
 	//Partícula modelo
 	model = new Particle(pos,shape,color,v,_tVida,damp,masa);
 	model->DeRegItem();
@@ -22,6 +22,26 @@ GaussianGenerator::GaussianGenerator(float rad,Vector3 pos, physx::PxShape* shap
 
 }
 
+GaussianGenerator::GaussianGenerator(float rad, Vector3 pos, physx::PxMaterial* mat,int tam ,Vector4 color, Vector3 v, double _tVida, int l, double _timeToSpwan, double damp, double masa)
+{
+	//Atributos del generador
+	radius = rad;
+	limitPos.x = rad * 2;
+	limitPos.y = rad * 2;
+	limitPos.z = rad * 2;
+	timeToSpawn = _timeToSpwan;
+	timePass = timeToSpawn;
+	limit = l;
+	PxShape* shape = CreateShape(PxSphereGeometry(tam),mat);
+	//Partícula modelo
+	model = new Particle(pos, shape, color, v, _tVida, damp, masa);
+	model->DeRegItem();
+
+	//Aleatorio
+	std::random_device rand;
+	_mt = std::mt19937(rand());
+}
+
 GaussianGenerator::~GaussianGenerator()
 {
 	for (auto particle : part) {
@@ -29,6 +49,13 @@ GaussianGenerator::~GaussianGenerator()
 			particle.first->DeRegItem();
 		}
 	}
+}
+
+void GaussianGenerator::setLimitPos(Vector3 pos)
+{
+	limitPos.x = pos.x;
+	limitPos.y = pos.y;
+	limitPos.z = pos.z;
 }
 
 bool GaussianGenerator::getIsActive()
