@@ -11,6 +11,7 @@ public:
 	GaussianGenerator(float rad,Vector3 pos, physx::PxShape* shape,Vector4 color, Vector3 v, double _tVida,int l = 10, double timeToSpwan = 5, double damp = 0.999, double masa = 5.0);
 	GaussianGenerator(float rad, Vector3 pos, physx::PxMaterial* mat,int tam ,Vector4 color, Vector3 v, double _tVida, int l = 10, double timeToSpwan = 5, double damp = 0.999, double masa = 5.0);
 	virtual ~GaussianGenerator();
+	virtual void setPosition(Vector3 pos) override;
 	void setLimitPos(Vector3 pos);
 	virtual bool getIsActive() override;
 	virtual void setIsActive(bool active) override;

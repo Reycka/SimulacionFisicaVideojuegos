@@ -21,6 +21,7 @@ protected:
 	std::uniform_real_distribution<double> urd;
 public:
 	virtual ~ParticleGen() {};
+	virtual void setPosition(Vector3 pos) = 0;
 	virtual bool getIsActive() = 0;
 	virtual void setIsActive(bool active) = 0;
 	virtual void addForceGen(ForceGenerator* g) = 0;

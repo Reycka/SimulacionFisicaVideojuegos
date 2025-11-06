@@ -2,10 +2,9 @@
 
 shootManager::shootManager(Proyectil* _model) : Entity()
 {
-	modelo = new Proyectil(_model->getT()->p, _model->getShape(), _model->getRenderItem()->color, _model->getV(), _model->getMasa(), _model->getTvida(), _model->getMasaReal(), _model->getVReal());;
+	modelo = _model;
 	Entity::DeRegItem();
 	modelo->DeRegItem();
-	_model->DeRegItem();
 }
 
 shootManager::~shootManager()
@@ -27,8 +26,8 @@ void shootManager::addProyectil()
 
 void shootManager::removeProyectil()
 {
-	for (auto p : proyectiles) {
-		if (p.second && p.first->getTvida() <= 0) {
+	for (auto& p : proyectiles) {
+		if (p.second) {
 			p.first->DeRegItem();
 			p.second = false;
 		}
@@ -37,7 +36,7 @@ void shootManager::removeProyectil()
 
 void shootManager::addForceGenerator(ForceGenerator* gen)
 {
-	for (auto p : proyectiles) {
+	for (auto& p : proyectiles) {
 		if (p.second) {
 			p.first->addForceGenerator(gen);
 		}
@@ -46,7 +45,7 @@ void shootManager::addForceGenerator(ForceGenerator* gen)
 
 void shootManager::RegItem()
 {
-	for (auto p : proyectiles) {
+	for (auto& p : proyectiles) {
 		if (p.second) {
 			p.first->RegItem();
 		}
@@ -55,7 +54,7 @@ void shootManager::RegItem()
 
 void shootManager::DeRegItem()
 {
-	for (auto p : proyectiles) {
+	for (auto& p : proyectiles) {
 		if (p.second) {
 			p.first->DeRegItem();
 		}
@@ -64,8 +63,11 @@ void shootManager::DeRegItem()
 
 void shootManager::integrate(double t)
 {
-	removeProyectil();
-	for (auto p : proyectiles) {
+	for (auto& p : proyectiles) {
+
+		if (p.second && p.first->getTvida() <= 0 || p.second && abs(p.first->getT()->p.x) > 60) {
+			removeProyectil();
+		}
 		if (p.second) {
 			p.first->integrate(t);
 		}

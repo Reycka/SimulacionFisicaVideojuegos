@@ -37,6 +37,14 @@ void ParticleSystem::addForceGenerator(ForceGenerator* gen)
 	}
 }
 
+void ParticleSystem::setPosition(Vector3 pos)
+{
+	getT()->p = pos;
+	for (auto g : generators) {
+		g->setPosition(pos);
+	}
+}
+
 void ParticleSystem::integrate(double t)
 {
 

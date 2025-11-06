@@ -7,6 +7,7 @@
 class nave : public Entity ,public Enemy
 {
 private:
+	Proyectil* pr;
 	Vector3 finalPos;
 	ParticleSystem* partShipSystem;
 	GaussianGenerator* smokeGenerator;

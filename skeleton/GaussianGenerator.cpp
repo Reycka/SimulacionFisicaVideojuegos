@@ -51,6 +51,11 @@ GaussianGenerator::~GaussianGenerator()
 	}
 }
 
+void GaussianGenerator::setPosition(Vector3 pos)
+{
+	model->getT()->p = pos;
+}
+
 void GaussianGenerator::setLimitPos(Vector3 pos)
 {
 	limitPos.x = pos.x;

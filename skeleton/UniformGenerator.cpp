@@ -70,6 +70,10 @@ void UniformGenerator::addForceGen(ForceGenerator* g)
 	FGen.push_back(g);
 }
 
+void UniformGenerator::setPosition(Vector3 pos)
+{
+	model->getT()->p = pos;
+}
 
 Particle* UniformGenerator::GeneraAleatoria()
 {

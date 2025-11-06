@@ -16,6 +16,7 @@ public:
 	void addGenerator(ParticleGen* gen);
 	void setActiveParticleGenerator(ParticleGen* gen, bool active);
 	virtual void addForceGenerator(ForceGenerator* gen) override;
+	void setPosition(Vector3 pos);
 	virtual void integrate(double t) override;
 	virtual void RegItem() override;
 	virtual void DeRegItem() override;

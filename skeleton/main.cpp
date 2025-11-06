@@ -181,22 +181,8 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		ChangeScene(scenes[6]);
 		break;
 	}
-	case 'c':
-	{
-		actScene->keyPress(key);
-		break;
-	}
-	case 'v':
-	{
-		actScene->keyPress(key);
-		break;
-	}
-	case 'b':
-	{
-		actScene->keyPress(key);
-		break;
-	}
 	default:
+		actScene->keyPress(key);
 		break;
 	}
 }
