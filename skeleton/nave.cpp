@@ -6,9 +6,10 @@ nave::nave(Vector3 _finalPos, Vector3 pos, physx::PxShape* _shape, physx::PxMate
 	partShipSystem = new ParticleSystem();
 	Vector4 smokeColor = { 0.5,0.5,0.5,0.7 };
 	Vector4 fireColor = { 1.0f,1.0f,0.0f,1.0f };
-	smokeGenerator = new GaussianGenerator(5, getT()->p + Vector3({ -10.0,-10.0,-10.0 }), mat, 1, smokeColor, { 0.0,1.0,0.0 }, 4, 3, 0.1, 0.999, 2.0);
+	smokeGenerator = new GaussianGenerator(5, getT()->p + Vector3({ -10.0,-10.0,-10.0 }), mat, 1, smokeColor, { 1.0,1.0,1.0 }, 8, 6, 0.1, 0.999, 2.0);
 	fireGenerator = new UniformGenerator(5, getT()->p + Vector3({ -10.0,-10.0,-10.0 }), mat, 1, fireColor, { 0.0,10.0,0.0 }, 4, 3, 0.1, 0.999, 5.0);
 	fireGenerator->setLimitPos({30.0, 20.0, 30.0});
+	smokeGenerator->setLimitPos({ 30.0, 20.0, 30.0 });
 	fireGenerator->setVariation(0, false);
 	partShipSystem->addGenerator(smokeGenerator);
 	partShipSystem->addGenerator(fireGenerator);

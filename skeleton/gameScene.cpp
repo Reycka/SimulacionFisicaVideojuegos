@@ -24,6 +24,7 @@ void gameScene::keyPress(unsigned char key)
 		AddEntity(new Proyectil(getCamera()->getEye(), CreateShape(PxSphereGeometry(1), getMaterial()), { 1.0f,0.0f,1.0f,1.0f }, getCamera()->getDir() * 100, 50, 10, 30, Vector3(30.0, 15.0, 0.0)));
 		break;
 	case 'b':
+		model->GotHit(1);
 		break;
 	}
 }

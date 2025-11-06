@@ -19,10 +19,10 @@ void Enemy::GotHit(int damage)
 {
 	health -= damage;
 	if (health <= 0) {
-		actState == MUERTO;
+		actState = MUERTO;
 	}
 	else {
-		actState == GOLPEADO;
+		actState = GOLPEADO;
 	}
 }
 
