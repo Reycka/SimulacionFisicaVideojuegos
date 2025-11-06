@@ -9,6 +9,11 @@ gameScene::gameScene(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, phys
 {
 	PxShape* sphereShape = CreateShape(PxSphereGeometry(3), getMaterial());
 	Vector4 sphereColor = { 1.0f,0.0f,1.0f,1.0f };
+	Vector4 rainColor = { 0.0f,0.0f,1.0f,0.8f };
+	PxShape* rainShape = CreateShape(PxSphereGeometry(0.5), getMaterial());
+
+	ParticleSystem* partSys = new ParticleSystem();
+	UniformGenerator* unif = new UniformGenerator(80, { -20.0,60.0,-20.0 }, rainShape, rainColor, { 0.0,-60.0,0.0 }, 25, 40, 0.2);
 	Proyectil* p = new Proyectil({ 15.0,15.0,15.0 }, CreateShape(PxSphereGeometry(1), getMaterial()), { 1.0f,1.0f,0.0f,1.0f }, getCamera()->getEye() , 10, 60, 60, Vector3(30.0, 15.0, 0.0));
 	ExplosionGenerator* exp = new ExplosionGenerator({ 15.0f, 15.0f, 0.0f }, 0.0f, 2.0f, 25500.0f, { 3043.0f, 2405.0f, 1234.0f }, 0.5);
 	model = new nave({ 15.0,15.0,15.0 }, { 15.0,15.0,15.0 }, sphereShape,getMaterial(), sphereColor, {0.0,3.0,0.0}, 20.0, 30.0, 0.999, 2, 100, 2.0, p,exp);
@@ -23,10 +28,16 @@ gameScene::gameScene(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, phys
 	model->addForceGenerator(whirlWind);
 	model->addForceGenerator(g);
 	model->addForceGenerator(wind);
+	partSys->addGenerator(unif);
+	partSys->addForceGenerator(whirlWind);
+	partSys->addForceGenerator(g);
+	partSys->addForceGenerator(wind);
+	partSys->addForceGenerator(exp);
 	whirlWind->setIsActive(false);
 	wind->setIsActive(false);
 	exp->setIsActive(false);
 	AddEntity(model);
+	AddEntity(partSys);
 }
 
 gameScene::~gameScene()
