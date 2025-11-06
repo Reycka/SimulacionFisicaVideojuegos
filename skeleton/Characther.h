@@ -10,7 +10,7 @@ protected:
 	double shootTime = 0.0;
 public:
 	virtual void GotHit(int damage) = 0;
-	virtual void shoot() = 0;
-	virtual void proyectilUpdate(double t) = 0;
+	virtual void shoot(Proyectil* p) = 0;
+	virtual void proyectilUpdate(double t, Proyectil* p) {};
 };
 

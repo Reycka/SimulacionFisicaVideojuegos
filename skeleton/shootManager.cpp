@@ -1,10 +1,8 @@
 #include "shootManager.h"
 
-shootManager::shootManager(Proyectil* _model) : Entity()
+shootManager::shootManager() : Entity()
 {
-	modelo = _model;
 	Entity::DeRegItem();
-	modelo->DeRegItem();
 }
 
 shootManager::~shootManager()
@@ -18,10 +16,10 @@ shootManager::~shootManager()
 	proyectiles.clear();
 }
 
-void shootManager::addProyectil()
+
+void shootManager::addProyectil(Proyectil* pr)
 {
-	Proyectil* p = new Proyectil(modelo->getT()->p, modelo->getShape(), modelo->getRenderItem()->color, modelo->getV(), modelo->getMasa(), modelo->getTvida(), modelo->getMasaReal(), modelo->getVReal());
-	proyectiles.push_back({ p, true });
+	proyectiles.push_back({ pr, true });
 	for (auto& g : ForceGen) {
 		for (auto& p : proyectiles) {
 			if (p.second) {

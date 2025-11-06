@@ -1,9 +1,12 @@
 #include "nave.h"
 using namespace physx;
-nave::nave(Vector3 _finalPos, Vector3 pos, physx::PxShape* _shape, physx::PxMaterial* mat, const Vector4& color, Vector3 _v, double _masa, double _tVida, double _damp, int health, int points, double timeToSpawn,Proyectil* p,ExplosionGenerator* _Exp) : Entity(pos, _shape, color, _v, _masa, _tVida, _damp), Enemy(health, points, timeToSpawn,p)
+nave::nave(Vector3 _finalPos, Vector3 pos, physx::PxShape* _shape, physx::PxMaterial* _mat, const Vector4& color, Vector3 _v, double _masa, double _tVida, double _damp, int health, int points, 
+	double timeToSpawn,ExplosionGenerator* _Exp,PxTransform cameraTransform) 
+	: Entity(pos, _shape, color, _v, _masa, _tVida, _damp), Enemy(health, points, timeToSpawn)
 {
+	trans = cameraTransform;
+	mat = _mat;
 	exp = _Exp;
-	pr = p;
 	finalPos = _finalPos;
 	partShipSystem = new ParticleSystem();
 	Vector4 smokeColor = { 0.5,0.5,0.5,0.7 };
@@ -56,9 +59,8 @@ void nave::integrate(double t)
 	}
 	partShipSystem->setPosition(getT()->p + Vector3({ -10.0,-10.0,-10.0 }));
 	partShipSystem->integrate(t);
-	proyectilUpdate(t);
-	pr->getT()->p = getT()->p;
-
+	Proyectil* p = new Proyectil(getT()->p, CreateShape(PxSphereGeometry(1), mat), {1.0f,1.0f,0.0f,1.0f}, trans.p, 10, 60, 60, Vector3(30.0, 15.0, 0.0), 0.999);
+	proyectilUpdate(t, p);
 
 }
 

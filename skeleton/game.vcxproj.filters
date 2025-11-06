@@ -86,6 +86,7 @@
     <ClCompile Include="shootManager.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render\Camera.h">
@@ -184,6 +185,7 @@
     <ClInclude Include="shootManager.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

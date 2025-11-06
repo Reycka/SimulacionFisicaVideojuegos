@@ -14,10 +14,10 @@ protected:
 	state actState = SPAWN;
 	int points = 0;
 public:
-	Enemy(int _health,int _points,double _shootTime,Proyectil* p);
+	Enemy(int _health,int _points,double _shootTime);
 	virtual ~Enemy();
 	virtual void GotHit(int damage) override;
-	virtual void shoot() override;
-	virtual void proyectilUpdate(double t) override;
+	virtual void shoot(Proyectil* p) override;
+	virtual void proyectilUpdate(double t, Proyectil* p) override;
 };
 

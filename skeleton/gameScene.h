@@ -4,9 +4,11 @@ class nave;
 class WhirlwindGenerator;
 class WindGenerator;
 class GravityGenerator;
+class Player;
 class gameScene : public Scene
 {
 private:
+	Player* pla;
 	GravityGenerator* g;
 	WindGenerator* wind;
 	WhirlwindGenerator* whirlWind;
