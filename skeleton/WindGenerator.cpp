@@ -14,7 +14,7 @@ WindGenerator::~WindGenerator()
 {
 }
 
-Vector3 WindGenerator::addForce(Vector3 entPos, Vector3 entVelocity,float t)
+Vector3 WindGenerator::addForce(Vector3 entPos, Vector3 entVelocity,float t,float m)
 {
 	if (isActive && isOnArea(entPos)) {
 		return k1 * (windVelocity - entVelocity) + k2 * 

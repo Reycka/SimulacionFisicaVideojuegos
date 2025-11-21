@@ -87,6 +87,7 @@
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="dockForceGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render\Camera.h">
@@ -186,6 +187,7 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Player.h" />
+    <ClInclude Include="dockForceGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

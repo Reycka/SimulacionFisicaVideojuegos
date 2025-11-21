@@ -7,7 +7,7 @@ private:
 public:
 	GravityGenerator(Vector3 g);
 	virtual ~GravityGenerator();
-	virtual Vector3 addForce(Vector3 entPos, Vector3 entVelocity,float t = 0) override;
+	virtual Vector3 addForce(Vector3 entPos, Vector3 entVel, float t = 0, float m = 0) override;
 	virtual bool isOnArea(Vector3 entPos) override;
 };
 

@@ -9,9 +9,9 @@ GravityGenerator::~GravityGenerator()
 {
 }
 
-Vector3 GravityGenerator::addForce(Vector3 entPos, Vector3 entVelocity,float t)
+Vector3 GravityGenerator::addForce(Vector3 entPos, Vector3 entVelocity,float t,float m)
 {
-    if (isActive) return grav;
+    if (isActive) return m * grav;
     else return Vector3{ 0.0,0.0,0.0 };
 }
 
