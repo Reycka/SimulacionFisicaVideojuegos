@@ -50,7 +50,7 @@
     <ClCompile Include="SceneP2_GEN2.cpp">
       <Filter>General\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="SceneP2_GEN3.cpp">
+    <ClCompile Include="SceneP4.cpp">
       <Filter>General\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="GravityGenerator.cpp">
@@ -87,7 +87,9 @@
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="dockForceGenerator.cpp" />
+    <ClCompile Include="dockForceGenerator.cpp">
+      <Filter>ForceGenerators</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render\Camera.h">
@@ -123,9 +125,6 @@
     <ClInclude Include="GaussianGenerator.h">
       <Filter>Entities\Particles</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleGen.h">
-      <Filter>Entities\Particles</Filter>
-    </ClInclude>
     <ClInclude Include="callbacks.hpp">
       <Filter>General</Filter>
     </ClInclude>
@@ -147,7 +146,7 @@
     <ClInclude Include="SceneP2_GEN2.h">
       <Filter>General\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="SceneP2_GEN3.h">
+    <ClInclude Include="SceneP4.h">
       <Filter>General\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="ForceGenerator.h">
@@ -187,7 +186,12 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Player.h" />
-    <ClInclude Include="dockForceGenerator.h" />
+    <ClInclude Include="dockForceGenerator.h">
+      <Filter>ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleGen.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

@@ -19,7 +19,9 @@ Vector3 dockForceGenerator::addForce(Vector3 entPos, Vector3 entVelocity, float 
         d.x = abs(origen->getT()->p.x - destino->getT()->p.x);
         d.y = abs(origen->getT()->p.y - destino->getT()->p.y);
         d.z = abs(origen->getT()->p.z - destino->getT()->p.z);
-        forceToReturn = -K * (d.magnitude() - l_o) * (d / d.magnitude());
+        float lenght = d.normalize();
+        float deltaX = lenght - l_o;
+        forceToReturn = d * deltaX * K;
         return forceToReturn;
     }
     else return Vector3({ 0.0,0.0,0.0 });

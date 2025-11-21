@@ -15,7 +15,7 @@
 #include "SceneP1.h"
 #include "SceneP2_GEN1.h"
 #include "SceneP2_GEN2.h"
-#include "SceneP2_GEN3.h"
+#include "SceneP4.h"
 #include "SceneP3_Explosion.h"
 #include "gameScene.h"
 
@@ -70,8 +70,8 @@ void initPhysics(bool interactive)
 	scenes.push_back(new SceneP1(gMaterial,gPhysics,gScene,GetCamera()));
 	scenes.push_back(new SceneP2_GEN1(gMaterial, gPhysics, gScene, GetCamera()));
 	scenes.push_back(new SceneP2_GEN2(gMaterial, gPhysics, gScene, GetCamera()));
-	scenes.push_back(new SceneP2_GEN3(gMaterial, gPhysics, gScene, GetCamera()));
 	scenes.push_back(new SceneP3_Explosion(gMaterial, gPhysics, gScene, GetCamera()));
+	scenes.push_back(new SceneP4(gMaterial, gPhysics, gScene, GetCamera()));
 	scenes.push_back(new gameScene(gMaterial, gPhysics, gScene, GetCamera()));
 
 
