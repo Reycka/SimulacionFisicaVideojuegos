@@ -7,7 +7,6 @@
     <ClCompile Include="Render\Render.cpp">
       <Filter>Render</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene.cpp">
       <Filter>General\Scenes</Filter>
     </ClCompile>
@@ -86,8 +85,16 @@
     <ClCompile Include="shootManager.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="dockForceGenerator.cpp">
+      <Filter>ForceGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>General</Filter>
+    </ClCompile>
+    <ClCompile Include="RubberyForceGenerator.cpp">
       <Filter>ForceGenerators</Filter>
     </ClCompile>
   </ItemGroup>
@@ -185,12 +192,17 @@
     <ClInclude Include="shootManager.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h" />
     <ClInclude Include="dockForceGenerator.h">
       <Filter>ForceGenerators</Filter>
     </ClInclude>
     <ClInclude Include="ParticleGen.h">
       <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="RubberyForceGenerator.h">
+      <Filter>ForceGenerators</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

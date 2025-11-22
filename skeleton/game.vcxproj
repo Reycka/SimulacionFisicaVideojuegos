@@ -273,6 +273,7 @@
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="Render\Camera.cpp" />
     <ClCompile Include="Render\Render.cpp" />
+    <ClCompile Include="RubberyForceGenerator.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneP0.cpp" />
     <ClCompile Include="SceneP1.cpp" />
@@ -309,6 +310,7 @@
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />
+    <ClInclude Include="RubberyForceGenerator.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneP0.h" />
     <ClInclude Include="SceneP1.h" />
