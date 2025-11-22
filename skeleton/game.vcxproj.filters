@@ -97,6 +97,7 @@
     <ClCompile Include="RubberyForceGenerator.cpp">
       <Filter>ForceGenerators</Filter>
     </ClCompile>
+    <ClCompile Include="Slinky.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render\Camera.h">
@@ -204,6 +205,7 @@
     <ClInclude Include="RubberyForceGenerator.h">
       <Filter>ForceGenerators</Filter>
     </ClInclude>
+    <ClInclude Include="Slinky.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
