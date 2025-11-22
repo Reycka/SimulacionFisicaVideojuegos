@@ -16,9 +16,9 @@ Vector3 dockForceGenerator::addForce(Vector3 entPos, Vector3 entVelocity, float 
 {
     //EntPos
     if (isActive && isOnArea(entPos)) {
-        d.x = abs(origen->getT()->p.x - destino->getT()->p.x);
-        d.y = abs(origen->getT()->p.y - destino->getT()->p.y);
-        d.z = abs(origen->getT()->p.z - destino->getT()->p.z);
+        d.x = (origen->getT()->p.x - destino->getT()->p.x);
+        d.y = (origen->getT()->p.y - destino->getT()->p.y);
+        d.z = (origen->getT()->p.z - destino->getT()->p.z);
         float lenght = d.normalize();
         float deltaX = lenght - l_o;
         forceToReturn = d * deltaX * K;
@@ -31,4 +31,11 @@ bool dockForceGenerator::isOnArea(Vector3 entPos)
 {
     //Compruebo si la posicion de la partícula está por encima del valor permitido por el muelle el cual defino yo
     return true;
+}
+
+void dockForceGenerator::setNewK(float newK)
+{
+   // float alpha = 0.1f; // factor de suavizado
+   // K = K + alpha * (newK - K);
+    K = newK;
 }

@@ -15,5 +15,6 @@ public:
 	~dockForceGenerator();
 	virtual Vector3 addForce(Vector3 entPos, Vector3 entVelocity, float t = 0, float m = 0) override;
 	virtual bool isOnArea(Vector3 entPos) override;
+	void setNewK(float newK);
 };
 
