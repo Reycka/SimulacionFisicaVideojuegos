@@ -13,7 +13,7 @@ dockForceGenerator::~dockForceGenerator()
 {
 }
 
-Vector3 dockForceGenerator::addForce(Vector3 entPos, Vector3 entVelocity, float t,float m)
+Vector3 dockForceGenerator::addForce(physx::PxShape* shape,Vector3 entPos, Vector3 entVelocity, float t,float m)
 {
     //EntPos
     if (isActive && isOnArea(entPos)) {

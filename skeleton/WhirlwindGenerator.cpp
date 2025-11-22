@@ -8,7 +8,7 @@ WhirlwindGenerator::~WhirlwindGenerator()
 {
 }
 
-Vector3 WhirlwindGenerator::addForce(Vector3 entPos, Vector3 entVel,float t,float m)
+Vector3 WhirlwindGenerator::addForce(physx::PxShape* shape,Vector3 entPos, Vector3 entVel,float t,float m)
 {
 	windForce = Vector3({ 0.0,0.0,0.0 });
 	if (isActive && isOnArea(entPos)) {

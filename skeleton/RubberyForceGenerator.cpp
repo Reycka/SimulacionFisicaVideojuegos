@@ -9,7 +9,7 @@ RubberyForceGenerator::~RubberyForceGenerator()
 {
 }
 
-Vector3 RubberyForceGenerator::addForce(Vector3 entPos, Vector3 entVelocity, float t, float m)
+Vector3 RubberyForceGenerator::addForce(physx::PxShape* shape,Vector3 entPos, Vector3 entVelocity, float t, float m)
 {
     //EntPos
     if (isActive && isOnArea(entPos)) {

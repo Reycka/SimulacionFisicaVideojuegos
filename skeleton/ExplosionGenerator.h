@@ -16,7 +16,7 @@ private:
 public:
 	ExplosionGenerator(Vector3 _pos, float _R,float _cteR, float _K,Vector3 _velExp,float MAXEXPTIME = 2.0);
 	~ExplosionGenerator();
-	Vector3 addForce(Vector3 entPos,Vector3 entVel,float t = 0,float m = 0) override;
+	Vector3 addForce(physx::PxShape* shape,Vector3 entPos,Vector3 entVel,float t = 0,float m = 0) override;
 	bool isOnArea(Vector3 entPos) override;
 };
 

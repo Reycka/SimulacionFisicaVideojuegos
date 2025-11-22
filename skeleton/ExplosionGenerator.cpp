@@ -17,7 +17,7 @@ ExplosionGenerator::~ExplosionGenerator()
 {
 }
 
-Vector3 ExplosionGenerator::addForce(Vector3 entPos, Vector3 entVel, float t,float m)
+Vector3 ExplosionGenerator::addForce(physx::PxShape* shape,Vector3 entPos, Vector3 entVel, float t,float m)
 {
     explosionForce = Vector3({ 0.0,0.0,0.0 });
     if (lastTimeRegister != t) {
