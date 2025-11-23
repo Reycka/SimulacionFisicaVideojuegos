@@ -282,6 +282,7 @@
     <ClCompile Include="SceneP2_GEN2.cpp" />
     <ClCompile Include="SceneP4.cpp" />
     <ClCompile Include="SceneP3_Explosion.cpp" />
+    <ClCompile Include="SceneP4Floating.cpp" />
     <ClCompile Include="shootManager.cpp" />
     <ClCompile Include="Slinky.cpp" />
     <ClCompile Include="UniformGenerator.cpp" />
@@ -321,6 +322,7 @@
     <ClInclude Include="SceneP2_GEN2.h" />
     <ClInclude Include="SceneP4.h" />
     <ClInclude Include="SceneP3_Explosion.h" />
+    <ClInclude Include="SceneP4Floating.h" />
     <ClInclude Include="shootManager.h" />
     <ClInclude Include="Slinky.h" />
     <ClInclude Include="UniformGenerator.h" />

@@ -49,6 +49,8 @@ public:
 	double getMasaReal() const;
 	double getTvida() const;
 	double getDamp() const;
+	void setMasa(double newMasa);
+	void setVolume(double newVol);
 	virtual void integrate(double t) {};
 
 };

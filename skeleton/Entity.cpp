@@ -156,3 +156,13 @@ double Entity::getDamp() const
 	return damp;
 }
 
+void Entity::setMasa(double newMasa)
+{
+	masaSim = newMasa;
+}
+
+void Entity::setVolume(double newVol)
+{
+	volSim = newVol;
+}
+

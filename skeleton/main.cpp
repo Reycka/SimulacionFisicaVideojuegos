@@ -15,8 +15,9 @@
 #include "SceneP1.h"
 #include "SceneP2_GEN1.h"
 #include "SceneP2_GEN2.h"
-#include "SceneP4.h"
 #include "SceneP3_Explosion.h"
+#include "SceneP4.h"
+#include "SceneP4Floating.h"
 #include "gameScene.h"
 
 Scene* actScene;
@@ -72,6 +73,7 @@ void initPhysics(bool interactive)
 	scenes.push_back(new SceneP2_GEN2(gMaterial, gPhysics, gScene, GetCamera()));
 	scenes.push_back(new SceneP3_Explosion(gMaterial, gPhysics, gScene, GetCamera()));
 	scenes.push_back(new SceneP4(gMaterial, gPhysics, gScene, GetCamera()));
+	scenes.push_back(new SceneP4Floating(gMaterial, gPhysics, gScene, GetCamera()));
 	scenes.push_back(new gameScene(gMaterial, gPhysics, gScene, GetCamera()));
 
 
@@ -82,6 +84,7 @@ void initPhysics(bool interactive)
 	scenes[4]->DeRegScene();
 	scenes[5]->DeRegScene();
 	scenes[6]->DeRegScene();
+	scenes[7]->DeRegScene();
 
 	actScene = scenes[0];
 	actScene->RegScene();
@@ -179,6 +182,11 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case '6':
 	{
 		ChangeScene(scenes[6]);
+		break;
+	}
+	case '7':
+	{
+		ChangeScene(scenes[7]);
 		break;
 	}
 	default:

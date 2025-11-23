@@ -103,6 +103,9 @@
     <ClCompile Include="Slinky.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="SceneP4Floating.cpp">
+      <Filter>General\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render\Camera.h">
@@ -215,6 +218,9 @@
     </ClInclude>
     <ClInclude Include="Slinky.h">
       <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneP4Floating.h">
+      <Filter>General\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
