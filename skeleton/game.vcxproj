@@ -261,6 +261,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="ExplosionGenerator.cpp" />
+    <ClCompile Include="FloatingForceGenerator.cpp" />
     <ClCompile Include="gameScene.cpp" />
     <ClCompile Include="GaussianGenerator.cpp" />
     <ClCompile Include="GravityGenerator.cpp" />
@@ -298,6 +299,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="ExplosionGenerator.h" />
+    <ClInclude Include="FloatingForceGenerator.h" />
     <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="gameScene.h" />
     <ClInclude Include="GaussianGenerator.h" />

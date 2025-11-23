@@ -16,6 +16,8 @@ protected:
 	Vector3 vSim;
 	Vector3 vReal;
 	Vector3 force;
+	double volSim;
+	double volReal;
 	double masaSim;
 	double masaReal;
 	double tVida;
@@ -26,7 +28,7 @@ protected:
 public:
 	Entity();
 	Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color);
-	Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector3 _v, double _masa, double _tVida, double _damp = 0.999, double _masaReal = 1, Vector3 _vReal = { 0.0,1.0,0.0 });
+	Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector3 _v, double _masa,double vol,double _tVida, double _damp = 0.999, double _masaReal = 1, Vector3 _vReal = { 0.0,1.0,0.0 }, double _volReal = 1);
 	virtual void RegItem();
 	virtual void DeRegItem();
 	virtual ~Entity();
@@ -41,6 +43,7 @@ public:
 	Vector3 getVReal()const;
 	Vector3 getForce()const;
 	double getMasa() const;
+	double getVol() const;
 	double getMasaReal() const;
 	double getTvida() const;
 	double getDamp() const;

@@ -31,17 +31,19 @@ Entity::Entity(Vector3 pos, PxShape* _shape, const Vector4& color)
 	lastPos = Vector3({ 0.0,0.0,0.0 });
 }
 
-Entity::Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector3 _v, double _masa, double _tVida,double _damp, double _masaReal, Vector3 _vRea)
+Entity::Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector3 _v, double _masa,double _volSim ,double _tVida,double _damp, double _masaReal, Vector3 _vRea, double _volReal)
 {
 	shape = _shape;
 	transform = new PxTransform(pos);
 	renderItem = new RenderItem(shape, transform, color);
 	vSim = _v;
 	masaSim = _masa;
+	volSim = _volSim;
 	tVida = _tVida;
 	damp = _damp;
 	masaReal = _masaReal;
 	vReal = _vRea;
+	volReal = _volReal;
 	firstComprobation = true;
 	lastPos = Vector3({ 0.0,0.0,0.0 });
 }
@@ -131,6 +133,11 @@ Vector3 Entity::getForce() const
 double Entity::getMasa() const
 {
 	return masaSim;
+}
+
+double Entity::getVol() const
+{
+	return volSim;
 }
 
 double Entity::getMasaReal() const
