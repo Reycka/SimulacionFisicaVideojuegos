@@ -17,7 +17,7 @@ ExplosionGenerator::~ExplosionGenerator()
 {
 }
 
-Vector3 ExplosionGenerator::addForce(physx::PxShape* shape,Vector3 entPos, Vector3 entVel, float t,float m)
+Vector3 ExplosionGenerator::addForce(Entity* ent, float t)
 {
     explosionForce = Vector3({ 0.0,0.0,0.0 });
     if (lastTimeRegister != t) {
@@ -31,6 +31,7 @@ Vector3 ExplosionGenerator::addForce(physx::PxShape* shape,Vector3 entPos, Vecto
     }
     if (isActive) {
      
+        Vector3 entPos = ent->getT()->p;
         r = pow((entPos.x - pos.x), 2) + pow((entPos.y - pos.y), 2) + pow((entPos.z - pos.z), 2);
         float dotr = r;
         r = std::sqrt(r);

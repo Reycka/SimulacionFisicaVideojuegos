@@ -15,7 +15,7 @@ protected:
 public:
 	dockForceGenerator(Entity* origen, Entity* destino,float _K, float _l_o,Vector3 _limitDockPosition = Vector3({ FLT_MAX,FLT_MAX,FLT_MAX }));
 	~dockForceGenerator();
-	virtual Vector3 addForce(physx::PxShape* shape,Vector3 entPos, Vector3 entVelocity, float t = 0, float m = 0) override;
+	virtual Vector3 addForce(Entity* ent, float t) override;
 	virtual bool isOnArea(Vector3 entPos) override;
 	void setNewK(float newK);
 };

@@ -6,7 +6,7 @@ class Particle : public Entity
 
 public:
 	Particle();
-	Particle(Vector3 pos,physx::PxShape* shape, const Vector4& color,Vector3 _v, double _tVida, double _damp = 0.999,double masaSim = 3);
+	Particle(Vector3 pos,physx::PxShape* shape, const Vector4& color,Vector3 _v, double _tVida, double _damp = 0.999,double masaSim = 3,double volSim = 0.001);
 	void integrate(double t) override;
 };
 

@@ -14,7 +14,7 @@ Proyectil::Proyectil()
 {
 }
 
-Proyectil::Proyectil(Vector3 pos, physx::PxShape* shape, const Vector4& color, Vector3 _v, double _masa, double _tVida, double _masaReal, Vector3 _vReal ,double _damp) : Entity(pos,shape,color,_v,_masa,_tVida,_damp,_masaReal,_vReal)
+Proyectil::Proyectil(Vector3 pos, physx::PxShape* shape, const Vector4& color, Vector3 _v, double _masa,double _vol, double _tVida, double _masaReal, Vector3 _vReal ,double _damp) : Entity(pos,shape,color,_v,_masa,_vol,_tVida,_damp,_masaReal,_vReal)
 {
 	if(!masaAjustada)AjustaMasa();
 }

@@ -9,9 +9,9 @@ GravityGenerator::~GravityGenerator()
 {
 }
 
-Vector3 GravityGenerator::addForce(physx::PxShape* shape,Vector3 entPos, Vector3 entVelocity,float t,float m)
+Vector3 GravityGenerator::addForce(Entity* ent, float t)
 {
-    if (isActive) return m * grav;
+    if (isActive) return ent->getMasa() * grav;
     else return Vector3{ 0.0,0.0,0.0 };
 }
 

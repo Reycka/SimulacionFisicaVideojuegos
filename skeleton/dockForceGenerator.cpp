@@ -13,10 +13,10 @@ dockForceGenerator::~dockForceGenerator()
 {
 }
 
-Vector3 dockForceGenerator::addForce(physx::PxShape* shape,Vector3 entPos, Vector3 entVelocity, float t,float m)
+Vector3 dockForceGenerator::addForce(Entity* ent, float t)
 {
     //EntPos
-    if (isActive && isOnArea(entPos)) {
+    if (isActive && isOnArea(ent->getT()->p)) {
         d.x = (origen->getT()->p.x - destino->getT()->p.x);
         d.y = (origen->getT()->p.y - destino->getT()->p.y);
         d.z = (origen->getT()->p.z - destino->getT()->p.z);

@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "ForceGenerator.h"
 using namespace physx;
 
 Entity::Entity()
@@ -90,7 +91,7 @@ void Entity::addForces(double t)
 {
 	for (auto g : ForceGen) {
 		 Vector3 forceReturned;
-		 forceReturned = g->addForce(getShape(), transform->p, vSim, t, masaSim);
+		 forceReturned = g->addForce(this,t);
 		 force.x += forceReturned.x;
 		 force.y += forceReturned.y;
 		 force.z += forceReturned.z;

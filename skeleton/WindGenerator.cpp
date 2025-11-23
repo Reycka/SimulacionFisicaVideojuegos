@@ -14,8 +14,10 @@ WindGenerator::~WindGenerator()
 {
 }
 
-Vector3 WindGenerator::addForce(physx::PxShape* shape,Vector3 entPos, Vector3 entVelocity,float t,float m)
+Vector3 WindGenerator::addForce(Entity* ent, float t)
 {
+	Vector3 entPos = ent->getT()->p;
+	Vector3 entVelocity = ent->getV();
 	if (isActive && isOnArea(entPos)) {
 		return k1 * (windVelocity - entVelocity) + k2 * 
 			(windVelocity.magnitude() - entVelocity.magnitude()) * (windVelocity - entVelocity);

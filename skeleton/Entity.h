@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
-#include "ForceGenerator.h"
+#include <list>
+#include "RenderUtils.hpp"
+class ForceGenerator;
 class Entity
 {
 private:

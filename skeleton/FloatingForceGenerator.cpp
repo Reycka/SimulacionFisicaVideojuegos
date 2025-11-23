@@ -17,11 +17,13 @@ FloatingForceGenerator::~FloatingForceGenerator()
 {
 }
 
-Vector3 FloatingForceGenerator::addForce(physx::PxShape* shape, Vector3 entPos, Vector3 entVelocity, float t, float masa)
+Vector3 FloatingForceGenerator::addForce(Entity* ent, float t)
 {
+	Vector3 entPos = ent->getT()->p;
 	if (isActive && isOnArea(entPos)) {
-
+		return forceToReturn;
 	}
+	else return Vector3({ 0.0,0.0,0.0 });
 }
 
 bool FloatingForceGenerator::isOnArea(Vector3 entPos)

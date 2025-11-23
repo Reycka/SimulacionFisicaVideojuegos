@@ -13,6 +13,6 @@ private:
 public:
 	FloatingForceGenerator(float _height,float _dens, Vector3 _g,Vector3 _pos);
 	~FloatingForceGenerator();
-	virtual Vector3 addForce(physx::PxShape* shape, Vector3 entPos, Vector3 entVelocity, float t = 0, float masa = 0) override;
+	virtual Vector3 addForce(Entity* ent, float t) override;
 	virtual bool isOnArea(Vector3 entPos) override;
 };

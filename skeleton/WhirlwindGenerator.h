@@ -7,6 +7,6 @@ private:
 public:
 	WhirlwindGenerator(Vector3 _pos, float rad, float k);
 	~WhirlwindGenerator();
-	virtual Vector3 addForce(physx::PxShape* shape,Vector3 entPos,Vector3 entVel,float t = 0,float m = 0) override;
+	virtual Vector3 addForce(Entity* ent, float t) override;
 };
 
