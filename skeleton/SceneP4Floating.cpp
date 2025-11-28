@@ -12,11 +12,11 @@ SceneP4Floating::SceneP4Floating(physx::PxMaterial* _gMaterial, physx::PxPhysics
 	PxShape* water = CreateShape(PxBoxGeometry(20.0f, height, 20.0f), getMaterial());
 	Vector4 waterColor = { 0.4f,0.4f,1.0f,0.0f };
 
-	FloatingForceGenerator* fl = new FloatingForceGenerator(height,1000.0f,Vector3(0.0,9.8,0.0), Vector3({0.0,0.0,0.0}));
+	FloatingForceGenerator* fl = new FloatingForceGenerator(height * 2,1000.0f,Vector3(0.0,9.8,0.0), Vector3({0.0,30.0,0.0}));
 	GravityGenerator* gr = new GravityGenerator(Vector3(0.0, -9.8, 0.0));
-	box = new Particle(Vector3(0, 30.0, 0), SmallBoxShape, SmallBoxColor, Vector3(0.0, -15.0, 0.0),10, 0.500, 10, 0.01);
+	box = new Particle(Vector3(0, 60.0, 0), SmallBoxShape, SmallBoxColor, Vector3(0.0, -15.0, 0.0),10, 0.500, 1, 0.02);
 	AddEntity(box);
-	AddEntity(new Entity(Vector3(0, 0, 0), water, waterColor, Vector3(0.0, 0.0, 0.0), 100.0, 100, 100));
+	AddEntity(new Entity(Vector3(0, 30, 0), water, waterColor, Vector3(0.0, 0.0, 0.0), 100.0, 100, 100));
 	AddForceGenerator(fl);
 	AddForceGenerator(gr);
 	box->addForceGenerator(fl);

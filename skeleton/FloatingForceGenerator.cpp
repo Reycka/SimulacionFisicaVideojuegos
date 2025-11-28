@@ -2,13 +2,13 @@
 
 void FloatingForceGenerator::sacaVolSumergido(Vector3 entPos)
 {
-	float h = entPos.y + height * 2;
-	float h0 = pos.y + height * 2;
+	float h = entPos.y;
+	float h0 = pos.y;
 	if (h0 - h > height * 0.5) {
 		volSumergido = 1.0; //Todo el cuerpo esta sumergido
 	}
 	else {
-		volSumergido = (h0 - h) / height + 0.5; //Se encuentra medio dentro medio fuera
+		volSumergido = (h - h0) / (height + 0.5); //Se encuentra medio dentro medio fuera
 	}
 
 }
@@ -38,7 +38,9 @@ Vector3 FloatingForceGenerator::addForce(Entity* ent, float t)
 
 bool FloatingForceGenerator::isOnArea(Vector3 entPos)
 {
-	if (entPos.y - pos.y > height * 0.5) {
+	float h = entPos.y;
+	float h0 = pos.y;
+	if (h - h0 > height *0.5) {
 		return false;
 	}
 	return true;
