@@ -39,7 +39,7 @@ public:
 	virtual void reActiveForceGenerator(ForceGenerator* gen);
 	void addForces(double t);
 	RenderItem* getRenderItem() const;
-	physx::PxTransform* getT() const;
+	physx::PxTransform* getT() ;
 	physx::PxShape* getShape() const;
 	Vector3 getV()const;
 	Vector3 getVReal()const;
@@ -49,6 +49,8 @@ public:
 	double getMasaReal() const;
 	double getTvida() const;
 	double getDamp() const;
+	void setShape(physx::PxShape* sh);
+	void setRenderItem(physx::PxRigidActor* act);
 	void setMasa(double newMasa);
 	void setVolume(double newVol);
 	virtual void integrate(double t) {};

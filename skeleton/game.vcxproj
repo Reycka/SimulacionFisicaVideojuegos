@@ -258,6 +258,7 @@
     <ClCompile Include="Characther.cpp" />
     <ClCompile Include="CompoundEntity.cpp" />
     <ClCompile Include="dockForceGenerator.cpp" />
+    <ClCompile Include="DynamicSolidRigid.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="ExplosionGenerator.cpp" />
@@ -285,6 +286,7 @@
     <ClCompile Include="SceneP4Floating.cpp" />
     <ClCompile Include="shootManager.cpp" />
     <ClCompile Include="Slinky.cpp" />
+    <ClCompile Include="StaticSolidRigid.cpp" />
     <ClCompile Include="UniformGenerator.cpp" />
     <ClCompile Include="Vector3D.cpp" />
     <ClCompile Include="WhirlwindGenerator.cpp" />
@@ -297,6 +299,7 @@
     <ClInclude Include="CompoundEntity.h" />
     <ClInclude Include="core.hpp" />
     <ClInclude Include="dockForceGenerator.h" />
+    <ClInclude Include="DynamicSolidRigid.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="ExplosionGenerator.h" />
@@ -325,6 +328,7 @@
     <ClInclude Include="SceneP4Floating.h" />
     <ClInclude Include="shootManager.h" />
     <ClInclude Include="Slinky.h" />
+    <ClInclude Include="StaticSolidRigid.h" />
     <ClInclude Include="UniformGenerator.h" />
     <ClInclude Include="Vector3D.h" />
     <ClInclude Include="WhirlwindGenerator.h" />

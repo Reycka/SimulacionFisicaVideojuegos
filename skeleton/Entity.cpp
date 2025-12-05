@@ -106,7 +106,7 @@ RenderItem* Entity::getRenderItem() const
 
 
 //GETTERS
-PxTransform* Entity::getT() const
+PxTransform* Entity::getT() 
 {
 	return transform;
 }
@@ -154,6 +154,17 @@ double Entity::getTvida() const
 double Entity::getDamp() const
 {
 	return damp;
+}
+
+void Entity::setShape(physx::PxShape* sh)
+{
+	shape = sh;
+}
+
+void Entity::setRenderItem(physx::PxRigidActor* act)
+{
+	renderItem->release();
+	renderItem = new RenderItem(shape, act, renderItem->color);
 }
 
 void Entity::setMasa(double newMasa)

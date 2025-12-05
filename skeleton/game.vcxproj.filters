@@ -106,6 +106,8 @@
     <ClCompile Include="SceneP4Floating.cpp">
       <Filter>General\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="StaticSolidRigid.cpp" />
+    <ClCompile Include="DynamicSolidRigid.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render\Camera.h">
@@ -222,6 +224,8 @@
     <ClInclude Include="SceneP4Floating.h">
       <Filter>General\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="StaticSolidRigid.h" />
+    <ClInclude Include="DynamicSolidRigid.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
@@ -244,6 +248,9 @@
     </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{ab6c6fb1-cd0a-4db3-abc1-c9ce329ed69e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\SolidosRigidos">
+      <UniqueIdentifier>{709cafe6-3fec-4a3b-9d63-155411bd5aa1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
