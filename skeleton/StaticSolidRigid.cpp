@@ -6,9 +6,8 @@ StaticSolidRigid::StaticSolidRigid(PxReal coefStatic, PxReal dynamStatic, PxReal
 	material = gPhysx->createMaterial(coefStatic, dynamStatic, restitution);
 	PxShape* sh = gPhysx->createShape(geom, *material);
 	setShape(sh);
-	obj = gPhysx->createRigidDynamic(*getT());
+	obj = gPhysx->createRigidStatic(*getT());
 	obj->attachShape(*getShape());
-	PxRigidBodyExt::updateMassAndInertia(*obj, (PxReal)getMasa());
 	setRenderItem(obj);
 }
 
@@ -22,4 +21,9 @@ void StaticSolidRigid::RegItem()
 
 void StaticSolidRigid::DeRegItem()
 {
+}
+
+physx::PxRigidStatic* StaticSolidRigid::getObj() const
+{
+	return obj;
 }

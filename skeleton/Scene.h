@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
-#include "Entity.h"
 #include "ForceGenerator.h"
+#include "RigidBodyManager.h"
 class Scene {
 private:
 	std::vector<Entity*> entities;
@@ -10,6 +10,7 @@ private:
 	physx::PxScene* gScene;
 	physx::PxMaterial* gMaterial;
 	Camera* cam;
+	RigidBodyManager* rgMng;
 protected:
 
 public:

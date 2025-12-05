@@ -9,7 +9,7 @@ DynamicSolidRigid::DynamicSolidRigid(PxReal coefStatic,PxReal dynamStatic, PxRea
 	setShape(sh);
 	obj = gPhysx->createRigidDynamic(*getT());
 	obj->attachShape(*getShape());
-	PxRigidBodyExt::updateMassAndInertia(*obj, (PxReal)getMasa());
+	PxRigidBodyExt::updateMassAndInertia(*obj, getMasa());
 	setRenderItem(obj);
 
 }
@@ -32,4 +32,9 @@ void DynamicSolidRigid::RegItem()
 void DynamicSolidRigid::DeRegItem()
 {
 	
+}
+
+physx::PxRigidDynamic* DynamicSolidRigid::getObj()
+{
+	return obj;
 }

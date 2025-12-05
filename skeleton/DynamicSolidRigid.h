@@ -11,5 +11,6 @@ public:
 	void integrate(double t) override;
 	void RegItem() override;
 	void DeRegItem() override;
+	physx::PxRigidDynamic* getObj();
 };
 

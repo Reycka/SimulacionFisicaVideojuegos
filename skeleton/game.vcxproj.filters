@@ -106,8 +106,13 @@
     <ClCompile Include="SceneP4Floating.cpp">
       <Filter>General\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="StaticSolidRigid.cpp" />
-    <ClCompile Include="DynamicSolidRigid.cpp" />
+    <ClCompile Include="DynamicSolidRigid.cpp">
+      <Filter>Entities\SolidosRigidos</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticSolidRigid.cpp">
+      <Filter>Entities\SolidosRigidos</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBodyManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render\Camera.h">
@@ -224,8 +229,13 @@
     <ClInclude Include="SceneP4Floating.h">
       <Filter>General\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="StaticSolidRigid.h" />
-    <ClInclude Include="DynamicSolidRigid.h" />
+    <ClInclude Include="DynamicSolidRigid.h">
+      <Filter>Entities\SolidosRigidos</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticSolidRigid.h">
+      <Filter>Entities\SolidosRigidos</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBodyManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
