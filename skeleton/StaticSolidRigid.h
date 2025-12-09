@@ -10,6 +10,7 @@ public:
 	~StaticSolidRigid();
 	void RegItem() override;
 	void DeRegItem() override;
+	void volumeSetter(const physx::PxGeometry& geom);
 	physx::PxRigidStatic* getObj() const;
 };
 

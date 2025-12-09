@@ -2,14 +2,14 @@
 #include "DynamicSolidRigid.h"
 #include "StaticSolidRigid.h"
 #include <list>
-class RigidBodyManager
+class RigidBodySystem : public Entity
 {
 private:
 	std::list<DynamicSolidRigid*> dynamicList;
 	std::list<StaticSolidRigid*> staticList;
 public:
-	RigidBodyManager();
-	~RigidBodyManager();
+	RigidBodySystem();
+	~RigidBodySystem();
 	void AddSolidRigid(DynamicSolidRigid* solidRigid);
 	void AddSolidRigid(StaticSolidRigid* solidRigid);
 	void regSolidRigids();

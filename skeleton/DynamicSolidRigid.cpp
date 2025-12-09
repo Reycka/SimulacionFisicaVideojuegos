@@ -7,6 +7,7 @@ DynamicSolidRigid::DynamicSolidRigid(PxReal coefStatic,PxReal dynamStatic, PxRea
 	material = gPhysx->createMaterial(coefStatic,dynamStatic,restitution);
 	PxShape* sh = gPhysx->createShape(geom,*material);
 	setShape(sh);
+	volumeSetter(geom);
 	obj = gPhysx->createRigidDynamic(*getT());
 	obj->attachShape(*getShape());
 	PxRigidBodyExt::updateMassAndInertia(*obj, getMasa());
@@ -26,12 +27,31 @@ void DynamicSolidRigid::integrate(double t)
 
 void DynamicSolidRigid::RegItem()
 {
-	
+	getObj()->getScene()->addActor(*getObj());
 }
 
 void DynamicSolidRigid::DeRegItem()
 {
-	
+	getObj()->getScene()->removeActor(*getObj());
+}
+
+void DynamicSolidRigid::volumeSetter(const physx::PxGeometry& geom)
+{
+	const PxSphereGeometry& sphere = static_cast<const PxSphereGeometry&>(geom);
+	const PxBoxGeometry& box = static_cast<const PxBoxGeometry&>(geom);
+
+	switch (geom.getType()) {
+	case (PxGeometryType::eSPHERE):
+		volSim = (4.0f / 3.0f) * PxPi * pow(sphere.radius, 3);
+		break;
+
+	case (PxGeometryType::eBOX):
+		volSim = 8.0f * box.halfExtents.x * box.halfExtents.y * box.halfExtents.z;
+		break;
+	default:
+		volSim = 0;
+		break;
+	}
 }
 
 physx::PxRigidDynamic* DynamicSolidRigid::getObj()

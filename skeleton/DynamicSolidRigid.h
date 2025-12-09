@@ -11,6 +11,7 @@ public:
 	void integrate(double t) override;
 	void RegItem() override;
 	void DeRegItem() override;
+	void volumeSetter(const physx::PxGeometry& geom);
 	physx::PxRigidDynamic* getObj();
 };
 

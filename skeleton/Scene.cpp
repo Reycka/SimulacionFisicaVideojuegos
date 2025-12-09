@@ -6,7 +6,6 @@ Scene::Scene(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, physx::PxSce
 	phy = _phy;
 	gScene = _gScene;
 	cam = _cam;
-	rgMng = new RigidBodyManager();
 	CreateAxes();
 }
 
@@ -18,7 +17,6 @@ Scene::~Scene()
 	for (auto fGen : generators) {
 		delete fGen;
 	}
-	delete rgMng;
 }
 
 void Scene::AddEntity(Entity* ent)

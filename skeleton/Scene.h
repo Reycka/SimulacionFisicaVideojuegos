@@ -10,7 +10,6 @@ private:
 	physx::PxScene* gScene;
 	physx::PxMaterial* gMaterial;
 	Camera* cam;
-	RigidBodyManager* rgMng;
 protected:
 
 public:
