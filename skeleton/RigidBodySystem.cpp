@@ -1,47 +1,63 @@
 #include "RigidBodySystem.h"
-RigidBodySystem::RigidBodySystem() : Entity()
+RigidBodySystem::RigidBodySystem(physx::PxScene* _context) : Entity()
 {
+	context = _context;
 	Entity::DeRegItem();
 }
 
 RigidBodySystem::~RigidBodySystem()
 {
-	for (auto dyn : dynamicList) {
-		delete dyn;
+	Entity::RegItem(); //Activo la representacion para posteirormente eliminarla bien
+	for (auto gen : generators) {
+		delete gen;
 	}
-	for (auto st : staticList) {
-		delete st;
+	generators.clear();
+}
+
+void RigidBodySystem::addGenerator(SolidRigidGenerator* gen)
+{
+	generators.push_back(gen);
+}
+
+void RigidBodySystem::setActiveParticleGenerator(SolidRigidGenerator* gen, bool active)
+{
+	for (auto g : generators) {
+		if (g == gen) {
+			g->setIsActive(active);
+			break;
+		}
 	}
 }
 
-void RigidBodySystem::AddSolidRigid(DynamicSolidRigid* solidRigid)
+void RigidBodySystem::addForceGenerator(ForceGenerator* gen)
 {
-	solidRigid->getObj()->getScene()->addActor(*solidRigid->getObj());
-	dynamicList.push_back(solidRigid);
-}
-
-void RigidBodySystem::AddSolidRigid(StaticSolidRigid* solidRigid)
-{
-	solidRigid->getObj()->getScene()->addActor(*solidRigid->getObj());
-	staticList.push_back(solidRigid);
-}
-
-void RigidBodySystem::regSolidRigids()
-{
-	for (auto dyn : dynamicList) {
-		dyn->RegItem();
-	}
-	for (auto st : staticList) {
-		st->RegItem();
+	for (auto g : generators) {
+		g->addForceGen(gen);
 	}
 }
 
-void RigidBodySystem::DeRegSolidRigids()
+void RigidBodySystem::integrate(double t)
 {
-	for (auto dyn : dynamicList) {
-		dyn->DeRegItem();
-	}
-	for (auto st : staticList) {
-		st->DeRegItem();
+	for (auto& gen : generators) {
+		if (gen->getIsActive()) {
+			gen->removeSolidRigid(); //Elimina las particulas viejas
+			gen->integrate(t);
+			gen->addSolidRigid(context); //Añade las partículas nuevas
+		}
 	}
 }
+
+void RigidBodySystem::RegItem()
+{
+	for (auto& gen : generators) {
+		gen->RegSolidRigid();
+	}
+}
+
+void RigidBodySystem::DeRegItem()
+{
+	for (auto& gen : generators) {
+		gen->DeRegSolidRigid();
+	}
+}
+

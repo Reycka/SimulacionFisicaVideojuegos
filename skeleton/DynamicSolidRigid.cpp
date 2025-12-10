@@ -1,19 +1,19 @@
 #include "DynamicSolidRigid.h"
+#include "RenderUtils.hpp"
 using namespace physx;
-DynamicSolidRigid::DynamicSolidRigid(PxReal coefStatic,PxReal dynamStatic, PxReal restitution,PxPhysics* gPhysx, PxGeometry geom,Vector3 pos, const Vector4& color, Vector3 _v,
+DynamicSolidRigid::DynamicSolidRigid(PxReal coefStatic,PxReal dynamStatic, PxReal restitution,PxPhysics* gPhysx,const PxGeometry& geom,Vector3 pos, const Vector4& color, Vector3 _v,
 	double _masa, double vol, double _tVida, double _damp) : Entity(pos,_v,_masa,vol,_tVida,_damp)
 {
 	phy = gPhysx;
 	geometry = geom;
 	material = gPhysx->createMaterial(coefStatic,dynamStatic,restitution);
-	PxShape* sh = gPhysx->createShape(geom,*material);
+	PxShape* sh = CreateShape(geom,material);
 	setShape(sh,color);
-	volumeSetter(geom);
+	volumeSetter(geometry);
 	obj = gPhysx->createRigidDynamic(*getT());
 	obj->attachShape(*getShape());
-	PxRigidBodyExt::updateMassAndInertia(*obj, getMasa());
+	//PxRigidBodyExt::updateMassAndInertia(*obj, getMasa());
 	setRenderItem(obj);
-	RegItem();
 }
 
 DynamicSolidRigid::~DynamicSolidRigid()
@@ -22,18 +22,22 @@ DynamicSolidRigid::~DynamicSolidRigid()
 
 void DynamicSolidRigid::integrate(double t)
 {
-	force = Vector3(0.0, 0.0, 0.0);
+	tVida -= t;
+	//ClearOldForces
+	force = Vector3({ 0.0,0.0,0.0 });
+	//AddNewForces
 	addForces(t);
+	obj->addForce(force);
 }
 
 void DynamicSolidRigid::RegItem()
 {
-	getObj()->getScene()->addActor(*getObj());
+	Entity::RegItem();
 }
 
 void DynamicSolidRigid::DeRegItem()
 {
-	getObj()->getScene()->removeActor(*getObj());
+	Entity::DeRegItem();
 }
 
 void DynamicSolidRigid::volumeSetter(const physx::PxGeometry& geom)
