@@ -11,7 +11,6 @@ public:
 	void RegItem() override;
 	void DeRegItem() override;
 	void volumeSetter(const physx::PxGeometry& geom);
-	void setObj(physx::PxRigidStatic* st);
 	physx::PxRigidStatic* getObj() const;
 };
 

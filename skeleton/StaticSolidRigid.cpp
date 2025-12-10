@@ -5,7 +5,7 @@ StaticSolidRigid::StaticSolidRigid(PxReal coefStatic, PxReal dynamStatic, PxReal
 	double _masa, double vol, double _tVida, double _damp) : Entity(pos,_v, _masa, vol, _tVida, _damp)
 {
 	material = gPhysx->createMaterial(coefStatic, dynamStatic, restitution);
-	PxShape* sh = CreateShape(PxBoxGeometry(1,1,1), material);
+	PxShape* sh = CreateShape(geom, material);
 	setShape(sh,color);
 	volumeSetter(geom);
 	obj = gPhysx->createRigidStatic(*getT());
@@ -19,12 +19,12 @@ StaticSolidRigid::~StaticSolidRigid()
 
 void StaticSolidRigid::RegItem()
 {
-	getObj()->getScene()->addActor(*getObj());
+	Entity::RegItem();
 }
 
 void StaticSolidRigid::DeRegItem()
 {
-	getObj()->getScene()->removeActor(*getObj());
+	Entity::DeRegItem();
 }
 
 void StaticSolidRigid::volumeSetter(const physx::PxGeometry& geom)
@@ -44,10 +44,6 @@ void StaticSolidRigid::volumeSetter(const physx::PxGeometry& geom)
 		volSim = 0;
 		break;
 	}
-}
-void StaticSolidRigid::setObj(PxRigidStatic* st)
-{
-	obj = st;
 }
 physx::PxRigidStatic* StaticSolidRigid::getObj() const
 {

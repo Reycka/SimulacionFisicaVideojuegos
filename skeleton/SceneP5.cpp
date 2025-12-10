@@ -8,9 +8,9 @@ SceneP5::SceneP5(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, physx::P
     StaticSolidRigid* floor = new StaticSolidRigid(
         coef, coef, coef,
         _phy,
-        PxBoxGeometry(),
+        PxBoxGeometry(100.0,0.01,100.0),
         Vector3(0.0, -10.0, 0.0),
-        Vector4(1.0, 1.0, 1.0,1.0),
+        Vector4(0.5, 0.5, 0.5,1.0),
         Vector3(0.0, 0.0, 0.0),
         30.0, 2.0, 10.0
     );
