@@ -1,19 +1,19 @@
 #include "DynamicSolidRigid.h"
 using namespace physx;
 DynamicSolidRigid::DynamicSolidRigid(PxReal coefStatic,PxReal dynamStatic, PxReal restitution,PxPhysics* gPhysx, PxGeometry geom,Vector3 pos, const Vector4& color, Vector3 _v,
-	double _masa, double vol, double _tVida, double _damp) : Entity(pos,nullptr,color,_v,_masa,vol,_tVida,_damp)
+	double _masa, double vol, double _tVida, double _damp) : Entity(pos,_v,_masa,vol,_tVida,_damp)
 {
 	phy = gPhysx;
 	geometry = geom;
 	material = gPhysx->createMaterial(coefStatic,dynamStatic,restitution);
 	PxShape* sh = gPhysx->createShape(geom,*material);
-	setShape(sh);
+	setShape(sh,color);
 	volumeSetter(geom);
 	obj = gPhysx->createRigidDynamic(*getT());
 	obj->attachShape(*getShape());
 	PxRigidBodyExt::updateMassAndInertia(*obj, getMasa());
 	setRenderItem(obj);
-
+	RegItem();
 }
 
 DynamicSolidRigid::~DynamicSolidRigid()

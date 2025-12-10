@@ -31,6 +31,8 @@ public:
 	Entity();
 	Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color);
 	Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector3 _v, double _masa,double vol,double _tVida, double _damp = 0.999, double _masaReal = 1, Vector3 _vReal = { 0.0,1.0,0.0 }, double _volReal = 1);
+	Entity(Vector3 pos, Vector3 _v, double _masa, double vol, double _tVida, double _damp = 0.999, double _masaReal = 1, Vector3 _vReal = { 0.0,1.0,0.0 }, double _volReal = 1);
+
 	virtual void RegItem();
 	virtual void DeRegItem();
 	virtual ~Entity();
@@ -49,7 +51,7 @@ public:
 	double getMasaReal() const;
 	double getTvida() const;
 	double getDamp() const;
-	void setShape(physx::PxShape* sh);
+	void setShape(physx::PxShape* sh,const Vector4& color);
 	void setRenderItem(physx::PxRigidActor* act);
 	void setMasa(double newMasa);
 	void setVolume(double newVol);

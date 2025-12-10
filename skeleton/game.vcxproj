@@ -275,7 +275,7 @@
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="Render\Camera.cpp" />
     <ClCompile Include="Render\Render.cpp" />
-    <ClCompile Include="RigidBodyManager.cpp" />
+    <ClCompile Include="RigidBodySystem.cpp" />
     <ClCompile Include="RubberyForceGenerator.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneP0.cpp" />
@@ -285,8 +285,10 @@
     <ClCompile Include="SceneP4.cpp" />
     <ClCompile Include="SceneP3_Explosion.cpp" />
     <ClCompile Include="SceneP4Floating.cpp" />
+    <ClCompile Include="SceneP5.cpp" />
     <ClCompile Include="shootManager.cpp" />
     <ClCompile Include="Slinky.cpp" />
+    <ClCompile Include="SolidRigidGaussianGenerator.cpp" />
     <ClCompile Include="StaticSolidRigid.cpp" />
     <ClCompile Include="UniformGenerator.cpp" />
     <ClCompile Include="Vector3D.cpp" />
@@ -318,7 +320,7 @@
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />
-    <ClInclude Include="RigidBodyManager.h" />
+    <ClInclude Include="RigidBodySystem.h" />
     <ClInclude Include="RubberyForceGenerator.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneP0.h" />
@@ -328,8 +330,11 @@
     <ClInclude Include="SceneP4.h" />
     <ClInclude Include="SceneP3_Explosion.h" />
     <ClInclude Include="SceneP4Floating.h" />
+    <ClInclude Include="SceneP5.h" />
     <ClInclude Include="shootManager.h" />
     <ClInclude Include="Slinky.h" />
+    <ClInclude Include="SolidRigidGaussianGenerator.h" />
+    <ClInclude Include="SolidRigidGenerator.h" />
     <ClInclude Include="StaticSolidRigid.h" />
     <ClInclude Include="UniformGenerator.h" />
     <ClInclude Include="Vector3D.h" />

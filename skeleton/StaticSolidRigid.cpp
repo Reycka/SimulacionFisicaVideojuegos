@@ -1,11 +1,12 @@
 #include "StaticSolidRigid.h"
+#include "RenderUtils.hpp"
 using namespace physx;
-StaticSolidRigid::StaticSolidRigid(PxReal coefStatic, PxReal dynamStatic, PxReal restitution, PxPhysics* gPhysx, PxGeometry geom, Vector3 pos, const Vector4& color, Vector3 _v,
-	double _masa, double vol, double _tVida, double _damp) : Entity(pos, nullptr, color, _v, _masa, vol, _tVida, _damp)
+StaticSolidRigid::StaticSolidRigid(PxReal coefStatic, PxReal dynamStatic, PxReal restitution, PxPhysics* gPhysx, const PxGeometry& geom, Vector3 pos, const Vector4& color, Vector3 _v,
+	double _masa, double vol, double _tVida, double _damp) : Entity(pos,_v, _masa, vol, _tVida, _damp)
 {
 	material = gPhysx->createMaterial(coefStatic, dynamStatic, restitution);
-	PxShape* sh = gPhysx->createShape(geom, *material);
-	setShape(sh);
+	PxShape* sh = CreateShape(PxBoxGeometry(1,1,1), material);
+	setShape(sh,color);
 	volumeSetter(geom);
 	obj = gPhysx->createRigidStatic(*getT());
 	obj->attachShape(*getShape());
@@ -43,6 +44,10 @@ void StaticSolidRigid::volumeSetter(const physx::PxGeometry& geom)
 		volSim = 0;
 		break;
 	}
+}
+void StaticSolidRigid::setObj(PxRigidStatic* st)
+{
+	obj = st;
 }
 physx::PxRigidStatic* StaticSolidRigid::getObj() const
 {

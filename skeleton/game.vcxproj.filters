@@ -112,7 +112,15 @@
     <ClCompile Include="StaticSolidRigid.cpp">
       <Filter>Entities\SolidosRigidos</Filter>
     </ClCompile>
-    <ClCompile Include="RigidBodyManager.cpp" />
+    <ClCompile Include="RigidBodySystem.cpp">
+      <Filter>Entities\SolidosRigidos</Filter>
+    </ClCompile>
+    <ClCompile Include="SolidRigidGaussianGenerator.cpp">
+      <Filter>Entities\SolidosRigidos</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneP5.cpp">
+      <Filter>General\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render\Camera.h">
@@ -211,9 +219,6 @@
     <ClInclude Include="dockForceGenerator.h">
       <Filter>ForceGenerators</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleGen.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -235,7 +240,21 @@
     <ClInclude Include="StaticSolidRigid.h">
       <Filter>Entities\SolidosRigidos</Filter>
     </ClInclude>
-    <ClInclude Include="RigidBodyManager.h" />
+    <ClInclude Include="ParticleGen.h">
+      <Filter>Entities\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBodySystem.h">
+      <Filter>Entities\SolidosRigidos</Filter>
+    </ClInclude>
+    <ClInclude Include="SolidRigidGenerator.h">
+      <Filter>Entities\SolidosRigidos</Filter>
+    </ClInclude>
+    <ClInclude Include="SolidRigidGaussianGenerator.h">
+      <Filter>Entities\SolidosRigidos</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneP5.h">
+      <Filter>General\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
@@ -243,9 +262,6 @@
     </Filter>
     <Filter Include="Entities">
       <UniqueIdentifier>{c046ea5f-a5c8-4132-9f8d-6ff047310c65}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Entities\Particles">
-      <UniqueIdentifier>{f129fd3b-18b7-49a5-aaac-7d19bb247733}</UniqueIdentifier>
     </Filter>
     <Filter Include="General">
       <UniqueIdentifier>{1620f2aa-c471-4bbd-a3b0-0170961d0c2e}</UniqueIdentifier>
@@ -261,6 +277,9 @@
     </Filter>
     <Filter Include="Entities\SolidosRigidos">
       <UniqueIdentifier>{709cafe6-3fec-4a3b-9d63-155411bd5aa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Particles">
+      <UniqueIdentifier>{f129fd3b-18b7-49a5-aaac-7d19bb247733}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

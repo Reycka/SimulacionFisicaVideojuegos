@@ -49,6 +49,21 @@ Entity::Entity(Vector3 pos, physx::PxShape* _shape, const Vector4& color, Vector
 	lastPos = Vector3({ 0.0,0.0,0.0 });
 }
 
+Entity::Entity(Vector3 pos, Vector3 _v, double _masa, double vol, double _tVida, double _damp, double _masaReal, Vector3 _vReal, double _volReal)
+{
+	transform = new PxTransform(pos);
+	vSim = _v;
+	masaSim = _masa;
+	volSim = vol;
+	tVida = _tVida;
+	damp = _damp;
+	masaReal = _masaReal;
+	vReal = _vReal;
+	volReal = _volReal;
+	firstComprobation = true;
+	lastPos = Vector3({ 0.0,0.0,0.0 });
+}
+
 void Entity::RegItem()
 {
 	RegisterRenderItem(renderItem);
@@ -156,15 +171,17 @@ double Entity::getDamp() const
 	return damp;
 }
 
-void Entity::setShape(physx::PxShape* sh)
+void Entity::setShape(physx::PxShape* sh,const Vector4& color)
 {
 	shape = sh;
+	renderItem = new RenderItem(shape, transform, color);
 }
 
 void Entity::setRenderItem(physx::PxRigidActor* act)
 {
+	Vector4 color = renderItem->color;
 	renderItem->release();
-	renderItem = new RenderItem(shape, act, renderItem->color);
+	renderItem = new RenderItem(shape, act, color);
 }
 
 void Entity::setMasa(double newMasa)

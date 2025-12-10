@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 #include "ForceGenerator.h"
-#include "RigidBodyManager.h"
 class Scene {
 private:
 	std::vector<Entity*> entities;
