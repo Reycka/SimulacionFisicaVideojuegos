@@ -5,6 +5,8 @@ class DynamicSolidRigid : public Entity
 private:
 	physx::PxMaterial* material;
 	physx::PxRigidDynamic* obj;
+	physx::PxPhysics* phy;
+	physx::PxGeometry geometry = PxSphereGeometry(1);
 public:
 	DynamicSolidRigid(physx::PxReal coefStatic, physx::PxReal dynamStatic, physx::PxReal restitution,physx::PxPhysics* gPhysx,physx::PxGeometry geom,Vector3 pos, const Vector4& color, Vector3 _v, double _masa, double vol, double _tVida, double _damp = 0.999);
 	~DynamicSolidRigid();
@@ -12,6 +14,8 @@ public:
 	void RegItem() override;
 	void DeRegItem() override;
 	void volumeSetter(const physx::PxGeometry& geom);
+	physx::PxPhysics* getPhy();
+	physx::PxGeometry getGeom();
 	physx::PxRigidDynamic* getObj();
 };
 
