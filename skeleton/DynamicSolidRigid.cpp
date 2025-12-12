@@ -13,7 +13,6 @@ DynamicSolidRigid::DynamicSolidRigid(physx::PxScene* context,PxReal coefStatic,P
 	volumeSetter(geometry);
 	obj = gPhysx->createRigidDynamic(*getT());
 	obj->attachShape(*getShape());
-	//PxRigidBodyExt::updateMassAndInertia(*obj, getMasa());
 	setRenderItem(obj);
 	mContext->addActor(*obj);
 }
