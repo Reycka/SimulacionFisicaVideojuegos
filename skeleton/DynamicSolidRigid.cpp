@@ -1,9 +1,10 @@
 #include "DynamicSolidRigid.h"
 #include "RenderUtils.hpp"
 using namespace physx;
-DynamicSolidRigid::DynamicSolidRigid(PxReal coefStatic,PxReal dynamStatic, PxReal restitution,PxPhysics* gPhysx,const PxGeometry& geom,Vector3 pos, const Vector4& color, Vector3 _v,
+DynamicSolidRigid::DynamicSolidRigid(physx::PxScene* context,PxReal coefStatic,PxReal dynamStatic, PxReal restitution,PxPhysics* gPhysx,const PxGeometry& geom,Vector3 pos, const Vector4& color, Vector3 _v,
 	double _masa, double vol, double _tVida, double _damp) : Entity(pos,_v,_masa,vol,_tVida,_damp)
 {
+	mContext = context;
 	phy = gPhysx;
 	geometry = geom;
 	material = gPhysx->createMaterial(coefStatic,dynamStatic,restitution);
@@ -14,6 +15,7 @@ DynamicSolidRigid::DynamicSolidRigid(PxReal coefStatic,PxReal dynamStatic, PxRea
 	obj->attachShape(*getShape());
 	//PxRigidBodyExt::updateMassAndInertia(*obj, getMasa());
 	setRenderItem(obj);
+	mContext->addActor(*obj);
 }
 
 DynamicSolidRigid::~DynamicSolidRigid()
@@ -32,12 +34,16 @@ void DynamicSolidRigid::integrate(double t)
 
 void DynamicSolidRigid::RegItem()
 {
-	Entity::RegItem();
+	if (obj->getScene() == NULL) {
+		Entity::RegItem();
+		mContext->addActor(*obj);
+	}
 }
 
 void DynamicSolidRigid::DeRegItem()
 {
 	Entity::DeRegItem();
+	mContext->removeActor(*obj);
 }
 
 void DynamicSolidRigid::volumeSetter(const physx::PxGeometry& geom)
@@ -67,6 +73,11 @@ physx::PxPhysics* DynamicSolidRigid::getPhy()
 physx::PxGeometry DynamicSolidRigid::getGeom()
 {
 	return geometry;
+}
+
+physx::PxScene* DynamicSolidRigid::getContext()
+{
+	return mContext;
 }
 
 physx::PxRigidDynamic* DynamicSolidRigid::getObj()

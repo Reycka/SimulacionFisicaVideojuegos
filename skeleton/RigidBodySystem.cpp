@@ -1,7 +1,6 @@
 #include "RigidBodySystem.h"
-RigidBodySystem::RigidBodySystem(physx::PxScene* _context) : Entity()
+RigidBodySystem::RigidBodySystem() : Entity()
 {
-	context = _context;
 	Entity::DeRegItem();
 }
 
@@ -40,9 +39,9 @@ void RigidBodySystem::integrate(double t)
 {
 	for (auto& gen : generators) {
 		if (gen->getIsActive()) {
-			gen->removeSolidRigid(context); //Elimina las particulas viejas
+			gen->removeSolidRigid(); //Elimina las particulas viejas
 			gen->integrate(t);
-			gen->addSolidRigid(context); //Añade las partículas nuevas
+			gen->addSolidRigid(); //Añade las partículas nuevas
 		}
 	}
 }

@@ -1,6 +1,6 @@
 #include "SolidRigidGaussianGenerator.h"
 using namespace physx;
-SolidRigidGaussianGenerator::SolidRigidGaussianGenerator(float rad, float _timeToSpawn, float l, physx::PxReal coefStatic, physx::PxReal dynamStatic, physx::PxReal restitution, physx::PxPhysics* gPhysx, const physx::PxGeometry& geom,
+SolidRigidGaussianGenerator::SolidRigidGaussianGenerator(physx::PxScene* context,float rad, float _timeToSpawn, float l, physx::PxReal coefStatic, physx::PxReal dynamStatic, physx::PxReal restitution, physx::PxPhysics* gPhysx, const physx::PxGeometry& geom,
 	Vector3 pos, const Vector4& color, Vector3 _v, double _masa, double vol, double _tVida, double _damp)
 {
 	//Atributos del generador
@@ -12,7 +12,7 @@ SolidRigidGaussianGenerator::SolidRigidGaussianGenerator(float rad, float _timeT
 	timePass = timeToSpawn;
 	limit = l;
 	//Partícula modelo
-	model = new DynamicSolidRigid(coefStatic, dynamStatic, restitution, gPhysx, geom, pos, color,_v,_masa,vol,_tVida,_damp);
+	model = new DynamicSolidRigid(context,coefStatic, dynamStatic, restitution, gPhysx, geom, pos, color,_v,_masa,vol,_tVida,_damp);
 	model->DeRegItem();
 
 	//Aleatorio
@@ -112,16 +112,17 @@ DynamicSolidRigid* SolidRigidGaussianGenerator::GeneraAleatoria()
 	double masa = model->getMasa();
 	//Creación y devolución de la partícula
 	DynamicSolidRigid* p;
+	physx::PxScene* context = model->getContext();
 	switch (model->getGeom().getType()) {
 	case (PxGeometryType::eSPHERE):
-		p = new DynamicSolidRigid(staticVariation, dynamicVariation, restitutionVariation, model->getPhy(), PxSphereGeometry(1), pos, color, v, masa, 0.0, vida, damping);
+		p = new DynamicSolidRigid(context,staticVariation, dynamicVariation, restitutionVariation, model->getPhy(), PxSphereGeometry(1), pos, color, v, masa, 0.0, vida, damping);
 		break;
 
 	case (PxGeometryType::eBOX):
-		p = new DynamicSolidRigid(staticVariation, dynamicVariation, restitutionVariation, model->getPhy(), PxBoxGeometry(1, 1, 1), pos, color, v, masa, 0.0, vida, damping);
+		p = new DynamicSolidRigid(context, staticVariation,dynamicVariation, restitutionVariation, model->getPhy(), PxBoxGeometry(1, 1, 1), pos, color, v, masa, 0.0, vida, damping);
 		break;
 	default:
-		p = new DynamicSolidRigid(staticVariation, dynamicVariation, restitutionVariation, model->getPhy(), PxBoxGeometry(1, 1, 1), pos, color, v, masa, 0.0, vida, damping);
+		p = new DynamicSolidRigid(context,staticVariation, dynamicVariation, restitutionVariation, model->getPhy(), PxBoxGeometry(1, 1, 1), pos, color, v, masa, 0.0, vida, damping);
 		break;
 	}
 	for (auto g : FGen) {
@@ -148,32 +149,29 @@ void SolidRigidGaussianGenerator::DeRegSolidRigid()
 	}
 }
 
-void SolidRigidGaussianGenerator::addSolidRigid(physx::PxScene* context)
+void SolidRigidGaussianGenerator::addSolidRigid()
 {
 	//pos, shape, color, v, a, _tVida, damp
 	if (timePass >= timeToSpawn) {
 		int i = 0;
 		while (i < limit) {
 			solidRigid.push_back({ GeneraAleatoria(),true });
-			context->addActor(*solidRigid.back().first->getObj());
 			i++;
 		}
 		timePass = 0;
 	}
 }
 
-void SolidRigidGaussianGenerator::removeSolidRigid(physx::PxScene* context)
+void SolidRigidGaussianGenerator::removeSolidRigid()
 {
 	for (auto& rigid : solidRigid) {
 		if (rigid.first->getTvida() <= 0 && rigid.second == true) {
 			rigid.first->DeRegItem();
-			context->removeActor(*rigid.first->getObj());
 			rigid.second = false;
 
 		}
 		else if (rigid.second == true && std::abs(rigid.first->getT()->p.x) > limitPos.x || rigid.second == true && std::abs(rigid.first->getT()->p.y) > limitPos.y || rigid.second == true && std::abs(rigid.first->getT()->p.z) > limitPos.z) {
 			rigid.first->DeRegItem();
-			context->removeActor(*rigid.first->getObj());
 			rigid.second = false;
 		}
 	}

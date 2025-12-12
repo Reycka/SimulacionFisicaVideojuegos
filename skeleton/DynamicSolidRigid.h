@@ -7,8 +7,9 @@ private:
 	physx::PxRigidDynamic* obj;
 	physx::PxPhysics* phy;
 	physx::PxGeometry geometry = physx::PxSphereGeometry(1);
+	physx::PxScene* mContext;
 public:
-	DynamicSolidRigid(physx::PxReal coefStatic, physx::PxReal dynamStatic, physx::PxReal restitution,physx::PxPhysics* gPhysx,const physx::PxGeometry& geom,Vector3 pos, const Vector4& color, Vector3 _v, double _masa, double vol, double _tVida, double _damp = 0.999);
+	DynamicSolidRigid(physx::PxScene* context,physx::PxReal coefStatic, physx::PxReal dynamStatic, physx::PxReal restitution,physx::PxPhysics* gPhysx,const physx::PxGeometry& geom,Vector3 pos, const Vector4& color, Vector3 _v, double _masa, double vol, double _tVida, double _damp = 0.999);
 	~DynamicSolidRigid();
 	void integrate(double t) override;
 	void RegItem() override;
@@ -16,6 +17,7 @@ public:
 	void volumeSetter(const physx::PxGeometry& geom);
 	physx::PxPhysics* getPhy();
 	physx::PxGeometry getGeom();
+	physx::PxScene* getContext();
 	physx::PxRigidDynamic* getObj();
 };
 

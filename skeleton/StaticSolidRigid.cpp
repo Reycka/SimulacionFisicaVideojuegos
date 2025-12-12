@@ -1,9 +1,10 @@
 #include "StaticSolidRigid.h"
 #include "RenderUtils.hpp"
 using namespace physx;
-StaticSolidRigid::StaticSolidRigid(PxReal coefStatic, PxReal dynamStatic, PxReal restitution, PxPhysics* gPhysx, const PxGeometry& geom, Vector3 pos, const Vector4& color, Vector3 _v,
+StaticSolidRigid::StaticSolidRigid(physx::PxScene* context,PxReal coefStatic, PxReal dynamStatic, PxReal restitution, PxPhysics* gPhysx, const PxGeometry& geom, Vector3 pos, const Vector4& color, Vector3 _v,
 	double _masa, double vol, double _tVida, double _damp) : Entity(pos,_v, _masa, vol, _tVida, _damp)
 {
+	mContext = context;
 	material = gPhysx->createMaterial(coefStatic, dynamStatic, restitution);
 	PxShape* sh = CreateShape(geom, material);
 	setShape(sh,color);
@@ -11,6 +12,7 @@ StaticSolidRigid::StaticSolidRigid(PxReal coefStatic, PxReal dynamStatic, PxReal
 	obj = gPhysx->createRigidStatic(*getT());
 	obj->attachShape(*getShape());
 	setRenderItem(obj);
+	mContext->addActor(*obj);
 }
 
 StaticSolidRigid::~StaticSolidRigid()
@@ -19,12 +21,16 @@ StaticSolidRigid::~StaticSolidRigid()
 
 void StaticSolidRigid::RegItem()
 {
-	Entity::RegItem();
+	if (obj->getScene() == NULL) {
+		Entity::RegItem();
+		mContext->addActor(*obj);
+	}
 }
 
 void StaticSolidRigid::DeRegItem()
 {
 	Entity::DeRegItem();
+	mContext->removeActor(*obj);
 }
 
 void StaticSolidRigid::volumeSetter(const physx::PxGeometry& geom)

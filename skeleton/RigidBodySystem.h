@@ -7,7 +7,7 @@ private:
 	std::list<SolidRigidGenerator*>generators;
 	physx::PxScene* context;
 public:
-	RigidBodySystem(physx::PxScene* context);
+	RigidBodySystem();
 	~RigidBodySystem();
 	void addGenerator(SolidRigidGenerator* gen);
 	void setActiveParticleGenerator(SolidRigidGenerator* gen, bool active);

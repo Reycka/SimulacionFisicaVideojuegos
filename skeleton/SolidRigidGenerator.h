@@ -23,11 +23,11 @@ public:
 	virtual bool getIsActive() = 0;
 	virtual void setIsActive(bool active) = 0;
 	virtual void addForceGen(ForceGenerator* g) = 0;
-	virtual void addSolidRigid(physx::PxScene* context) = 0;
+	virtual void addSolidRigid() = 0;
 	virtual void RegSolidRigid() = 0;
 	virtual void DeRegSolidRigid() = 0;
 	virtual DynamicSolidRigid* GeneraAleatoria() = 0;
-	virtual void removeSolidRigid(physx::PxScene* context) = 0;
+	virtual void removeSolidRigid() = 0;
 	virtual void integrate(double t) = 0;
 	virtual void setVariation(int RGBAttribute, bool show) = 0;
 };

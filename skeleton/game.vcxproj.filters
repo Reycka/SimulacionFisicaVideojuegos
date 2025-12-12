@@ -73,9 +73,6 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Characther.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="nave.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
@@ -121,6 +118,9 @@
     <ClCompile Include="SceneP5.cpp">
       <Filter>General\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Characther.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render\Camera.h">
@@ -148,9 +148,6 @@
       <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="ParticleSystem.h">
-      <Filter>Entities\Particles</Filter>
-    </ClInclude>
-    <ClInclude Include="Particle.h">
       <Filter>Entities\Particles</Filter>
     </ClInclude>
     <ClInclude Include="GaussianGenerator.h">
@@ -254,6 +251,9 @@
     </ClInclude>
     <ClInclude Include="SceneP5.h">
       <Filter>General\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Entities\SolidosRigidos</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
