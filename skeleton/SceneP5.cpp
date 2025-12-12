@@ -2,7 +2,7 @@
 #include "StaticSolidRigid.h"
 #include "RigidBodySystem.h"
 #include "SolidRigidGaussianGenerator.h"
-#include "GravityGenerator.h"
+#include "WhirlwindGenerator.h"
 using namespace physx;
 SceneP5::SceneP5(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, physx::PxScene* _gScene, Camera* _cam) : Scene(_gMaterial,_phy,_gScene,_cam)
 {
@@ -22,10 +22,10 @@ SceneP5::SceneP5(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, physx::P
     RigidBodySystem* rgSys = new RigidBodySystem(_gScene);
     SolidRigidGaussianGenerator* solidGen = new SolidRigidGaussianGenerator(10.0,1.0,10.0,1.0,1.0,1.0,_phy, PxBoxGeometry(1.0, 1.0, 1.0),Vector3(0.0,10.0,0.0),Vector4(1.0,0.0,1.0,1.0),Vector3(1.0,0.0,0.0),5,2,5.0);
     rgSys->addGenerator(solidGen);
- //   GravityGenerator* gravityGen = new GravityGenerator({ 0.0,-10.0,0.0 });
-//    rgSys->addForceGenerator(gravityGen);
+    WhirlwindGenerator* whirlwind = new WhirlwindGenerator({ 0.0,0.0,0.0 },20.0,3.0);
+    rgSys->addForceGenerator(whirlwind);
     AddEntity(rgSys);
- //   AddForceGenerator(gravityGen);
+    AddForceGenerator(whirlwind);
 }
 
 SceneP5::~SceneP5()

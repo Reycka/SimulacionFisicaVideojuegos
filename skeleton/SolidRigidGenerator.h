@@ -27,7 +27,7 @@ public:
 	virtual void RegSolidRigid() = 0;
 	virtual void DeRegSolidRigid() = 0;
 	virtual DynamicSolidRigid* GeneraAleatoria() = 0;
-	virtual void removeSolidRigid() = 0;
+	virtual void removeSolidRigid(physx::PxScene* context) = 0;
 	virtual void integrate(double t) = 0;
 	virtual void setVariation(int RGBAttribute, bool show) = 0;
 };

@@ -162,16 +162,18 @@ void SolidRigidGaussianGenerator::addSolidRigid(physx::PxScene* context)
 	}
 }
 
-void SolidRigidGaussianGenerator::removeSolidRigid()
+void SolidRigidGaussianGenerator::removeSolidRigid(physx::PxScene* context)
 {
 	for (auto& rigid : solidRigid) {
 		if (rigid.first->getTvida() <= 0 && rigid.second == true) {
 			rigid.first->DeRegItem();
+			context->removeActor(*rigid.first->getObj());
 			rigid.second = false;
 
 		}
 		else if (rigid.second == true && std::abs(rigid.first->getT()->p.x) > limitPos.x || rigid.second == true && std::abs(rigid.first->getT()->p.y) > limitPos.y || rigid.second == true && std::abs(rigid.first->getT()->p.z) > limitPos.z) {
 			rigid.first->DeRegItem();
+			context->removeActor(*rigid.first->getObj());
 			rigid.second = false;
 		}
 	}

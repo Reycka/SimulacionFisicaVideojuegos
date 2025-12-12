@@ -40,7 +40,7 @@ void RigidBodySystem::integrate(double t)
 {
 	for (auto& gen : generators) {
 		if (gen->getIsActive()) {
-			gen->removeSolidRigid(); //Elimina las particulas viejas
+			gen->removeSolidRigid(context); //Elimina las particulas viejas
 			gen->integrate(t);
 			gen->addSolidRigid(context); //Añade las partículas nuevas
 		}

@@ -16,7 +16,7 @@ public:
 	virtual void RegSolidRigid() override;
 	virtual void DeRegSolidRigid() override;
 	virtual void addSolidRigid(physx::PxScene* context) override;
-	virtual void removeSolidRigid() override;
+	virtual void removeSolidRigid(physx::PxScene* context) override;
 	virtual void integrate(double t) override;
 	virtual void setVariation(int RGBAttribute, bool show) override;
 };
