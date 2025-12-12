@@ -1,4 +1,5 @@
 #include "DynamicSolidRigid.h"
+#include <iostream>
 #include "RenderUtils.hpp"
 using namespace physx;
 DynamicSolidRigid::DynamicSolidRigid(physx::PxScene* context,PxReal coefStatic,PxReal dynamStatic, PxReal restitution,PxPhysics* gPhysx,const PxGeometry& geom,Vector3 pos, const Vector4& color, Vector3 _v,
@@ -13,6 +14,7 @@ DynamicSolidRigid::DynamicSolidRigid(physx::PxScene* context,PxReal coefStatic,P
 	volumeSetter(geometry);
 	obj = gPhysx->createRigidDynamic(*getT());
 	obj->attachShape(*getShape());
+	PxRigidBodyExt::updateMassAndInertia(*obj, getMasa());
 	setRenderItem(obj);
 	mContext->addActor(*obj);
 }
