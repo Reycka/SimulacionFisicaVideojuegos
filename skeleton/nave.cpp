@@ -5,6 +5,7 @@ nave::nave(physx::PxScene* context, physx::PxReal coefStatic, physx::PxReal dyna
 	int health, int points, double timeToSpawn, ExplosionGenerator* _exp, physx::PxTransform cameraTransform) :
 	DynamicSolidRigid(context,coefStatic,dynamStatic,restitution,gPhysx,geom,pos,color,_v,_masa,vol,_tVida,_damp), Enemy(health,points,timeToSpawn)
 {
+	type = Nave;
 	//Variables globales inicializadas
 	initialPositon = pos;
 	finalPos = pos + Vector3(300.0, 0.0, 0.0);
@@ -50,9 +51,30 @@ void nave::integrate(double t)
 
 }
 
+void nave::onCollision(Entity* other)
+{
+	switch (other->getEntType()) {
+	case Nave:
+		GotHit(MAXHEALTH);
+		break;
+	case Bala:
+		GotHit(1);
+		break;
+	}
+}
+
 void nave::setState()
 {
-	getContext()->getSimulationEventCallback();
+	if (health != MAXHEALTH) {
+		if (health <= 0) {
+			actState = MUERTO;
+		}
+		else actState = GOLPEADO;
+	}
+
+	if (getT()->p.x > finalPos.x && health > 0) {
+		actState = RETIRANDOSE;
+	}
 }
 
 void nave::AIFunction()
@@ -74,7 +96,7 @@ void nave::AIFunction()
 			//TODO ganar los puntos que hagan falta
 		}
 
-		else {
+		else if (actState == RETIRANDOSE){
 			//Despawnear la nave
 			tVida = 0;
 			//TODO perder puntos por cada nave que se escape
@@ -99,6 +121,7 @@ void nave::DeRegItem()
 	}
 	DynamicSolidRigid::DeRegItem();
 }
+
 void nave::createSmoke()
 {
 	PxMaterial* smokeMaterial = getPhy()->createMaterial(0.5f, 0.5f, 0.6f);

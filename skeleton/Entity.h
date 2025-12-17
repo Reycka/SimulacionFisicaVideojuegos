@@ -2,6 +2,7 @@
 #include <vector>
 #include <list>
 #include "RenderUtils.hpp"
+#include "CallBackEnumType.h"
 class ForceGenerator;
 class Entity
 {
@@ -13,6 +14,7 @@ private:
 
 protected:
 
+	bool isActive = true;
 	Vector3 lastPos;
 	bool firstComprobation;
 	Vector3 vSim;
@@ -25,7 +27,7 @@ protected:
 	double tVida;
 	double damp;
 	std::list<ForceGenerator*> ForceGen;
-
+	EntityType type = None;
 
 public:
 	Entity();
@@ -39,6 +41,7 @@ public:
 	virtual void addForceGenerator(ForceGenerator* gen);
 	virtual void DesActiveForceGenerator(ForceGenerator* gen);
 	virtual void reActiveForceGenerator(ForceGenerator* gen);
+	virtual void onCollision(Entity* other) {}
 	void addForces(double t);
 	RenderItem* getRenderItem() const;
 	physx::PxTransform* getT() ;
@@ -51,6 +54,7 @@ public:
 	double getMasaReal() const;
 	double getTvida() const;
 	double getDamp() const;
+	EntityType getEntType()const ;
 	void setShape(physx::PxShape* sh,const Vector4& color);
 	void setRenderItem(physx::PxRigidActor* act);
 	void setMasa(double newMasa);

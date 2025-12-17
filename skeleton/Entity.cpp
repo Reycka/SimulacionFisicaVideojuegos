@@ -66,12 +66,16 @@ Entity::Entity(Vector3 pos, Vector3 _v, double _masa, double vol, double _tVida,
 
 void Entity::RegItem()
 {
-	RegisterRenderItem(renderItem);
+	if (isActive) {
+		RegisterRenderItem(renderItem);
+	}
 }
 
 void Entity::DeRegItem()
 {
-	DeregisterRenderItem(renderItem);
+	if (isActive) {
+		DeregisterRenderItem(renderItem);
+	}
 }
 
 Entity::~Entity()
@@ -169,6 +173,11 @@ double Entity::getTvida() const
 double Entity::getDamp() const
 {
 	return damp;
+}
+
+EntityType Entity::getEntType() const
+{
+	return type;
 }
 
 void Entity::setShape(physx::PxShape* sh,const Vector4& color)

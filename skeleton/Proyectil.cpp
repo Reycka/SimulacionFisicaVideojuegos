@@ -17,6 +17,7 @@ Proyectil::Proyectil()
 Proyectil::Proyectil(Vector3 pos, physx::PxShape* shape, const Vector4& color, Vector3 _v, double _masa,double _vol, double _tVida, double _masaReal, Vector3 _vReal ,double _damp) : Entity(pos,shape,color,_v,_masa,_vol,_tVida,_damp,_masaReal,_vReal)
 {
 	if(!masaAjustada)AjustaMasa();
+	type = Bala;
 }
 
 Proyectil::~Proyectil()
@@ -25,15 +26,24 @@ Proyectil::~Proyectil()
 
 void Proyectil::integrate(double t)
 {
+	if (isActive) {
+		tVida -= t;
+		//ClearOldForces
+		force = Vector3({ 0.0,0.0,0.0 });
+		//AddNewForces
+		addForces(t);
 
-	tVida -= t;
-	//ClearOldForces
-	force = Vector3({ 0.0,0.0,0.0 });
-	//AddNewForces
-	addForces(t);
+		vSim = (vSim + ((force / masaSim) * t));
+		vSim = vSim * pow(damp, t);
+		getT()->p = getT()->p + (vSim * t);
+		if (tVida <= 0) {
+			DeRegItem();
+			isActive = false;
+		}
+	}
+}
 
-	vSim = (vSim + ((force/masaSim) * t));
-	vSim = vSim * pow(damp, t);
-	getT()->p = getT()->p + (vSim * t);
-
+void Proyectil::onCollision(Entity* other)
+{
+	DeRegItem();
 }

@@ -255,6 +255,9 @@
     <ClInclude Include="Particle.h">
       <Filter>Entities\SolidosRigidos</Filter>
     </ClInclude>
+    <ClInclude Include="CallBackEnumType.h">
+      <Filter>Entities\SolidosRigidos</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

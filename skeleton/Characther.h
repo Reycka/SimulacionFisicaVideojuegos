@@ -5,6 +5,7 @@ class Characther
 {
 protected:
 	shootManager* sh;
+	int MAXHEALTH;
 	int health = 0;
 	double MAXSHOOTTIME = 0.0;
 	double shootTime = 0.0;

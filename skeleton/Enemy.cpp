@@ -2,6 +2,7 @@
 
 Enemy::Enemy(int _health, int _points, double _shootTime)
 {
+	MAXHEALTH = _health;
 	health = _health;
 	points = _points;
 	MAXSHOOTTIME = _shootTime;
@@ -18,12 +19,6 @@ Enemy::~Enemy()
 void Enemy::GotHit(int damage)
 {
 	health -= damage;
-	if (health <= 0) {
-		actState = MUERTO;
-	}
-	else {
-		actState = GOLPEADO;
-	}
 }
 
 

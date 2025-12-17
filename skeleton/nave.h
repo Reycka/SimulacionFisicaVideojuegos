@@ -35,5 +35,6 @@ public:
 	virtual void integrate(double t) override;
 	virtual void RegItem() override;
 	virtual void DeRegItem() override;
+	void onCollision(Entity* other) override;
 };
 

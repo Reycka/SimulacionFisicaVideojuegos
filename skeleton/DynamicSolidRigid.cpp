@@ -17,10 +17,12 @@ DynamicSolidRigid::DynamicSolidRigid(physx::PxScene* context,PxReal coefStatic,P
 	PxRigidBodyExt::updateMassAndInertia(*obj, getMasa());
 	setRenderItem(obj);
 	mContext->addActor(*obj);
+	obj->userData = this; //PARA LOS CALLBACKS, SE TRATA COMO EL IDENTIFICADOR DEL DYNAMIC OBJECT EN CUESTIÓN
 }
 
 DynamicSolidRigid::~DynamicSolidRigid()
 {
+	
 }
 
 void DynamicSolidRigid::integrate(double t)

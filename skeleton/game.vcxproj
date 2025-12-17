@@ -296,6 +296,7 @@
     <ClCompile Include="WindGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CallBackEnumType.h" />
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="Characther.h" />
     <ClInclude Include="checkML.h" />
