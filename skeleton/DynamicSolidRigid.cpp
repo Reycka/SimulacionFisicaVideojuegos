@@ -17,7 +17,7 @@ DynamicSolidRigid::DynamicSolidRigid(physx::PxScene* context,PxReal coefStatic,P
 	PxRigidBodyExt::updateMassAndInertia(*obj, getMasa());
 	setRenderItem(obj);
 	mContext->addActor(*obj);
-	obj->userData = this; //PARA LOS CALLBACKS, SE TRATA COMO EL IDENTIFICADOR DEL DYNAMIC OBJECT EN CUESTIÓN
+	obj->userData = this; //PARA LOS CALLBACKS, SE TRATA COMO EL IDENTIFICADOR DEL DYNAMIC OBJECT EN CUESTIÓN PARA QUE SEPA QUE TIPO DE ENTIDAD ES
 }
 
 DynamicSolidRigid::~DynamicSolidRigid()
