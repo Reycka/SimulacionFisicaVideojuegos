@@ -1,27 +1,25 @@
 #include "nave.h"
 using namespace physx;
-nave::nave(Vector3 _finalPos, Vector3 pos, physx::PxShape* _shape, physx::PxMaterial* _mat, const Vector4& color, Vector3 _v, double _masa,
-	double vol,double _tVida, double _damp, int health, int points, 
-	double timeToSpawn,ExplosionGenerator* _Exp,PxTransform cameraTransform) 
-	: Entity(pos, _shape, color, _v, _masa,vol, _tVida, _damp), Enemy(health, points, timeToSpawn)
+nave::nave(physx::PxScene* context, physx::PxReal coefStatic, physx::PxReal dynamStatic, physx::PxReal restitution, physx::PxPhysics* gPhysx,
+	const physx::PxGeometry& geom, Vector3 pos, const Vector4& color, Vector3 _v, double _masa, double vol, double _tVida, double _damp, 
+	int health, int points, double timeToSpawn, ExplosionGenerator* _exp, physx::PxTransform cameraTransform) :
+	DynamicSolidRigid(context,coefStatic,dynamStatic,restitution,gPhysx,geom,pos,color,_v,_masa,vol,_tVida,_damp), Enemy(health,points,timeToSpawn)
 {
-	trans = cameraTransform;
-	mat = _mat;
-	exp = _Exp;
-	finalPos = _finalPos;
+	//Variables globales inicializadas
+	initialPositon = pos;
+	finalPos = pos + Vector3(300.0, 0.0, 0.0);
+	shootPoint = cameraTransform.p;
+
+	//Sistemas de partículas internos
 	partShipSystem = new ParticleSystem();
-	Vector4 smokeColor = { 0.5,0.5,0.5,0.7 };
-	Vector4 fireColor = { 1.0f,1.0f,0.0f,1.0f };
-	smokeGenerator = new GaussianGenerator(5, getT()->p + Vector3({ -10.0,-10.0,-10.0 }), mat, 1, smokeColor, { 1.0,1.0,1.0 }, 8, 6, 0.1, 0.999, 2.0);
-	fireGenerator = new UniformGenerator(5, getT()->p + Vector3({ -10.0,-10.0,-10.0 }), mat, 1, fireColor, { 0.0,10.0,0.0 }, 4, 3, 0.1, 0.999, 5.0);
-	fireGenerator->setLimitPos({300.0, 350.0, 300.0});
-	smokeGenerator->setLimitPos({ 300.0, 350.0, 300.0 });
-	fireGenerator->setVariation(0, false);
-	partShipSystem->addGenerator(smokeGenerator);
-	partShipSystem->addGenerator(fireGenerator);
-	partShipSystem->setActiveParticleGenerator(smokeGenerator,false);
-	addForceGenerator(exp);
-	
+	entities.push_back(partShipSystem);
+	createFire();
+	createSmoke();
+
+	//Asignar el puntero de explosión de la escena a las entidades
+	exp = _exp;
+	createExplosion();
+
 }
 
 nave::~nave()
@@ -30,52 +28,97 @@ nave::~nave()
 
 void nave::addForceGenerator(ForceGenerator* gen)
 {
-	Entity::addForceGenerator(gen);
-	partShipSystem->addForceGenerator(gen);
-	sh->addForceGenerator(gen);
+	for (auto ent : entities) {
+		ent->addForceGenerator(gen);
+	}
 }
 
 void nave::integrate(double t)
 {
-	if (!smokeGenerator->getIsActive() && actState == GOLPEADO) {
-		partShipSystem->setActiveParticleGenerator(smokeGenerator, true);
-	}
-	else if (!exp->getIsActive() && actState == MUERTO) {
-		exp->setIsActive(true);
-	}
-	tVida -= t;
-	force = Vector3({ 0.0,0.0,0.0 });
-	addForces(t);
 
-	vSim = (vSim + ((force * pow(masaSim, -1)) * t));
-	vSim = vSim * pow(damp, t);
-	getT()->p = getT()->p + (vSim * t);
+	AIFunction();
 
-	//SOLO PARA LA INTERMEDIA, RESETEA LA NAVE MODELO A SU POSICION ORIGINAL
-	//PARA ESTE DISPARO TAMBIÉN HABRÁ QUE SETEARLE QUE APUNTE SOLO A CÁMARA A FUTURO AL IGUAL QUE DESACTIVAR EL SHOOT CUANDO MUERA O ESTE SIENDO DERRIBADA
-	if (abs(getT()->p.x) > 50 || abs(getT()->p.y) > 50 || abs(getT()->p.z > 50)) {
-		getT()->p = finalPos;
-		vSim = { 0.0,0.0,0.0 };
-		actState = SPAWN;
-		health = 2;
-	}
-	partShipSystem->setPosition(getT()->p + Vector3({ -10.0,-10.0,-10.0 }));
+	//Colocación de las partículas para que sigan a la nave e integrate del generador
+	getObj()->attachShape(*partShipSystem->getShape());
+//	partShipSystem->setPosition(getT()->p + Vector3({ -10.0,-10.0,-10.0 }));
 	partShipSystem->integrate(t);
-	Proyectil* p = new Proyectil(getT()->p, CreateShape(PxSphereGeometry(1), mat), {1.0f,1.0f,0.0f,1.0f}, trans.p, 10,0.02 ,60, 60, Vector3(30.0, 15.0, 0.0), 0.999);
+
+	//Proyectil propio de la nave
+	PxMaterial* proyectilMateril = getPhy()->createMaterial(0.4f, 0.3f, 0.6f);
+	Proyectil* p = new Proyectil(getT()->p, CreateShape(PxSphereGeometry(1), proyectilMateril), { 1.0f,1.0f,0.0f,1.0f }, shootPoint, 10, 0.02, 60, 60, Vector3(30.0, 15.0, 0.0), 0.999);
 	proyectilUpdate(t, p);
 
 }
 
+void nave::setState()
+{
+	getContext()->getSimulationEventCallback();
+}
+
+void nave::AIFunction()
+{
+	const state oldState = actState; //Guardamos una referencia al estado actual antes del cambio
+	setState(); //Cambiamos el estado?
+
+	if (actState != oldState) { //Si hemos cambiado el estado cambiamos el funcionamiento de los sistemas internos
+
+		if (actState == GOLPEADO) {
+			smokeGenerator->setIsActive(true);
+			//TODO Probar si queda bien bajar la velocidad aqui
+		}
+
+		else if (actState == MUERTO) {
+			//Activar la explosión y despawnear la nave
+			exp->setIsActive(true);
+			tVida = 0;
+			//TODO ganar los puntos que hagan falta
+		}
+
+		else {
+			//Despawnear la nave
+			tVida = 0;
+			//TODO perder puntos por cada nave que se escape
+		}
+
+	} 
+	//Si no no hacemos nada pq ya está hecho
+}
+
 void nave::RegItem()
 {
-	Entity::RegItem();
-	partShipSystem->RegItem();
-	sh->RegItem();
+	for (auto ent : entities) {
+		ent->RegItem();
+	}
+	DynamicSolidRigid::RegItem();
 }
 
 void nave::DeRegItem()
 {
-	Entity::DeRegItem();
-	partShipSystem->DeRegItem();
-	sh->DeRegItem();
+	for (auto ent : entities) {
+		ent->DeRegItem();
+	}
+	DynamicSolidRigid::DeRegItem();
 }
+void nave::createSmoke()
+{
+	PxMaterial* smokeMaterial = getPhy()->createMaterial(0.5f, 0.5f, 0.6f);
+	Vector4 smokeColor = { 0.5,0.5,0.5,0.7 };
+	smokeGenerator = new GaussianGenerator(5, getT()->p + Vector3({ -10.0,-10.0,-10.0 }), smokeMaterial, 1, smokeColor, { 1.0,1.0,1.0 }, 8, 6, 0.1, 0.999, 2.0);
+	smokeGenerator->setIsActive(false);
+	partShipSystem->addGenerator(smokeGenerator);
+}
+
+void nave::createFire()
+{
+	PxMaterial* fireMaterial = getPhy()->createMaterial(0.5f, 0.5f, 0.6f);
+	Vector4 fireColor = { 1.0f,1.0f,0.0f,1.0f };
+	fireGenerator = new UniformGenerator(5, getT()->p + Vector3({ -10.0,-10.0,-10.0 }), fireMaterial, 1, fireColor, { 0.0,10.0,0.0 }, 4, 3, 0.1, 0.999, 5.0);
+	partShipSystem->addGenerator(fireGenerator);
+}
+
+void nave::createExplosion()
+{
+	partShipSystem->addForceGenerator(exp);
+}
+
+

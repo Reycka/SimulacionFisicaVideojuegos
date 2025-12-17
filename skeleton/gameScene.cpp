@@ -7,7 +7,7 @@
 #include "nave.h"
 using namespace physx;
 gameScene::gameScene(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, physx::PxScene* _gScene, Camera* _cam) : Scene(_gMaterial, _phy, _gScene, _cam)
-{
+{/*
 	PxShape* sphereShape = CreateShape(PxSphereGeometry(3), getMaterial());
 	Vector4 sphereColor = { 1.0f,0.0f,1.0f,1.0f };
 	Vector4 rainColor = { 0.0f,0.0f,1.0f,0.8f };
@@ -44,7 +44,7 @@ gameScene::gameScene(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, phys
 	pla->addForceGenerator(exp);
 	AddEntity(model);
 	AddEntity(partSys);
-	AddEntity(pla);
+	AddEntity(pla);*/
 }
 
 gameScene::~gameScene()

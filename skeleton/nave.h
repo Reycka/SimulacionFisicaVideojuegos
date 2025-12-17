@@ -1,24 +1,35 @@
 #pragma once
-#include "Entity.h"
+#include "DynamicSolidRigid.h"
 #include "Enemy.h"
 #include "ParticleSystem.h"
 #include "GaussianGenerator.h"
 #include "UniformGenerator.h"
 #include "ExplosionGenerator.h"
-class nave : public Entity ,public Enemy
+class nave : public DynamicSolidRigid ,public Enemy
 {
 private:
 
+	std::list<Entity*> entities;
+	Vector3 shootPoint;
+	Vector3 initialPositon;
 	Vector3 finalPos;
+
 	ParticleSystem* partShipSystem;
 	GaussianGenerator* smokeGenerator;
 	UniformGenerator* fireGenerator;
 	ExplosionGenerator* exp;
-	physx::PxMaterial* mat;
-	physx::PxTransform trans;
+
+	//Creacion de los sistemas propios de la nave (las 2 partículas y la explosión)
+	void createSmoke();
+	void createFire();
+	void createExplosion();
+
+	void setState() override;
+	void AIFunction() override;
 
 public:
-	nave(Vector3 _finalPos,Vector3 pos, physx::PxShape* _shape, physx::PxMaterial* mat,const Vector4& color, Vector3 _v, double _masa,double vol ,double _tVida, double _damp = 0.999, int health = 2, int points = 100, double timeToSpawn = 2.0,ExplosionGenerator* exp = nullptr, physx::PxTransform cameraTransform = physx::PxTransform());
+	nave(physx::PxScene* context, physx::PxReal coefStatic, physx::PxReal dynamStatic, physx::PxReal restitution, physx::PxPhysics* gPhysx, const physx::PxGeometry& geom, Vector3 pos, const Vector4& color, Vector3 _v, double _masa, double vol, double _tVida, double _damp = 0.999,
+		int health = 2, int points = 100, double timeToSpawn = 2.0,ExplosionGenerator* exp = nullptr, physx::PxTransform cameraTransform = physx::PxTransform());
 	~nave();
 	virtual void addForceGenerator(ForceGenerator* gen) override;
 	virtual void integrate(double t) override;

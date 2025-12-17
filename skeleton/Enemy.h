@@ -16,6 +16,8 @@ protected:
 public:
 	Enemy(int _health,int _points,double _shootTime);
 	virtual ~Enemy();
+	virtual void setState() {};
+	virtual void AIFunction() {};
 	virtual void GotHit(int damage) override;
 	virtual void shoot(Proyectil* p) override;
 	virtual void proyectilUpdate(double t, Proyectil* p) override;
