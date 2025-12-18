@@ -32,7 +32,7 @@ gameScene::~gameScene()
 void gameScene::keyPress(unsigned char key)
 {
 	PxReal coef = 0.4;
-	Proyectil* p = new Proyectil(gScene, coef, coef / 2, coef * 2, phy, PxSphereGeometry(1), getCamera()->getEye(), CreateShape(PxSphereGeometry(1), getMaterial()), { 1.0f,0.0f,0.0f,1.0f }, -getCamera()->getDir() * 240, 50, 0.1, 10, 30, Vector3(30.0, 15.0, 0.0));
+	Proyectil* p = new Proyectil(gScene, coef, coef / 2, coef * 2, phy, PxSphereGeometry(1), getCamera()->getEye(), CreateShape(PxSphereGeometry(1), getMaterial()), { 1.0f,0.0f,0.0f,1.0f }, -getCamera()->getDir() * 240, 50, 0.1, 30, 30, Vector3(30.0, 15.0, 0.0));
 	p->addForceGenerator(wind);
 	switch (key) {
 	case 'c':
@@ -74,8 +74,8 @@ void gameScene::createEnemyGenerators(physx::PxMaterial* _gMaterial, physx::PxPh
 
 void gameScene::createForces()
 {
-	float height = 11.0f;
-	flFGen = new FloatingForceGenerator(height * 2, 1000.0f, Vector3(0.0, 9.8, 0.0), Vector3({ 0.0,30.0,0.0 }));
+	float height = 32.0f;
+	flFGen = new FloatingForceGenerator(height, 1000.0f, Vector3(0.0, 9.8, 0.0), Vector3({ 0.0,0.0,0.0 }));
 	whirlWind = new WhirlwindGenerator({ 0.0,30.0,0.0 }, 70.0f, 320);
 	explosion = new ExplosionGenerator({ 15.0f, 15.0f, 0.0f }, 0.0f, 2.0f, 25500.0f, { 3043.0f, 2405.0f, 1234.0f }, 1);
 	whirlWind->setIsActive(false);

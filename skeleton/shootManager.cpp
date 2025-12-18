@@ -29,15 +29,6 @@ void shootManager::addProyectil(Proyectil* pr)
 	}
 }
 
-void shootManager::removeProyectil()
-{
-	for (auto& p : proyectiles) {
-		if (p.second) {
-			p.first->DeRegItem();
-			p.second = false;
-		}
-	}
-}
 
 void shootManager::addForceGenerator(ForceGenerator* gen)
 {
@@ -66,8 +57,9 @@ void shootManager::integrate(double t)
 {
 	for (auto& p : proyectiles) {
 
-		if (p.second && p.first->getTvida() <= 0 || p.second && abs(p.first->getT()->p.x) > 60) {
-			removeProyectil();
+		if (p.second && p.first->getTvida() <= 0) {
+				p.first->DeRegItem();
+				p.second = false;
 		}
 		if (p.second) {
 			p.first->integrate(t);

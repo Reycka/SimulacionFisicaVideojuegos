@@ -41,19 +41,12 @@ void Proyectil::integrate(double t)
 			isActive = false;
 		}
 	}*/
-	if (isActive) {
-		DynamicSolidRigid::integrate(t);
-		if (tVida <= 0) {
-			isActive = false;
-			Entity::DeRegItem();
-		}
-	}
+	DynamicSolidRigid::integrate(t);
 }
 
 void Proyectil::onCollision(Entity* other)
 {
 	if (other->getEntType() == Nave && isActive) {
-		isActive = false;
-		Entity::DeRegItem();
+		tVida = 0;
 	}
 }

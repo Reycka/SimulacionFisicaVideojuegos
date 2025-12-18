@@ -100,7 +100,7 @@ void nave::AIFunction()
 
 		if (actState == GOLPEADO) {
 			smokeGenerator->setIsActive(true);
-			//TODO Probar si queda bien bajar la velocidad aqui
+			getObj()->setActorFlag(physx::PxActorFlag::eDISABLE_GRAVITY, false);
 		}
 
 		else if (actState == MUERTO) {
