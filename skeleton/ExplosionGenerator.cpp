@@ -33,6 +33,7 @@ Vector3 ExplosionGenerator::addForce(Entity* ent, float t)
      
         Vector3 entPos = ent->getT()->p;
         r = pow((entPos.x - pos.x), 2) + pow((entPos.y - pos.y), 2) + pow((entPos.z - pos.z), 2);
+        if (r == 0) r = 1;
         float dotr = r;
         r = std::sqrt(r);
         float auxR = R;
@@ -52,4 +53,9 @@ Vector3 ExplosionGenerator::addForce(Entity* ent, float t)
 bool ExplosionGenerator::isOnArea(Vector3 entPos)
 {
     return r < R;
+}
+
+void ExplosionGenerator::setExpPosition(Vector3 newPos)
+{
+    pos = newPos;
 }

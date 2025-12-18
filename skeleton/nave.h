@@ -22,6 +22,7 @@ private:
 	GravityGenerator* g;
 	WindGenerator* windProyectil;
 	WindGenerator* wind;
+	ExplosionGenerator* explosion;
 
 	//Creacion de los sistemas propios de la nave (las 2 partículas y la explosión)
 	void createSmoke();
@@ -43,5 +44,6 @@ public:
 	virtual void DeRegItem() override;
 	void onCollision(Entity* other) override;
 	void setGravity(bool value);
+	ExplosionGenerator* getExp() const;
 };
 

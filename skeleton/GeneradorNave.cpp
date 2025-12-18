@@ -27,7 +27,9 @@ GeneradorNave::~GeneradorNave()
 	for (auto rigid : srg) {
 		if (rigid.second) {
 			rigid.first->DeRegItem();
+			delete rigid.first;
 		}
+
 	}
 }
 
@@ -116,6 +118,7 @@ nave* GeneradorNave::GeneraNaveAleatoria()
 	nave* p;
 	physx::PxScene* context = n->getContext();
 	p = new nave(context, staticVariation, dynamicVariation, restitutionVariation, n->getPhy(), PxSphereGeometry(3), pos, color, v, masa, 0.0, n->getTvida(), cameraTransform, damping);
+	addForceGen(p->getExp());
 	for (auto g : FGen) {
 		p->addForceGenerator(g);
 	}

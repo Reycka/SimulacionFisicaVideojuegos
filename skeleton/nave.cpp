@@ -29,6 +29,8 @@ nave::~nave()
 	delete g;
 	delete wind;
 	delete windProyectil;
+	delete explosion;
+	RegItem();
 }
 
 void nave::addForceGenerator(ForceGenerator* gen)
@@ -51,9 +53,11 @@ void nave::integrate(double t)
 		PxMaterial* proyectilMateril = getPhy()->createMaterial(0.4f, 0.3f, 0.6f);
 		PxReal coef = 0.4;
 		Vector3 pos = Vector3(getObj()->getGlobalPose().p.x + 10, getObj()->getGlobalPose().p.y, getObj()->getGlobalPose().p.z + 10);
-		Proyectil* p = new Proyectil(getContext(), coef, coef / 2, coef * 2, getPhy(), PxSphereGeometry(1), pos, CreateShape(PxSphereGeometry(1), proyectilMateril), { 0.5f,0.5f,0.5f,1.0f }, shootPoint, 50, 0.1, 10, 30, Vector3(30.0, 15.0, 0.0));
-		p->addForceGenerator(windProyectil);
-		proyectilUpdate(t, p);
+		if (actState == FULL_VIDA) {
+			Proyectil* p = new Proyectil(getContext(), coef, coef / 2, coef * 2, getPhy(), PxSphereGeometry(1), pos, CreateShape(PxSphereGeometry(1), proyectilMateril), { 0.5f,0.5f,0.5f,1.0f }, shootPoint, 50, 0.1, 10, 30, Vector3(30.0, 15.0, 0.0));
+			p->addForceGenerator(windProyectil);
+			proyectilUpdate(t, p);
+		}
 		DynamicSolidRigid::integrate(t);
 		partShipSystem->setPosition(getObj()->getGlobalPose().p + Vector3({ -3.0,0.0,-3.0 }));
 		partShipSystem->integrate(t);
@@ -75,6 +79,11 @@ void nave::onCollision(Entity* other)
 void nave::setGravity(bool value)
 {
 	getObj()->setActorFlag(physx::PxActorFlag::eDISABLE_GRAVITY, value);
+}
+
+ExplosionGenerator* nave::getExp() const
+{
+	return explosion;
 }
 
 void nave::setState()
@@ -105,8 +114,9 @@ void nave::AIFunction()
 
 		else if (actState == MUERTO) {
 			//Activar la explosión y despawnear la nave
-			//exp->setIsActive(true);
-			tVida = 0;
+			explosion->setExpPosition(getObj()->getGlobalPose().p);
+			explosion->setIsActive(true);
+			tVida = 1;
 			//TODO ganar los puntos que hagan falta
 		}
 
@@ -163,7 +173,8 @@ void nave::createForces()
 	g = new GravityGenerator(Vector3(0.0, -10.0, 0.0));
 	windProyectil = new WindGenerator(getObj()->getGlobalPose().p, 350.0f, Vector3(200.0, 0.0, 200.0), 120);
 	wind = new WindGenerator(getObj()->getGlobalPose().p, 350.0f, Vector3(300.0, 0.0, 0.0), 60);
-	//partShipSystem->addForceGenerator(exp);
+	explosion = new ExplosionGenerator(getObj()->getGlobalPose().p, 0.0f, 2.0f, 25500.0f, { 3043.0f, 2405.0f, 1234.0f }, 1);
+	partShipSystem->addForceGenerator(explosion);
 	partShipSystem->addForceGenerator(g);
 	DynamicSolidRigid::addForceGenerator(wind);
 }

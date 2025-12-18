@@ -6,13 +6,11 @@ class WindGenerator;
 class Player;
 class RigidBodySystem;
 class FloatingForceGenerator;
-class ExplosionGenerator;
 
 class gameScene : public Scene
 {
 private:
 	Player* pla;
-	ExplosionGenerator* explosion;
 	WindGenerator* wind;
 	WhirlwindGenerator* whirlWind;
 	FloatingForceGenerator* flFGen;

@@ -18,5 +18,6 @@ public:
 	~ExplosionGenerator();
 	Vector3 addForce(Entity* ent, float t) override;
 	bool isOnArea(Vector3 entPos) override;
+	void setExpPosition(Vector3 newPos);
 };
 

@@ -1,7 +1,6 @@
 #include "gameScene.h"
 #include "WindGenerator.h"
 #include "WhirlwindGenerator.h"
-#include "ExplosionGenerator.h"
 #include "FloatingForceGenerator.h"
 #include "Player.h"
 #include "nave.h"
@@ -77,7 +76,6 @@ void gameScene::createForces()
 	float height = 32.0f;
 	flFGen = new FloatingForceGenerator(height, 1000.0f, Vector3(0.0, 9.8, 0.0), Vector3({ 0.0,0.0,0.0 }));
 	whirlWind = new WhirlwindGenerator({ 0.0,30.0,0.0 }, 70.0f, 320);
-	explosion = new ExplosionGenerator({ 15.0f, 15.0f, 0.0f }, 0.0f, 2.0f, 25500.0f, { 3043.0f, 2405.0f, 1234.0f }, 1);
 	whirlWind->setIsActive(false);
 	rgbs->addForceGenerator(flFGen);
 	rgbs->addForceGenerator(whirlWind);

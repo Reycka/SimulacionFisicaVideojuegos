@@ -11,7 +11,7 @@ protected:
 		RETIRANDOSE,
 		MUERTO
 	};
-	state actState = SPAWN;
+	state actState = FULL_VIDA;
 	int points = 0;
 public:
 	Enemy(int _health,int _points,double _shootTime);
