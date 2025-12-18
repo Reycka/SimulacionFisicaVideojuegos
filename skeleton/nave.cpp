@@ -3,7 +3,7 @@
 using namespace physx;
 nave::nave(physx::PxScene* context, physx::PxReal coefStatic, physx::PxReal dynamStatic, physx::PxReal restitution, physx::PxPhysics* gPhysx,
 	const physx::PxGeometry& geom, Vector3 pos, const Vector4& color, Vector3 _v, double _masa, double vol, 
-	double _tVida, ExplosionGenerator* _exp, physx::PxTransform cameraTransform, double _damp,
+	double _tVida, physx::PxTransform cameraTransform, double _damp,
 	int health, int points, double timeToSpawn) :
 	DynamicSolidRigid(context,coefStatic,dynamStatic,restitution,gPhysx,geom,pos,color,_v,_masa,vol,_tVida,_damp), Enemy(health,points,timeToSpawn)
 {
@@ -19,8 +19,7 @@ nave::nave(physx::PxScene* context, physx::PxReal coefStatic, physx::PxReal dyna
 	createFire();
 	createSmoke();
 
-	//Asignar el puntero de explosión de la escena a las entidades
-	exp = _exp;
+	//Crear fuerzas y desactivar la gravedad
 	createForces();
 	getObj()->setActorFlag(physx::PxActorFlag::eDISABLE_GRAVITY, true);
 }
@@ -35,6 +34,7 @@ void nave::addForceGenerator(ForceGenerator* gen)
 	for (auto ent : entities) {
 		ent->addForceGenerator(gen);
 	}
+	DynamicSolidRigid::addForceGenerator(gen);
 }
 
 void nave::integrate(double t)
@@ -47,12 +47,12 @@ void nave::integrate(double t)
 	//Proyectil propio de la nave
 	PxMaterial* proyectilMateril = getPhy()->createMaterial(0.4f, 0.3f, 0.6f);
 	PxReal coef = 0.4;
-	Vector3 pos = Vector3(getObj()->getGlobalPose().p.x + 2, getObj()->getGlobalPose().p.y, getObj()->getGlobalPose().p.z + 2);
+	Vector3 pos = Vector3(getObj()->getGlobalPose().p.x + 10, getObj()->getGlobalPose().p.y, getObj()->getGlobalPose().p.z + 10);
 	Proyectil* p = new Proyectil(getContext(), coef, coef / 2, coef * 2, getPhy(), PxSphereGeometry(1), pos, CreateShape(PxSphereGeometry(1), proyectilMateril), {1.0f,0.0f,0.0f,1.0f}, shootPoint , 50, 0.1, 10, 30, Vector3(30.0, 15.0, 0.0));
 	p->addForceGenerator(wind);
 	proyectilUpdate(t, p);
 	DynamicSolidRigid::integrate(t);
-	partShipSystem->setPosition(getObj()->getGlobalPose().p);
+	partShipSystem->setPosition(getObj()->getGlobalPose().p + Vector3({ -10.0,-10.0,-10.0 }));
 	partShipSystem->integrate(t);
 }
 
@@ -66,6 +66,11 @@ void nave::onCollision(Entity* other)
 		GotHit(1);
 		break;
 	}
+}
+
+void nave::setGravity(bool value)
+{
+	getObj()->setActorFlag(physx::PxActorFlag::eDISABLE_GRAVITY, value);
 }
 
 void nave::setState()
@@ -99,7 +104,9 @@ void nave::AIFunction()
 			//exp->setIsActive(true);
 			tVida = 0;
 			smokeGenerator->setIsActive(false);
+			smokeGenerator->DeRegParticles();
 			fireGenerator->setIsActive(false);
+			fireGenerator->DeRegParticles();
 			//TODO ganar los puntos que hagan falta
 		}
 
@@ -135,6 +142,7 @@ void nave::createSmoke()
 	Vector4 smokeColor = { 0.5,0.5,0.5,0.7 };
 	smokeGenerator = new GaussianGenerator(5, getT()->p , smokeMaterial, 1, smokeColor, { 1.0,1.0,1.0 }, 8, 6, 0.1, 0.999, 2.0);
 	smokeGenerator->setIsActive(false);
+	smokeGenerator->setLimitPos(Vector3(300.0, 300.0, 300.0));
 	partShipSystem->addGenerator(smokeGenerator);
 }
 
@@ -142,7 +150,9 @@ void nave::createFire()
 {
 	PxMaterial* fireMaterial = getPhy()->createMaterial(0.5f, 0.5f, 0.6f);
 	Vector4 fireColor = { 1.0f,1.0f,0.0f,1.0f };
-	fireGenerator = new UniformGenerator(5, getT()->p , fireMaterial, 1, fireColor, { 0.0,10.0,0.0 }, 4, 3, 0.1, 0.999, 5.0);
+	fireGenerator = new UniformGenerator(5, getT()->p + Vector3({ -80.0,-10.0,-80.0 }), fireMaterial, 1, fireColor, { 0.0,10.0,0.0 }, 4, 6, 0.1, 0.999, 5.0);
+	fireGenerator->setLimitPos(Vector3(300.0, 300.0, 300.0));
+	fireGenerator->setVariation(0, false);
 	partShipSystem->addGenerator(fireGenerator);
 }
 
@@ -150,7 +160,7 @@ void nave::createForces()
 {
 	g = new GravityGenerator(Vector3(0.0, -10.0, 0.0));
 	wind = new WindGenerator(getT()->p, 350.0f, Vector3(200.0, 80.0, 200.0), 120);
-	partShipSystem->addForceGenerator(exp);
+	//partShipSystem->addForceGenerator(exp);
 	partShipSystem->addForceGenerator(g);
 }
 

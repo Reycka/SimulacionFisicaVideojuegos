@@ -23,9 +23,10 @@ Proyectil::~Proyectil()
 {
 }
 
-/*void Proyectil::integrate(double t) Como es solidRigid no hace falta
+void Proyectil::integrate(double t) 
 {
-	if (isActive) {
+
+/*	if (isActive) {
 		tVida -= t;
 		//ClearOldForces
 		force = Vector3({ 0.0,0.0,0.0 });
@@ -39,8 +40,15 @@ Proyectil::~Proyectil()
 			DeRegItem();
 			isActive = false;
 		}
+	}*/
+	if (isActive) {
+		DynamicSolidRigid::integrate(t);
+		if (tVida <= 0) {
+			isActive = false;
+			Entity::DeRegItem();
+		}
 	}
-}*/
+}
 
 void Proyectil::onCollision(Entity* other)
 {

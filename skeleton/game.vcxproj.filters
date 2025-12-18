@@ -121,6 +121,7 @@
     <ClCompile Include="Characther.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="GeneradorNave.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render\Camera.h">
@@ -258,6 +259,7 @@
     <ClInclude Include="CallBackEnumType.h">
       <Filter>Entities\SolidosRigidos</Filter>
     </ClInclude>
+    <ClInclude Include="GeneradorNave.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

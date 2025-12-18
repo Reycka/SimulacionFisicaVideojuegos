@@ -19,7 +19,6 @@ private:
 	ParticleSystem* partShipSystem;
 	GaussianGenerator* smokeGenerator;
 	UniformGenerator* fireGenerator;
-	ExplosionGenerator* exp;
 	GravityGenerator* g;
 	WindGenerator* wind;
 
@@ -34,7 +33,7 @@ private:
 public:
 	nave(physx::PxScene* context, physx::PxReal coefStatic, physx::PxReal dynamStatic, physx::PxReal restitution, physx::PxPhysics* gPhysx, const physx::PxGeometry& geom,
 		Vector3 pos, const Vector4& color, Vector3 _v, double _masa, double vol, double _tVida, 
-		ExplosionGenerator* exp = nullptr, physx::PxTransform cameraTransform = physx::PxTransform(),double _damp = 0.999,
+		physx::PxTransform cameraTransform = physx::PxTransform(),double _damp = 0.999,
 		int health = 2, int points = 100, double timeToSpawn = 2.0);
 	~nave();
 	virtual void addForceGenerator(ForceGenerator* gen) override;
@@ -42,5 +41,6 @@ public:
 	virtual void RegItem() override;
 	virtual void DeRegItem() override;
 	void onCollision(Entity* other) override;
+	void setGravity(bool value);
 };
 
