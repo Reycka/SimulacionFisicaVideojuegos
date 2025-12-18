@@ -43,17 +43,17 @@ void nave::integrate(double t)
 	AIFunction();
 
 	//Colocación de las partículas para que sigan a la nave e integrate del generador
-	partShipSystem->setPosition(getT()->p);
-	partShipSystem->integrate(t);
 
 	//Proyectil propio de la nave
 	PxMaterial* proyectilMateril = getPhy()->createMaterial(0.4f, 0.3f, 0.6f);
 	PxReal coef = 0.4;
-	Vector3 pos = Vector3(getT()->p.x + 2, getT()->p.y, getT()->p.z + 2);
+	Vector3 pos = Vector3(getObj()->getGlobalPose().p.x + 2, getObj()->getGlobalPose().p.y, getObj()->getGlobalPose().p.z + 2);
 	Proyectil* p = new Proyectil(getContext(), coef, coef / 2, coef * 2, getPhy(), PxSphereGeometry(1), pos, CreateShape(PxSphereGeometry(1), proyectilMateril), {1.0f,0.0f,0.0f,1.0f}, shootPoint , 50, 0.1, 10, 30, Vector3(30.0, 15.0, 0.0));
 	p->addForceGenerator(wind);
 	proyectilUpdate(t, p);
-//	DynamicSolidRigid::integrate(t);
+	DynamicSolidRigid::integrate(t);
+	partShipSystem->setPosition(getObj()->getGlobalPose().p);
+	partShipSystem->integrate(t);
 }
 
 void nave::onCollision(Entity* other)
@@ -149,7 +149,7 @@ void nave::createFire()
 void nave::createForces()
 {
 	g = new GravityGenerator(Vector3(0.0, -10.0, 0.0));
-	wind = new WindGenerator(getT()->p, 50.0f, Vector3(-20.0, 0.0, 0.0), 120);
+	wind = new WindGenerator(getT()->p, 350.0f, Vector3(200.0, 80.0, 200.0), 120);
 	partShipSystem->addForceGenerator(exp);
 	partShipSystem->addForceGenerator(g);
 }

@@ -33,6 +33,7 @@ void DynamicSolidRigid::integrate(double t)
 	//AddNewForces
 	addForces(t);
 	obj->addForce(force);
+
 }
 
 void DynamicSolidRigid::RegItem()
