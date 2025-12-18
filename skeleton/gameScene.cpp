@@ -7,6 +7,7 @@
 #include "nave.h"
 #include "RigidBodySystem.h"
 #include "SolidRigidGaussianGenerator.h"
+#include "GeneradorNave.h"
 using namespace physx;
 
 gameScene::gameScene(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, physx::PxScene* _gScene, Camera* _cam) : Scene(_gMaterial, _phy, _gScene, _cam)
@@ -66,20 +67,20 @@ void gameScene::createLimits()
 void gameScene::createEnemyGenerators(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, physx::PxScene* _gScene, Camera* _cam)
 {
 	PxReal coef = 0.4;
-	AddEntity(new nave(_gScene, coef, coef / 2, coef * 2, _phy, PxSphereGeometry(3), Vector3(0.0, 40.0, 0.0),
-		Vector4(1.0, 0.0, 1.0, 1.0), Vector3(1.0, 0.0, 0.0), 5, 2, 5.0,getCamera()->getTransform()));
+	rgbs->addGenerator(new GeneradorNave(gScene, coef, coef / 2, coef * 2, _phy, PxSphereGeometry(3), Vector3(0.0, 40.0, 0.0),
+		Vector4(1.0, 0.0, 1.0, 1.0), Vector3(1.0, 0.0, 0.0), 30.0, 2, 5.0, getCamera()->getTransform()));
+
 }
 
 void gameScene::createForces()
 {
 	float height = 32.0f;
 	flFGen = new FloatingForceGenerator(height * 2, 1000.0f, Vector3(0.0, 9.8, 0.0), Vector3({ 0.0,30.0,0.0 }));
-	whirlWind = new WhirlwindGenerator({ 0.0,30.0,0.0 }, 70.0f, 10);
+	whirlWind = new WhirlwindGenerator({ 0.0,30.0,0.0 }, 70.0f, 320);
 	explosion = new ExplosionGenerator({ 15.0f, 15.0f, 0.0f }, 0.0f, 2.0f, 25500.0f, { 3043.0f, 2405.0f, 1234.0f }, 1);
 	whirlWind->setIsActive(false);
 	rgbs->addForceGenerator(flFGen);
 	rgbs->addForceGenerator(whirlWind);
-	rgbs->addForceGenerator(wind);
 	AddForceGenerator(flFGen);
 	AddForceGenerator(whirlWind);
 	AddForceGenerator(wind);

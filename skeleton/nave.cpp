@@ -40,20 +40,22 @@ void nave::addForceGenerator(ForceGenerator* gen)
 void nave::integrate(double t)
 {
 
-	AIFunction();
+	if (tVida > 0) {
+		AIFunction();
 
-	//Colocación de las partículas para que sigan a la nave e integrate del generador
+		//Colocación de las partículas para que sigan a la nave e integrate del generador
 
-	//Proyectil propio de la nave
-	PxMaterial* proyectilMateril = getPhy()->createMaterial(0.4f, 0.3f, 0.6f);
-	PxReal coef = 0.4;
-	Vector3 pos = Vector3(getObj()->getGlobalPose().p.x + 10, getObj()->getGlobalPose().p.y, getObj()->getGlobalPose().p.z + 10);
-	Proyectil* p = new Proyectil(getContext(), coef, coef / 2, coef * 2, getPhy(), PxSphereGeometry(1), pos, CreateShape(PxSphereGeometry(1), proyectilMateril), {1.0f,0.0f,0.0f,1.0f}, shootPoint , 50, 0.1, 10, 30, Vector3(30.0, 15.0, 0.0));
-	p->addForceGenerator(wind);
-	proyectilUpdate(t, p);
-	DynamicSolidRigid::integrate(t);
-	partShipSystem->setPosition(getObj()->getGlobalPose().p + Vector3({ -10.0,-10.0,-10.0 }));
-	partShipSystem->integrate(t);
+		//Proyectil propio de la nave
+		PxMaterial* proyectilMateril = getPhy()->createMaterial(0.4f, 0.3f, 0.6f);
+		PxReal coef = 0.4;
+		Vector3 pos = Vector3(getObj()->getGlobalPose().p.x + 10, getObj()->getGlobalPose().p.y, getObj()->getGlobalPose().p.z + 10);
+		Proyectil* p = new Proyectil(getContext(), coef, coef / 2, coef * 2, getPhy(), PxSphereGeometry(1), pos, CreateShape(PxSphereGeometry(1), proyectilMateril), { 0.5f,0.5f,0.5f,1.0f }, shootPoint, 50, 0.1, 10, 30, Vector3(30.0, 15.0, 0.0));
+		p->addForceGenerator(wind);
+		proyectilUpdate(t, p);
+		DynamicSolidRigid::integrate(t);
+		partShipSystem->setPosition(getObj()->getGlobalPose().p + Vector3({ -10.0,-10.0,-10.0 }));
+		partShipSystem->integrate(t);
+	}
 }
 
 void nave::onCollision(Entity* other)
@@ -103,10 +105,6 @@ void nave::AIFunction()
 			//Activar la explosión y despawnear la nave
 			//exp->setIsActive(true);
 			tVida = 0;
-			smokeGenerator->setIsActive(false);
-			smokeGenerator->DeRegParticles();
-			fireGenerator->setIsActive(false);
-			fireGenerator->DeRegParticles();
 			//TODO ganar los puntos que hagan falta
 		}
 
@@ -126,6 +124,7 @@ void nave::RegItem()
 		ent->RegItem();
 	}
 	DynamicSolidRigid::RegItem();
+	sh->DeRegItem();
 }
 
 void nave::DeRegItem()
@@ -134,6 +133,7 @@ void nave::DeRegItem()
 		ent->DeRegItem();
 	}
 	DynamicSolidRigid::DeRegItem();
+	sh->RegItem();
 }
 
 void nave::createSmoke()

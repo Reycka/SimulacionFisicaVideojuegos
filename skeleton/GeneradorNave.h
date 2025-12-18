@@ -1,9 +1,13 @@
 #pragma once
 #include "SolidRigidGenerator.h"
+#include "nave.h"
 class GeneradorNave : public SolidRigidGenerator
 {
 private:
 	std::normal_distribution<double> nd;
+	nave* n;
+	std::vector<std::pair<nave*, bool>>srg;
+	physx::PxTransform cameraTransform;
 public:
 	GeneradorNave(physx::PxScene* context, physx::PxReal coefStatic, physx::PxReal dynamStatic, physx::PxReal restitution, physx::PxPhysics* gPhysx, const physx::PxGeometry& geom,
 		Vector3 pos, const Vector4& color, Vector3 _v, double _masa, double vol, double _tVida,
@@ -17,6 +21,7 @@ public:
 	virtual void setIsActive(bool active) override;
 	virtual void addForceGen(ForceGenerator* g) override;
 	virtual DynamicSolidRigid* GeneraAleatoria() override;
+	nave* GeneraNaveAleatoria();
 	virtual void RegSolidRigid() override;
 	virtual void DeRegSolidRigid() override;
 	virtual void addSolidRigid() override;
