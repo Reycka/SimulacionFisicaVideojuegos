@@ -20,6 +20,7 @@ private:
 	GaussianGenerator* smokeGenerator;
 	UniformGenerator* fireGenerator;
 	GravityGenerator* g;
+	WindGenerator* windProyectil;
 	WindGenerator* wind;
 
 	//Creacion de los sistemas propios de la nave (las 2 partículas y la explosión)

@@ -27,6 +27,7 @@ DynamicSolidRigid::~DynamicSolidRigid()
 
 void DynamicSolidRigid::integrate(double t)
 {
+	setTransform(&obj->getGlobalPose());
 	tVida -= t;
 	//ClearOldForces
 	force = Vector3({ 0.0,0.0,0.0 });

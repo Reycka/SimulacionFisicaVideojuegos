@@ -180,6 +180,11 @@ EntityType Entity::getEntType() const
 	return type;
 }
 
+void Entity::setTransform(PxTransform* tr)
+{
+	*transform = *tr;
+}
+
 void Entity::setShape(physx::PxShape* sh,const Vector4& color)
 {
 	shape = sh;

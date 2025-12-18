@@ -52,7 +52,7 @@ void Proyectil::integrate(double t)
 
 void Proyectil::onCollision(Entity* other)
 {
-	if (other->getEntType() == Nave) {
+	if (other->getEntType() == Nave && isActive) {
 		isActive = false;
 		Entity::DeRegItem();
 	}

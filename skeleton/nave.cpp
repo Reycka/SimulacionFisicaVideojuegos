@@ -11,7 +11,7 @@ nave::nave(physx::PxScene* context, physx::PxReal coefStatic, physx::PxReal dyna
 	//Variables globales inicializadas
 	initialPositon = pos;
 	finalPos = pos + Vector3(300.0, 0.0, 0.0);
-	shootPoint = cameraTransform.p;
+	shootPoint = pos - cameraTransform.p;
 
 	//Sistemas de partículas internos
 	partShipSystem = new ParticleSystem();
@@ -27,6 +27,8 @@ nave::nave(physx::PxScene* context, physx::PxReal coefStatic, physx::PxReal dyna
 nave::~nave()
 {
 	delete g;
+	delete wind;
+	delete windProyectil;
 }
 
 void nave::addForceGenerator(ForceGenerator* gen)
@@ -50,10 +52,10 @@ void nave::integrate(double t)
 		PxReal coef = 0.4;
 		Vector3 pos = Vector3(getObj()->getGlobalPose().p.x + 10, getObj()->getGlobalPose().p.y, getObj()->getGlobalPose().p.z + 10);
 		Proyectil* p = new Proyectil(getContext(), coef, coef / 2, coef * 2, getPhy(), PxSphereGeometry(1), pos, CreateShape(PxSphereGeometry(1), proyectilMateril), { 0.5f,0.5f,0.5f,1.0f }, shootPoint, 50, 0.1, 10, 30, Vector3(30.0, 15.0, 0.0));
-		p->addForceGenerator(wind);
+		p->addForceGenerator(windProyectil);
 		proyectilUpdate(t, p);
 		DynamicSolidRigid::integrate(t);
-		partShipSystem->setPosition(getObj()->getGlobalPose().p + Vector3({ -10.0,-10.0,-10.0 }));
+		partShipSystem->setPosition(getObj()->getGlobalPose().p + Vector3({ -3.0,0.0,-3.0 }));
 		partShipSystem->integrate(t);
 	}
 }
@@ -124,7 +126,7 @@ void nave::RegItem()
 		ent->RegItem();
 	}
 	DynamicSolidRigid::RegItem();
-	sh->DeRegItem();
+	sh->RegItem();
 }
 
 void nave::DeRegItem()
@@ -133,14 +135,14 @@ void nave::DeRegItem()
 		ent->DeRegItem();
 	}
 	DynamicSolidRigid::DeRegItem();
-	sh->RegItem();
+	sh->DeRegItem();
 }
 
 void nave::createSmoke()
 {
 	PxMaterial* smokeMaterial = getPhy()->createMaterial(0.5f, 0.5f, 0.6f);
 	Vector4 smokeColor = { 0.5,0.5,0.5,0.7 };
-	smokeGenerator = new GaussianGenerator(5, getT()->p , smokeMaterial, 1, smokeColor, { 1.0,1.0,1.0 }, 8, 6, 0.1, 0.999, 2.0);
+	smokeGenerator = new GaussianGenerator(5, getObj()->getGlobalPose().p, smokeMaterial, 1, smokeColor, { 1.0,1.0,1.0 }, 8, 6, 0.1, 0.999, 2.0);
 	smokeGenerator->setIsActive(false);
 	smokeGenerator->setLimitPos(Vector3(300.0, 300.0, 300.0));
 	partShipSystem->addGenerator(smokeGenerator);
@@ -150,7 +152,7 @@ void nave::createFire()
 {
 	PxMaterial* fireMaterial = getPhy()->createMaterial(0.5f, 0.5f, 0.6f);
 	Vector4 fireColor = { 1.0f,1.0f,0.0f,1.0f };
-	fireGenerator = new UniformGenerator(5, getT()->p + Vector3({ -80.0,-10.0,-80.0 }), fireMaterial, 1, fireColor, { 0.0,10.0,0.0 }, 4, 6, 0.1, 0.999, 5.0);
+	fireGenerator = new UniformGenerator(5, getObj()->getGlobalPose().p + Vector3({ -20.0,5.0,-20.0 }), fireMaterial, 1, fireColor, { 0.0,10.0,0.0 }, 4, 6, 0.1, 0.999, 5.0);
 	fireGenerator->setLimitPos(Vector3(300.0, 300.0, 300.0));
 	fireGenerator->setVariation(0, false);
 	partShipSystem->addGenerator(fireGenerator);
@@ -159,9 +161,11 @@ void nave::createFire()
 void nave::createForces()
 {
 	g = new GravityGenerator(Vector3(0.0, -10.0, 0.0));
-	wind = new WindGenerator(getT()->p, 350.0f, Vector3(200.0, 80.0, 200.0), 120);
+	windProyectil = new WindGenerator(getObj()->getGlobalPose().p, 350.0f, Vector3(200.0, 0.0, 200.0), 120);
+	wind = new WindGenerator(getObj()->getGlobalPose().p, 350.0f, Vector3(300.0, 0.0, 0.0), 60);
 	//partShipSystem->addForceGenerator(exp);
 	partShipSystem->addForceGenerator(g);
+	DynamicSolidRigid::addForceGenerator(wind);
 }
 
 

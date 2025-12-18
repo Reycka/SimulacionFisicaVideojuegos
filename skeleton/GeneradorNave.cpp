@@ -1,21 +1,20 @@
 #include "GeneradorNave.h"
 using namespace physx;
 
-GeneradorNave::GeneradorNave(physx::PxScene* context, physx::PxReal coefStatic, physx::PxReal dynamStatic, physx::PxReal restitution, physx::PxPhysics* gPhysx, const physx::PxGeometry& geom, Vector3 pos, const Vector4& color, Vector3 _v, double _masa, double vol, double _tVida, physx::PxTransform _cameraTransform, double _damp, int health, int points, double timeToSpawn)
+GeneradorNave::GeneradorNave(physx::PxScene* context, physx::PxReal coefStatic, physx::PxReal dynamStatic, physx::PxReal restitution, physx::PxPhysics* gPhysx, const physx::PxGeometry& geom, Vector3 pos, const Vector4& color, Vector3 _v, double _masa, double vol, double _tVida, physx::PxTransform _cameraTransform, double _damp, int health, int points, double _timeToSpawn)
 {
 	//Atributos del generador
 	radius = 5.0;
 	limitPos.x = 400.0;
 	limitPos.y = 400.0;
 	limitPos.z = 400.0;
-	timeToSpawn = 3.0;
+	timeToSpawn = 6.0;
 	timePass = timeToSpawn;
 	limit = 1;
 	//Partícula modelo
 	PxReal coef = 0.4;
 	cameraTransform = _cameraTransform;
-	n = new nave(context, coef, coef / 2, coef * 2, gPhysx, PxSphereGeometry(3), Vector3(-200.0, 40.0, 0.0),
-		Vector4(1.0, 0.0, 1.0, 1.0), Vector3(1.0, 0.0, 0.0), 5, 2, 5.0, cameraTransform);
+	n = new nave(context, coef, coef / 2, coef * 2, gPhysx,geom,pos,color, _v, _masa, vol, _tVida, cameraTransform);
 	n->DeRegItem();
 
 	//Aleatorio
@@ -109,11 +108,6 @@ nave* GeneradorNave::GeneraNaveAleatoria()
 	v.y = v.y + (v.y * velVariationY);
 	v.z = v.z + (v.z * velVariationZ);
 
-
-	//Asignación de la vida
-	double lifeVariation = life(_mt);
-	double vida = n->getTvida() + lifeVariation;
-
 	//Asignacion de damping
 	double damping = n->getDamp();
 
@@ -121,7 +115,7 @@ nave* GeneradorNave::GeneraNaveAleatoria()
 	//Creación y devolución de la partícula
 	nave* p;
 	physx::PxScene* context = n->getContext();
-	p = new nave(context, staticVariation, dynamicVariation, restitutionVariation, n->getPhy(), PxSphereGeometry(3), pos, color, v, masa, 0.0, vida, cameraTransform, damping);
+	p = new nave(context, staticVariation, dynamicVariation, restitutionVariation, n->getPhy(), PxSphereGeometry(3), pos, color, v, masa, 0.0, n->getTvida(), cameraTransform, damping);
 	for (auto g : FGen) {
 		p->addForceGenerator(g);
 	}
@@ -167,7 +161,7 @@ void GeneradorNave::removeSolidRigid()
 			rigid.second = false;
 
 		}
-		else if (rigid.second == true && std::abs(rigid.first->getT()->p.x) > limitPos.x || rigid.second == true && std::abs(rigid.first->getT()->p.y) > limitPos.y || rigid.second == true && std::abs(rigid.first->getT()->p.z) > limitPos.z) {
+		else if (rigid.second == true && std::abs(rigid.first->getObj()->getGlobalPose().p.x) > limitPos.x || rigid.second == true && std::abs(rigid.first->getObj()->getGlobalPose().p.y) > limitPos.y || rigid.second == true && std::abs(rigid.first->getObj()->getGlobalPose().p.z) > limitPos.z) {
 			rigid.first->DeRegItem();
 			rigid.second = false;
 		}

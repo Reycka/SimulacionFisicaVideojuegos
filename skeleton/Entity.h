@@ -55,6 +55,7 @@ public:
 	double getTvida() const;
 	double getDamp() const;
 	EntityType getEntType()const ;
+	void setTransform(physx::PxTransform* tr);
 	void setShape(physx::PxShape* sh,const Vector4& color);
 	void setRenderItem(physx::PxRigidActor* act);
 	void setMasa(double newMasa);
@@ -62,4 +63,5 @@ public:
 	virtual void integrate(double t) {};
 
 };
+
 
