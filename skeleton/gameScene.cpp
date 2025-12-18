@@ -37,12 +37,6 @@ void gameScene::keyPress(unsigned char key)
 	case 'c':
 		pla->shoot(p);
 		break;
-	case 'n':
-		whirlWind->setIsActive(!whirlWind->getIsActive());
-		break;
-	case 'm':
-		wind->setIsActive(!wind->getIsActive());
-		break;
 	}
 }
 void gameScene::createLimits()
@@ -68,6 +62,9 @@ void gameScene::createEnemyGenerators(physx::PxMaterial* _gMaterial, physx::PxPh
 	PxReal coef = 0.4;
 	rgbs->addGenerator(new GeneradorNave(gScene, coef, coef / 2, coef * 2, _phy, PxSphereGeometry(3), Vector3(-100.0, 40.0, 0.0),
 		Vector4(1.0, 0.0, 1.0, 1.0), Vector3(1.0, 0.0, 0.0), 30.0, 2, 100.0, getCamera()->getTransform()));
+	coef = 0.5;
+	rgbs->addGenerator(new GeneradorNave(gScene, coef, coef / 2, coef * 2, _phy, PxBoxGeometry(10.0, 3.0, 5.0), Vector3(-100.0, 15.0, 0.0),
+		Vector4(1.0, 0.0, 1.0, 1.0), Vector3(1.0, 0.0, 0.0), 10.0, 2, 100.0, getCamera()->getTransform(),0.500,1,150,4.0));
 
 }
 
@@ -75,12 +72,8 @@ void gameScene::createForces()
 {
 	float height = 32.0f;
 	flFGen = new FloatingForceGenerator(height, 1000.0f, Vector3(0.0, 9.8, 0.0), Vector3({ 0.0,0.0,0.0 }));
-	whirlWind = new WhirlwindGenerator({ 0.0,30.0,0.0 }, 70.0f, 320);
-	whirlWind->setIsActive(false);
 	rgbs->addForceGenerator(flFGen);
-	rgbs->addForceGenerator(whirlWind);
 	AddForceGenerator(flFGen);
-	AddForceGenerator(whirlWind);
 	AddForceGenerator(wind);
 
 }

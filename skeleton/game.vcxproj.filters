@@ -255,13 +255,13 @@
     <ClInclude Include="Particle.h">
       <Filter>Entities\SolidosRigidos</Filter>
     </ClInclude>
-    <ClInclude Include="CallBackEnumType.h">
-      <Filter>Entities\SolidosRigidos</Filter>
-    </ClInclude>
     <ClInclude Include="GeneradorNave.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="nave.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="CallBackEnumType.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

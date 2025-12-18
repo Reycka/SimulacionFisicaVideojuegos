@@ -1,7 +1,8 @@
 #include "GeneradorNave.h"
 using namespace physx;
 
-GeneradorNave::GeneradorNave(physx::PxScene* context, physx::PxReal coefStatic, physx::PxReal dynamStatic, physx::PxReal restitution, physx::PxPhysics* gPhysx, const physx::PxGeometry& geom, Vector3 pos, const Vector4& color, Vector3 _v, double _masa, double vol, double _tVida, physx::PxTransform _cameraTransform, double _damp, int health, int points, double _timeToSpawn)
+GeneradorNave::GeneradorNave(physx::PxScene* context, physx::PxReal coefStatic, physx::PxReal dynamStatic, physx::PxReal restitution, physx::PxPhysics* gPhysx, const physx::PxGeometry& geom, Vector3 pos, const Vector4& color, Vector3 _v, double _masa, double vol, double _tVida, 
+	physx::PxTransform _cameraTransform, double _damp, int health, int points, double _timeToSpawn)
 {
 	//Atributos del generador
 	radius = 5.0;
@@ -14,7 +15,7 @@ GeneradorNave::GeneradorNave(physx::PxScene* context, physx::PxReal coefStatic, 
 	//Partícula modelo
 	PxReal coef = 0.4;
 	cameraTransform = _cameraTransform;
-	n = new nave(context, coef, coef / 2, coef * 2, gPhysx,geom,pos,color, _v, _masa, vol, _tVida, cameraTransform);
+	n = new nave(context, coef, coef / 2, coef * 2, gPhysx,geom,pos,color, _v, _masa, vol, _tVida, cameraTransform,_damp,health,points,_timeToSpawn);
 	n->DeRegItem();
 
 	//Aleatorio
@@ -117,7 +118,15 @@ nave* GeneradorNave::GeneraNaveAleatoria()
 	//Creación y devolución de la partícula
 	nave* p;
 	physx::PxScene* context = n->getContext();
-	p = new nave(context, staticVariation, dynamicVariation, restitutionVariation, n->getPhy(), PxSphereGeometry(3), pos, color, v, masa, 0.0, n->getTvida(), cameraTransform, damping);
+	switch (n->getGeom().getType()) {
+	case (PxGeometryType::eSPHERE):
+		p = new nave(context, staticVariation, dynamicVariation, restitutionVariation, n->getPhy(), PxSphereGeometry(3), pos, color, v, masa, 0.0, n->getTvida(), cameraTransform, damping,n->getHealth(),n->getPoints(),n->getTspawn());
+		break;
+
+	case (PxGeometryType::eBOX):
+		p = new nave(context, staticVariation, dynamicVariation, restitutionVariation, n->getPhy(), PxBoxGeometry(10.0, 3.0, 5.0), pos, color, v, masa, 0.0, n->getTvida(), cameraTransform, damping, n->getHealth(), n->getPoints(), n->getTspawn());
+		break;
+	}
 	addForceGen(p->getExp());
 	for (auto g : FGen) {
 		p->addForceGenerator(g);

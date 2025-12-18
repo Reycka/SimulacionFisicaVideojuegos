@@ -1,7 +1,6 @@
 #pragma once
 #include "Scene.h"
 class nave;
-class WhirlwindGenerator;
 class WindGenerator;
 class Player;
 class RigidBodySystem;
@@ -12,7 +11,6 @@ class gameScene : public Scene
 private:
 	Player* pla;
 	WindGenerator* wind;
-	WhirlwindGenerator* whirlWind;
 	FloatingForceGenerator* flFGen;
 	RigidBodySystem* rgbs;
 	physx::PxPhysics* phy;

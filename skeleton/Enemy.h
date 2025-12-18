@@ -21,5 +21,8 @@ public:
 	virtual void GotHit(int damage) override;
 	virtual void shoot(Proyectil* p) override;
 	virtual void proyectilUpdate(double t, Proyectil* p) override;
+	int getHealth() { return health; }
+	float getPoints() { return points; }
+	float getTspawn() { return shootTime; }
 };
 
