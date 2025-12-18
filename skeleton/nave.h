@@ -6,6 +6,7 @@
 #include "GaussianGenerator.h"
 #include "UniformGenerator.h"
 #include "ExplosionGenerator.h"
+#include "WindGenerator.h"
 class nave : public DynamicSolidRigid ,public Enemy
 {
 private:
@@ -20,6 +21,7 @@ private:
 	UniformGenerator* fireGenerator;
 	ExplosionGenerator* exp;
 	GravityGenerator* g;
+	WindGenerator* wind;
 
 	//Creacion de los sistemas propios de la nave (las 2 partículas y la explosión)
 	void createSmoke();
@@ -30,8 +32,10 @@ private:
 	void AIFunction() override;
 
 public:
-	nave(physx::PxScene* context, physx::PxReal coefStatic, physx::PxReal dynamStatic, physx::PxReal restitution, physx::PxPhysics* gPhysx, const physx::PxGeometry& geom, Vector3 pos, const Vector4& color, Vector3 _v, double _masa, double vol, double _tVida, double _damp = 0.999,
-		int health = 2, int points = 100, double timeToSpawn = 2.0,ExplosionGenerator* exp = nullptr, physx::PxTransform cameraTransform = physx::PxTransform());
+	nave(physx::PxScene* context, physx::PxReal coefStatic, physx::PxReal dynamStatic, physx::PxReal restitution, physx::PxPhysics* gPhysx, const physx::PxGeometry& geom,
+		Vector3 pos, const Vector4& color, Vector3 _v, double _masa, double vol, double _tVida, 
+		ExplosionGenerator* exp = nullptr, physx::PxTransform cameraTransform = physx::PxTransform(),double _damp = 0.999,
+		int health = 2, int points = 100, double timeToSpawn = 2.0);
 	~nave();
 	virtual void addForceGenerator(ForceGenerator* gen) override;
 	virtual void integrate(double t) override;

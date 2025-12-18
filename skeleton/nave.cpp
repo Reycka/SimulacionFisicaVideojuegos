@@ -2,8 +2,9 @@
 #include <iostream>
 using namespace physx;
 nave::nave(physx::PxScene* context, physx::PxReal coefStatic, physx::PxReal dynamStatic, physx::PxReal restitution, physx::PxPhysics* gPhysx,
-	const physx::PxGeometry& geom, Vector3 pos, const Vector4& color, Vector3 _v, double _masa, double vol, double _tVida, double _damp, 
-	int health, int points, double timeToSpawn, ExplosionGenerator* _exp, physx::PxTransform cameraTransform) :
+	const physx::PxGeometry& geom, Vector3 pos, const Vector4& color, Vector3 _v, double _masa, double vol, 
+	double _tVida, ExplosionGenerator* _exp, physx::PxTransform cameraTransform, double _damp,
+	int health, int points, double timeToSpawn) :
 	DynamicSolidRigid(context,coefStatic,dynamStatic,restitution,gPhysx,geom,pos,color,_v,_masa,vol,_tVida,_damp), Enemy(health,points,timeToSpawn)
 {
 	type = Nave;
@@ -46,10 +47,13 @@ void nave::integrate(double t)
 	partShipSystem->integrate(t);
 
 	//Proyectil propio de la nave
-//	PxMaterial* proyectilMateril = getPhy()->createMaterial(0.4f, 0.3f, 0.6f);
-//	Proyectil* p = new Proyectil(getT()->p, CreateShape(PxSphereGeometry(1), proyectilMateril), { 1.0f,1.0f,0.0f,1.0f }, shootPoint, 10, 0.02, 60, 60, Vector3(30.0, 15.0, 0.0), 0.999);
-//	proyectilUpdate(t, p);
-	DynamicSolidRigid::integrate(t);
+	PxMaterial* proyectilMateril = getPhy()->createMaterial(0.4f, 0.3f, 0.6f);
+	PxReal coef = 0.4;
+	Vector3 pos = Vector3(getT()->p.x + 2, getT()->p.y, getT()->p.z + 2);
+	Proyectil* p = new Proyectil(getContext(), coef, coef / 2, coef * 2, getPhy(), PxSphereGeometry(1), pos, CreateShape(PxSphereGeometry(1), proyectilMateril), {1.0f,0.0f,0.0f,1.0f}, shootPoint , 50, 0.1, 10, 30, Vector3(30.0, 15.0, 0.0));
+	p->addForceGenerator(wind);
+	proyectilUpdate(t, p);
+//	DynamicSolidRigid::integrate(t);
 }
 
 void nave::onCollision(Entity* other)
@@ -145,6 +149,7 @@ void nave::createFire()
 void nave::createForces()
 {
 	g = new GravityGenerator(Vector3(0.0, -10.0, 0.0));
+	wind = new WindGenerator(getT()->p, 50.0f, Vector3(-20.0, 0.0, 0.0), 120);
 	partShipSystem->addForceGenerator(exp);
 	partShipSystem->addForceGenerator(g);
 }
