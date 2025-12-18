@@ -23,7 +23,7 @@ Proyectil::~Proyectil()
 {
 }
 
-void Proyectil::integrate(double t) 
+void Proyectil::integrate(double t)  //Esta función es la que se usaba para los proyectiles cuando estos no se trataban de Solidos Rigidos
 {
 
 /*	if (isActive) {
