@@ -3,7 +3,6 @@
 class nave;
 class WhirlwindGenerator;
 class WindGenerator;
-class GravityGenerator;
 class Player;
 class RigidBodySystem;
 class FloatingForceGenerator;
@@ -15,13 +14,12 @@ private:
 	WindGenerator* wind;
 	WhirlwindGenerator* whirlWind;
 	FloatingForceGenerator* flFGen;
-	nave* modelShip;
-	nave* modelBoat;
 	RigidBodySystem* rgbs;
+	physx::PxPhysics* phy;
+	physx::PxScene* gScene;
 
 	void createLimits();
-	void createModels();
-	void createEnemyGenerators();
+	void createEnemyGenerators(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, physx::PxScene* _gScene, Camera* _cam);
 	void createForces();
 
 public:

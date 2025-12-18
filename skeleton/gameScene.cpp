@@ -1,5 +1,4 @@
 #include "gameScene.h"
-#include "GravityGenerator.h"
 #include "WindGenerator.h"
 #include "WhirlwindGenerator.h"
 #include "ExplosionGenerator.h"
@@ -7,14 +6,18 @@
 #include "Player.h"
 #include "nave.h"
 #include "RigidBodySystem.h"
+#include "SolidRigidGaussianGenerator.h"
 using namespace physx;
 
 gameScene::gameScene(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, physx::PxScene* _gScene, Camera* _cam) : Scene(_gMaterial, _phy, _gScene, _cam)
 {
+	gScene = _gScene;
+	phy = _phy;
 	pla = new Player(3);
 	rgbs = new RigidBodySystem();
+	wind = new WindGenerator(_cam->getTransform().p , 50.0f, Vector3(20.0, 0.0, 0.0), 120);
 	createLimits();
-	createEnemyGenerators();
+	createEnemyGenerators(_gMaterial,_phy, _gScene, _cam);
 	createForces();
 	AddEntity(pla);
 	AddEntity(rgbs);
@@ -27,9 +30,12 @@ gameScene::~gameScene()
 
 void gameScene::keyPress(unsigned char key)
 {
+	PxReal coef = 0.4;
+	Proyectil* p = new Proyectil(gScene, coef, coef / 2, coef * 2, phy, PxSphereGeometry(1), getCamera()->getEye(), CreateShape(PxSphereGeometry(1), getMaterial()), { 1.0f,0.0f,0.0f,1.0f }, -getCamera()->getDir() * 240, 50, 0.1, 10, 30, Vector3(30.0, 15.0, 0.0));
+	p->addForceGenerator(wind);
 	switch (key) {
 	case 'c':
-		pla->shoot(new Proyectil(getCamera()->getEye(), CreateShape(PxSphereGeometry(1), getMaterial()), { 1.0f,0.0f,0.0f,1.0f }, getCamera()->getDir() * 60, 50,0.1, 10, 30, Vector3(30.0, 15.0, 0.0)));
+		pla->shoot(p);
 		break;
 	case 'n':
 		whirlWind->setIsActive(!whirlWind->getIsActive());
@@ -57,12 +63,11 @@ void gameScene::createLimits()
 
 
 }
-void gameScene::createModels()
+void gameScene::createEnemyGenerators(physx::PxMaterial* _gMaterial, physx::PxPhysics* _phy, physx::PxScene* _gScene, Camera* _cam)
 {
-}
-void gameScene::createEnemyGenerators()
-{
-	createModels();
+	PxReal coef = 0.4;
+	AddEntity(new nave(_gScene, coef, coef / 2, coef * 2, _phy, PxSphereGeometry(1), Vector3(0.0, 40.0, 0.0),
+		Vector4(1.0, 0.0, 1.0, 1.0), Vector3(1.0, 0.0, 0.0), 5, 2, 5.0));
 }
 
 void gameScene::createForces()
@@ -70,9 +75,7 @@ void gameScene::createForces()
 	float height = 32.0f;
 	flFGen = new FloatingForceGenerator(height * 2, 1000.0f, Vector3(0.0, 9.8, 0.0), Vector3({ 0.0,30.0,0.0 }));
 	whirlWind = new WhirlwindGenerator({ 0.0,-20.0,0.0 }, 70.0f, 10);
-	wind = new WindGenerator({ 15.0,15.0,15.0 }, 30.0f, { 10.0,0.0,0.0 }, 50);
 	whirlWind->setIsActive(false);
-	wind->setIsActive(false);
 	rgbs->addForceGenerator(flFGen);
 	rgbs->addForceGenerator(whirlWind);
 	rgbs->addForceGenerator(wind);

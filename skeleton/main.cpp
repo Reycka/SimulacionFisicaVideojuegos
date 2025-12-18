@@ -205,8 +205,13 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 {
-	PX_UNUSED(actor1);
-	PX_UNUSED(actor2);
+	Entity* obj1 = reinterpret_cast<Entity*>(actor1->userData);
+	Entity* obj2 = reinterpret_cast<Entity*>(actor2->userData);
+
+	if (!obj1 || !obj2) return;
+
+	obj1->onCollision(obj2);
+	obj2->onCollision(obj1);
 }
 
 int main(int, const char*const*)

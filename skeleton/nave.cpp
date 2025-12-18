@@ -1,4 +1,5 @@
 #include "nave.h"
+#include <iostream>
 using namespace physx;
 nave::nave(physx::PxScene* context, physx::PxReal coefStatic, physx::PxReal dynamStatic, physx::PxReal restitution, physx::PxPhysics* gPhysx,
 	const physx::PxGeometry& geom, Vector3 pos, const Vector4& color, Vector3 _v, double _masa, double vol, double _tVida, double _damp, 
@@ -19,12 +20,13 @@ nave::nave(physx::PxScene* context, physx::PxReal coefStatic, physx::PxReal dyna
 
 	//Asignar el puntero de explosión de la escena a las entidades
 	exp = _exp;
-	createExplosion();
-
+	createForces();
+	getObj()->setActorFlag(physx::PxActorFlag::eDISABLE_GRAVITY, true);
 }
 
 nave::~nave()
 {
+	delete g;
 }
 
 void nave::addForceGenerator(ForceGenerator* gen)
@@ -40,15 +42,14 @@ void nave::integrate(double t)
 	AIFunction();
 
 	//Colocación de las partículas para que sigan a la nave e integrate del generador
-	getObj()->attachShape(*partShipSystem->getShape());
-//	partShipSystem->setPosition(getT()->p + Vector3({ -10.0,-10.0,-10.0 }));
+	partShipSystem->setPosition(getT()->p);
 	partShipSystem->integrate(t);
 
 	//Proyectil propio de la nave
-	PxMaterial* proyectilMateril = getPhy()->createMaterial(0.4f, 0.3f, 0.6f);
-	Proyectil* p = new Proyectil(getT()->p, CreateShape(PxSphereGeometry(1), proyectilMateril), { 1.0f,1.0f,0.0f,1.0f }, shootPoint, 10, 0.02, 60, 60, Vector3(30.0, 15.0, 0.0), 0.999);
-	proyectilUpdate(t, p);
-
+//	PxMaterial* proyectilMateril = getPhy()->createMaterial(0.4f, 0.3f, 0.6f);
+//	Proyectil* p = new Proyectil(getT()->p, CreateShape(PxSphereGeometry(1), proyectilMateril), { 1.0f,1.0f,0.0f,1.0f }, shootPoint, 10, 0.02, 60, 60, Vector3(30.0, 15.0, 0.0), 0.999);
+//	proyectilUpdate(t, p);
+	DynamicSolidRigid::integrate(t);
 }
 
 void nave::onCollision(Entity* other)
@@ -91,8 +92,10 @@ void nave::AIFunction()
 
 		else if (actState == MUERTO) {
 			//Activar la explosión y despawnear la nave
-			exp->setIsActive(true);
+			//exp->setIsActive(true);
 			tVida = 0;
+			smokeGenerator->setIsActive(false);
+			fireGenerator->setIsActive(false);
 			//TODO ganar los puntos que hagan falta
 		}
 
@@ -126,7 +129,7 @@ void nave::createSmoke()
 {
 	PxMaterial* smokeMaterial = getPhy()->createMaterial(0.5f, 0.5f, 0.6f);
 	Vector4 smokeColor = { 0.5,0.5,0.5,0.7 };
-	smokeGenerator = new GaussianGenerator(5, getT()->p + Vector3({ -10.0,-10.0,-10.0 }), smokeMaterial, 1, smokeColor, { 1.0,1.0,1.0 }, 8, 6, 0.1, 0.999, 2.0);
+	smokeGenerator = new GaussianGenerator(5, getT()->p , smokeMaterial, 1, smokeColor, { 1.0,1.0,1.0 }, 8, 6, 0.1, 0.999, 2.0);
 	smokeGenerator->setIsActive(false);
 	partShipSystem->addGenerator(smokeGenerator);
 }
@@ -135,13 +138,15 @@ void nave::createFire()
 {
 	PxMaterial* fireMaterial = getPhy()->createMaterial(0.5f, 0.5f, 0.6f);
 	Vector4 fireColor = { 1.0f,1.0f,0.0f,1.0f };
-	fireGenerator = new UniformGenerator(5, getT()->p + Vector3({ -10.0,-10.0,-10.0 }), fireMaterial, 1, fireColor, { 0.0,10.0,0.0 }, 4, 3, 0.1, 0.999, 5.0);
+	fireGenerator = new UniformGenerator(5, getT()->p , fireMaterial, 1, fireColor, { 0.0,10.0,0.0 }, 4, 3, 0.1, 0.999, 5.0);
 	partShipSystem->addGenerator(fireGenerator);
 }
 
-void nave::createExplosion()
+void nave::createForces()
 {
+	g = new GravityGenerator(Vector3(0.0, -10.0, 0.0));
 	partShipSystem->addForceGenerator(exp);
+	partShipSystem->addForceGenerator(g);
 }
 
 

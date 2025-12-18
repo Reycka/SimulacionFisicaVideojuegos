@@ -2,6 +2,7 @@
 #include "DynamicSolidRigid.h"
 #include "Enemy.h"
 #include "ParticleSystem.h"
+#include "GravityGenerator.h"
 #include "GaussianGenerator.h"
 #include "UniformGenerator.h"
 #include "ExplosionGenerator.h"
@@ -18,11 +19,12 @@ private:
 	GaussianGenerator* smokeGenerator;
 	UniformGenerator* fireGenerator;
 	ExplosionGenerator* exp;
+	GravityGenerator* g;
 
 	//Creacion de los sistemas propios de la nave (las 2 partículas y la explosión)
 	void createSmoke();
 	void createFire();
-	void createExplosion();
+	void createForces();
 
 	void setState() override;
 	void AIFunction() override;

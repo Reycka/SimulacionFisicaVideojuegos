@@ -10,21 +10,20 @@ void Proyectil::AjustaMasa()
 	masaAjustada = true;
 }
 
-Proyectil::Proyectil()
-{
-}
-
-Proyectil::Proyectil(Vector3 pos, physx::PxShape* shape, const Vector4& color, Vector3 _v, double _masa,double _vol, double _tVida, double _masaReal, Vector3 _vReal ,double _damp) : Entity(pos,shape,color,_v,_masa,_vol,_tVida,_damp,_masaReal,_vReal)
+Proyectil::Proyectil(physx::PxScene* context, physx::PxReal coefStatic, physx::PxReal dynamStatic, physx::PxReal restitution, physx::PxPhysics* gPhysx, const physx::PxGeometry& geom,
+	Vector3 pos, physx::PxShape* shape, const Vector4& color, Vector3 _v, double _masa,double _vol, double _tVida, double _masaReal, Vector3 _vReal ,double _damp)
+	: DynamicSolidRigid(context, coefStatic, dynamStatic, restitution, gPhysx, geom,pos,color,_v,_masa,_vol,_tVida,_damp)
 {
 	if(!masaAjustada)AjustaMasa();
 	type = Bala;
+	getObj()->setActorFlag(physx::PxActorFlag::eDISABLE_GRAVITY, true);
 }
 
 Proyectil::~Proyectil()
 {
 }
 
-void Proyectil::integrate(double t)
+/*void Proyectil::integrate(double t) Como es solidRigid no hace falta
 {
 	if (isActive) {
 		tVida -= t;
@@ -41,9 +40,12 @@ void Proyectil::integrate(double t)
 			isActive = false;
 		}
 	}
-}
+}*/
 
 void Proyectil::onCollision(Entity* other)
 {
-	DeRegItem();
+	if (other->getEntType() == Nave) {
+		isActive = false;
+		Entity::DeRegItem();
+	}
 }

@@ -30,14 +30,4 @@ void ContactReportCallback::onContact(const physx::PxContactPairHeader& pairHead
 	onCollision(actor1, actor2);
 }
 
-void ContactReportCallback::onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
-{
-	Entity* obj1 = reinterpret_cast<Entity*>(actor1->userData);
-	Entity* obj2 = reinterpret_cast<Entity*>(actor2->userData);
 
-	if (!obj1 || !obj2) return; 
-	if (obj1 == nullptr || obj2 == nullptr) return;
-
-	obj1->onCollision(obj2);
-	obj2->onCollision(obj1);
-}
